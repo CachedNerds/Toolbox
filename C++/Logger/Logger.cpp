@@ -1,19 +1,26 @@
 #include "Logger.h"
+#include <sstream>
 
-  Logger::Logger (void)
-  : os_ (std::cout.rdbuf ())
-  {
-  }
+namespace Toolbox::Log
+{
 
-  void Logger::log (Severity::Level level, const std::string& message)
-  {
-    if (level >= this->threshold_)
-    {
-      this->os_ << Severity::toString (level) << ": " << message << "\n";
-    }
-  }
+Logger::Logger (Sink & sink)
+: sink_ (sink)
+{}
 
-  void Logger::setThreshold (Severity::Level threshold)
+void Logger::log (const Severity::Level & level, const std::string & message)
+{
+  if (level >= this->threshold_)
   {
-    this->threshold_ = threshold;
+    std::stringstream ss;
+    ss << Severity::toString (level) << ": " << message << "\n";
+    this->sink_.output (ss.str ());
   }
+}
+
+void Logger::setThreshold (const Severity::Level & threshold)
+{
+  this->threshold_ = threshold;
+}
+
+} // Toolbox::Log

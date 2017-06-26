@@ -1,7 +1,7 @@
 #ifndef SEVERITY_H
 #define SEVERITY_H
 
-namespace Severity
+namespace Toolbox::Log::Severity
 {
 
 enum Level
@@ -14,6 +14,8 @@ enum Level
   FATAL
 };
 
-const char * toString (Level severity);
-}
+const char * toString (Level level);
+
+} // namespace Toolbox::Log::Severity
+
 #endif // SEVERITY_H

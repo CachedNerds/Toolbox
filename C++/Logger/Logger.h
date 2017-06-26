@@ -2,19 +2,28 @@
 #define LOGGER_H
 
 #include "Severity.h"
+#include "Sink.h"
+#include "SyncStdOutSink.h"
 #include <string>
 #include <iostream>
+
+namespace Toolbox::Log
+{
+
+using namespace Sinks;
 
 class Logger
 {
 public:
-  Logger (void);
+  Logger (Sink & sink);
 
-  void log (Severity::Level level, const std::string& message);
-  void setThreshold (Severity::Level threshold);
+  void log (const Severity::Level & level, const std::string & message);
+  void setThreshold (const Severity::Level & threshold);
 private:
-  std::ostream os_;
+  Sink & sink_;
   Severity::Level threshold_ = Severity::Level::TRACE;
 };
+
+} // namespace Toolbox::Log
 
 #endif // LOGGER_H

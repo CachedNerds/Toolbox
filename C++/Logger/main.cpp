@@ -1,12 +1,23 @@
 #include "Logger.h"
+#include "SyncStdOutSink.h"
+#include <thread>
+#include <functional>
+
+using namespace Toolbox::Log;
 
 int main (void)
 {
-  Logger logger;
-  logger.log (Severity::Level::DEBUG, "test");
-  logger.setThreshold (Severity::Level::INFO);
-  logger.log (Severity::Level::TRACE, "don't log");
-  logger.log (Severity::Level::ERROR, "log");
+  SyncStdOutSink syncStdOutSink;
+  Logger logger (syncStdOutSink);
+
+  std::thread threads[7];
+  std::string messages[] {"My", "name", "is", "DJ", "Scrum", "Master", "Peck"};
+
+  // spawn 7 threads:
+  for (int i=0; i < 7; ++i)
+    threads[i] = std::thread (&Logger::log, logger, Severity::Level::INFO, messages[i]);
+
+  for (auto & th : threads) th.join ();
 
   return 0;
 }
