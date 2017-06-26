@@ -19,6 +19,7 @@ public:
 
   void log (const Severity::Level & level, const std::string & message);
   void setThreshold (const Severity::Level & threshold);
+
 private:
   Sink & sink_;
   Severity::Level threshold_ = Severity::Level::TRACE;

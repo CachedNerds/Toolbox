@@ -2,6 +2,7 @@
 #include "SyncStdOutSink.h"
 #include <thread>
 #include <functional>
+#include <memory>
 
 using namespace Toolbox::Log;
 

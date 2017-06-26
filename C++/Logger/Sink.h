@@ -10,9 +10,9 @@ class Sink
 {
 public:
   Sink (void) = default;
-  Sink (const Sink& sink) = delete;
-  Sink& operator= (const Sink& sink) = delete;
-  virtual void output (const std::string& value) = 0;
+  Sink (const Sink & sink) = delete;
+  Sink& operator= (const Sink & sink) = delete;
+  virtual void output (const std::string & message) = 0;
 };
 
 } // namespace Toolbox::Log::Sinks

@@ -4,10 +4,10 @@
 namespace Toolbox::Log::Sinks
 {
 
-void SyncStdOutSink::output (const std::string & value)
+void SyncStdOutSink::output (const std::string & message)
 {
   this->mut_.lock ();
-  std::cout << value;
+  std::cout << message;
   this->mut_.unlock ();
 }
 
