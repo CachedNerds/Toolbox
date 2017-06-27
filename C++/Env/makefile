@@ -1,16 +1,16 @@
 CFLAGS += --std=c++17 -c
 OUTFILE = "env"
 
-all: main.o Dev.o Prod.o
-	g++ Dev.o Prod.o main.o -o $(OUTFILE)
+all: main.o Development.o Production.o
+	g++ Development.o Production.o main.o -o $(OUTFILE)
 
-Dev.o: Env.h Dev.h Dev.cpp
-	g++ $(CFLAGS) Dev.cpp
+Development.o: Environment.h Development.h Development.cpp
+	g++ $(CFLAGS) Development.cpp
 
-Prod.o: Env.h Prod.h Prod.cpp
-	g++ $(CFLAGS) Prod.cpp
+Production.o: Environment.h Production.h Production.cpp
+	g++ $(CFLAGS) Production.cpp
 
-main.o: main.cpp Prod.o Dev.o
+main.o: main.cpp Production.o Development.o
 	g++ $(CFLAGS) main.cpp
 
 clean:
