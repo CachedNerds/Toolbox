@@ -1,5 +1,4 @@
 #include "Logger.h"
-#include <sstream>
 
 namespace Toolbox::Log
 {
@@ -11,11 +10,7 @@ Logger::Logger (Sink & sink)
 void Logger::log (const Severity::Level & level, const std::string & message) const
 {
   if (level >= this->threshold_)
-  {
-    std::stringstream ss;
-    ss << Severity::toString (level) << ": " << message << "\n";
-    this->sink_.output (ss.str ());
-  }
+    this->sink_ << Severity::toString (level) << ": " << message << "\n";
 }
 
 void Logger::trace (const std::string & message) const

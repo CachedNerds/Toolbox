@@ -1,5 +1,5 @@
-#ifndef SINK_H
-#define SINK_H
+#ifndef _SINK_H_
+#define _SINK_H_
 
 #include <string>
 
@@ -11,10 +11,11 @@ class Sink
 public:
   Sink (void) = default;
   Sink (const Sink & sink) = delete;
-  Sink& operator= (const Sink & sink) = delete;
+  Sink & operator = (const Sink & sink) = delete;
+  Sink & operator << (const std::string & message);
   virtual void output (const std::string & message) = 0;
 };
 
 } // namespace Toolbox::Log::Sinks
 
-#endif // SINK_H
+#endif // _SINK_H_

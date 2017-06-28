@@ -1,5 +1,5 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef _LOGGER_H_
+#define _LOGGER_H_
 
 #include "Severity.h"
 #include "sinks/Sink.h"
@@ -34,4 +34,4 @@ private:
 
 } // namespace Toolbox::Log
 
-#endif // LOGGER_H
+#endif // _LOGGER_H_

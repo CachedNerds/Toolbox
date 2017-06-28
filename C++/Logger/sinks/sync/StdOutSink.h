@@ -1,5 +1,5 @@
-#ifndef SYNC_STD_OUT_SINK_H
-#define SYNC_STD_OUT_SINK_H
+#ifndef _SYNC_STD_OUT_SINK_H_
+#define _SYNC_STD_OUT_SINK_H_
 
 #include "../Sink.h"
 #include <string>
@@ -20,4 +20,4 @@ private:
 
 } // namespace Toolbox::Log::Sinks::Sync
 
-#endif // SYNC_STD_OUT_SINK_H
+#endif // _SYNC_STD_OUT_SINK_H_
