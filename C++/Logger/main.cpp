@@ -20,5 +20,8 @@ int main (void)
 
   for (auto & th : threads) th.join ();
 
+  logger.debug ("debug");
+  logger.fatal ("fatal");
+
   return 0;
 }

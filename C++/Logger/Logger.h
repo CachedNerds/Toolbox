@@ -17,7 +17,14 @@ class Logger
 public:
   Logger (Sink & sink);
 
-  void log (const Severity::Level & level, const std::string & message);
+  void log (const Severity::Level & level, const std::string & message) const;
+  void trace (const std::string & message) const;
+  void debug (const std::string & message) const;
+  void info (const std::string & message) const;
+  void warning (const std::string & message) const;
+  void error (const std::string & message) const;
+  void fatal (const std::string & message) const;
+
   void setThreshold (const Severity::Level & threshold);
 
 private:
