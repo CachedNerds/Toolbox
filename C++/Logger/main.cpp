@@ -1,14 +1,15 @@
 #include "Logger.h"
-#include "SyncStdOutSink.h"
+#include "sinks/sync/StdOutSink.h"
 #include <thread>
 #include <functional>
 #include <memory>
+#include <map>
 
 using namespace Toolbox::Log;
 
 int main (void)
 {
-  SyncStdOutSink syncStdOutSink;
+  Sinks::Sync::StdOutSink syncStdOutSink;
   Logger logger (syncStdOutSink);
 
   std::thread threads[7];

@@ -1,14 +1,14 @@
 #ifndef SYNC_STD_OUT_SINK_H
 #define SYNC_STD_OUT_SINK_H
 
-#include "Sink.h"
+#include "../Sink.h"
 #include <string>
 #include <mutex>
 
-namespace Toolbox::Log::Sinks
+namespace Toolbox::Log::Sinks::Sync
 {
 
-class SyncStdOutSink : public Sink
+class StdOutSink : public Sink
 {
 public:
   // Sink
@@ -18,6 +18,6 @@ private:
   std::mutex mut_;
 };
 
-} // namespace Toolbox::Log::Sinks
+} // namespace Toolbox::Log::Sinks::Sync
 
-#endif // STD_OUT_SINK_H
+#endif // SYNC_STD_OUT_SINK_H

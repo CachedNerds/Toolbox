@@ -2,8 +2,8 @@
 #define LOGGER_H
 
 #include "Severity.h"
-#include "Sink.h"
-#include "SyncStdOutSink.h"
+#include "sinks/Sink.h"
+#include "sinks/sync/StdOutSink.h"
 #include <string>
 #include <iostream>
 

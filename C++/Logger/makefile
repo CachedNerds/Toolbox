@@ -1,24 +1,24 @@
-CPPFLAGS = --std=c++1z -c
+CPP_FLAGS = --std=c++1z -c
 ADDITIONAL_FLAGS = -DBOOST_SYSTEM_NO_DEPRECATED -I ~/boost_1_64_0
 LINKER_FLAGS = -lboost_system
+OBJ_FILES = main.o Severity.o Logger.o StdOutSink.o
+SINKS = sinks
+SYNC = sinks/sync
 
-all: main.o Severity.o Logger.o SyncStdOutSink.o SyncFileSink.o
-	g++ $(LINKER_FLAGS) Logger.o Severity.o SyncStdOutSink.o SyncFileSink.o main.o -o logger
+all: $(OBJ_FILES)
+	g++ $(LINKER_FLAGS) $(OBJ_FILES) -o logger
 
-Logger.o: Logger.h Logger.cpp SyncStdOutSink.o
-	g++ $(CPPFLAGS) $(ADDITIONAL_FLAGS) Logger.cpp
+Logger.o: Logger.h Logger.cpp StdOutSink.o
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) Logger.cpp
 
 main.o: main.cpp Logger.o
-	g++ $(CPPFLAGS) $(ADDITIONAL_FLAGS) main.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) main.cpp
 
 Severity.o: Severity.h Severity.cpp
-	g++ $(CPPFLAGS) $(ADDITIONAL_FLAGS) Severity.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) Severity.cpp
 
-SyncStdOutSink.o: Sink.h SyncStdOutSink.h SyncStdOutSink.cpp
-	g++ $(CPPFLAGS) $(ADDITIONAL_FLAGS) SyncStdOutSink.cpp
-
-SyncFileSink.o: SyncFileSink.h SyncFileSink.cpp
-	g++ $(CPPFLAGS) $(ADDITIONAL_FLAGS) SyncFileSink.cpp
+StdOutSink.o: $(SINKS)/Sink.h $(SYNC)/StdOutSink.h $(SYNC)/StdOutSink.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(SYNC)/StdOutSink.cpp
 
 clean:
 	rm *.o logger
