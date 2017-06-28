@@ -6,7 +6,6 @@
 class Environment
 {
 public:
-  virtual std::string getEnvironment (void) = 0;
   
 private:
 };
