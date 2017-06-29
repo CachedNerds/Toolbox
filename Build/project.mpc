@@ -1,0 +1,16 @@
+project (_project_) {
+  exename = _project_
+  install = .
+ 
+  Source_Files {
+  }
+
+  Template_Files {
+  }
+
+  specific(make) {
+    compile_flags += --std=c++17
+    compile_flags += -g
+  }
+}
+
