@@ -1,14 +1,15 @@
-#include "StdOutSink.h"
+#include "ConsoleSink.h"
+
 #include <iostream>
 
 namespace Toolbox::Log::Sinks::Sync
 {
 
-void StdOutSink::output (const std::string & message)
+void ConsoleSink::output (const std::string & message)
 {
-  this->mut_.lock ();
+  this->_mut.lock ();
   std::cout << message;
-  this->mut_.unlock ();
+  this->_mut.unlock ();
 }
 
 } // namespace Toolbox::Log::Sinks::Sync

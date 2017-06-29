@@ -1,5 +1,6 @@
 #include "Logger.h"
-#include "sinks/sync/StdOutSink.h"
+#include "sinks/sync/ConsoleSink.h"
+
 #include <thread>
 #include <functional>
 #include <memory>
@@ -9,8 +10,8 @@ using namespace Toolbox::Log;
 
 int main (void)
 {
-  Sinks::Sync::StdOutSink syncStdOutSink;
-  Logger logger (syncStdOutSink);
+  Sinks::Sync::ConsoleSink syncConsoleSink;
+  Logger logger (syncConsoleSink);
 
   std::thread threads[7];
   std::string messages[] {"My", "name", "is", "DJ", "Scrum", "Master", "Peck"};

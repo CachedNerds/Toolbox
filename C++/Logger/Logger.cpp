@@ -4,13 +4,15 @@ namespace Toolbox::Log
 {
 
 Logger::Logger (Sink & sink)
-: sink_ (sink)
-{}
+: _sink (sink)
+{
+  
+}
 
 void Logger::log (const Severity::Level & level, const std::string & message) const
 {
-  if (level >= this->threshold_)
-    this->sink_ << Severity::toString (level) << ": " << message << "\n";
+  if (level >= this->_threshold)
+    this->_sink << Severity::toString (level) << ": " << message << "\n";
 }
 
 void Logger::trace (const std::string & message) const
@@ -45,7 +47,7 @@ void Logger::fatal (const std::string & message) const
 
 void Logger::setThreshold (const Severity::Level & threshold)
 {
-  this->threshold_ = threshold;
+  this->_threshold = threshold;
 }
 
 } // Toolbox::Log

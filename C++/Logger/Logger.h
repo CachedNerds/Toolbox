@@ -3,7 +3,8 @@
 
 #include "Severity.h"
 #include "sinks/Sink.h"
-#include "sinks/sync/StdOutSink.h"
+#include "sinks/sync/ConsoleSink.h"
+
 #include <string>
 #include <iostream>
 
@@ -28,8 +29,8 @@ public:
   void setThreshold (const Severity::Level & threshold);
 
 private:
-  Sink & sink_;
-  Severity::Level threshold_ = Severity::Level::TRACE;
+  Sink & _sink;
+  Severity::Level _threshold = Severity::Level::TRACE;
 };
 
 } // namespace Toolbox::Log
