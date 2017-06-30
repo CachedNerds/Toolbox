@@ -1,5 +1,5 @@
-#ifndef SEVERITY_H
-#define SEVERITY_H
+#ifndef _SEVERITY_H_
+#define _SEVERITY_H_
 
 namespace Toolbox::Log::Severity
 {
@@ -18,4 +18,4 @@ const char * toString (Level level);
 
 } // namespace Toolbox::Log::Severity
 
-#endif // SEVERITY_H
+#endif // _SEVERITY_H_
