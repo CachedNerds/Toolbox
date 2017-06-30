@@ -3,7 +3,6 @@
 
 #include "Severity.h"
 #include "sinks/Sink.h"
-#include "sinks/sync/ConsoleSink.h"
 
 #include <string>
 #include <iostream>
@@ -27,8 +26,11 @@ public:
   void fatal (const std::string & message) const;
 
   void setThreshold (const Severity::Level & threshold);
+  Severity::Level getThreshold (void) const;
 
 private:
+  std::string getCurrentTime (void) const;
+
   Sink & _sink;
   Severity::Level _threshold = Severity::Level::TRACE;
 };

@@ -12,6 +12,7 @@ public:
   Sink (void) = default;
   Sink (const Sink & sink) = delete;
   Sink & operator = (const Sink & sink) = delete;
+
   Sink & operator << (const std::string & message);
   virtual void output (const std::string & message) = 0;
 };

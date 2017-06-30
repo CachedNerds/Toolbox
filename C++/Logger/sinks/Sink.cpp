@@ -6,6 +6,7 @@ namespace Toolbox::Log::Sinks
 Sink & Sink::operator << (const std::string & message)
 {
   this->output (message);
+
   return *this;
 }
 

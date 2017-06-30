@@ -10,17 +10,15 @@ using namespace Toolbox::Log;
 
 int main (void)
 {
-  Sinks::Sync::ConsoleSink syncConsoleSink;
-  Logger logger (syncConsoleSink);
+  using namespace Sinks::Sync;
+  ConsoleSink consoleSink;
+  Logger logger (consoleSink);
 
-  std::thread threads[7];
-  std::string messages[] {"My", "name", "is", "DJ", "Scrum", "Master", "Peck"};
-
-  // spawn 7 threads:
-  for (int i=0; i < 7; ++i)
-    threads[i] = std::thread (&Logger::log, logger, Severity::Level::INFO, messages[i]);
-
-  for (auto & th : threads) th.join ();
+  std::string messages[] {"My", "name", "is", "Danny", "Peck", "The", "Third"};
+  for (std::string word : messages)
+  {
+    logger.info (word);
+  }
 
   logger.debug ("debug");
   logger.fatal ("fatal");

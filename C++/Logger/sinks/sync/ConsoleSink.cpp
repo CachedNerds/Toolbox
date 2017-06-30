@@ -7,9 +7,8 @@ namespace Toolbox::Log::Sinks::Sync
 
 void ConsoleSink::output (const std::string & message)
 {
-  this->_mut.lock ();
+  std::lock_guard<std::mutex> guard(this->_mut);
   std::cout << message;
-  this->_mut.unlock ();
 }
 
 } // namespace Toolbox::Log::Sinks::Sync
