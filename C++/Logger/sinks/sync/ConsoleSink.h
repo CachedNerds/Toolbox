@@ -1,7 +1,7 @@
 #ifndef _SYNC_CONSOLE_SINK_H_
 #define _SYNC_CONSOLE_SINK_H_
 
-#include "../Sink.h"
+#include "../BasicSink.h"
 
 #include <string>
 #include <mutex>
@@ -9,11 +9,11 @@
 namespace Toolbox::Log::Sinks::Sync
 {
 
-class ConsoleSink : public Sink
+class ConsoleSink : public BasicSink<std::string>
 {
 public:
-  // Sink
-  void output (const std::string & message);
+  // StringSink
+  void output (const std::string & output) override;
 
 private:
   std::mutex _mut;
