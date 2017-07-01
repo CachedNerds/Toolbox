@@ -1,5 +1,6 @@
 #include "Logger.h"
 #include "sinks/sync/ConsoleSink.h"
+#include "sinks/Message.h"
 
 #include <thread>
 #include <functional>
@@ -11,17 +12,13 @@ using namespace Toolbox::Log;
 int main (void)
 {
   using namespace Sinks::Sync;
+
   ConsoleSink consoleSink;
-  Logger logger (consoleSink);
-
-  std::string messages[] {"My", "name", "is", "Danny", "Peck", "The", "Third"};
-  for (std::string word : messages)
-  {
-    logger.info (word);
-  }
-
-  logger.debug ("debug");
-  logger.fatal ("fatal");
+  Logger<std::string> logger (consoleSink);
+  logger.info ("test");
+  
+  Message message ("message");
+  logger.info (message);
 
   return 0;
 }
