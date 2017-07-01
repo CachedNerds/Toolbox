@@ -2,7 +2,8 @@
 #define _LOGGER_H_
 
 #include "Severity.h"
-#include "sinks/Sink.h"
+#include "sinks/BasicSink.h"
+#include "sinks/Output.h"
 
 #include <string>
 #include <iostream>
@@ -12,18 +13,33 @@ namespace Toolbox::Log
 
 using namespace Sinks;
 
+template <typename OutputType>
 class Logger
 {
-public:
-  Logger (Sink & sink);
 
-  void log (const Severity::Level & level, const std::string & message) const;
-  void trace (const std::string & message) const;
-  void debug (const std::string & message) const;
-  void info (const std::string & message) const;
-  void warning (const std::string & message) const;
-  void error (const std::string & message) const;
-  void fatal (const std::string & message) const;
+public:
+  Logger<OutputType> (BasicSink<OutputType> & sink);
+
+  void log (const Severity::Level & level, const OutputType & output) const;
+  void log (const Severity::Level & level, const Output<OutputType> & output) const;
+
+  void trace (const OutputType & output) const;
+  void trace (const Output<OutputType> & output) const;
+
+  void debug (const OutputType & output) const;
+  void debug (const Output<OutputType> & output) const;
+
+  void info (const OutputType & output) const;
+  void info (const Output<OutputType> & output) const;
+
+  void warning (const OutputType & output) const;
+  void warning (const Output<OutputType> & output) const;
+
+  void error (const OutputType & output) const;
+  void error (const Output<OutputType> & output) const;
+
+  void fatal (const OutputType & output) const;
+  void fatal (const Output<OutputType> & output) const;
 
   void setThreshold (const Severity::Level & threshold);
   Severity::Level getThreshold (void) const;
@@ -31,9 +47,11 @@ public:
 private:
   std::string getCurrentTime (void) const;
 
-  Sink & _sink;
+  BasicSink<OutputType> & _sink;
   Severity::Level _threshold = Severity::Level::TRACE;
 };
+
+#include "Logger.cpp"
 
 } // namespace Toolbox::Log
 
