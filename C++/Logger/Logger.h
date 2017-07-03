@@ -1,12 +1,12 @@
 #ifndef _LOGGER_H_
 #define _LOGGER_H_
 
-#include "Severity.h"
-#include "sinks/Sink.h"
-#include "sinks/sync/ConsoleSink.h"
+#include "Level.h"
+#include "sinks/BasicSink.h"
+#include "sinks/Stringifiable.h"
 
 #include <string>
-#include <iostream>
+#include <boost/variant.hpp>
 
 namespace Toolbox::Log
 {
@@ -15,22 +15,42 @@ using namespace Sinks;
 
 class Logger
 {
+using String = boost::variant<const std::string &, const Stringifiable &>;
 public:
-  Logger (Sink & sink);
+  Logger (StringSink & sink);
 
-  void log (const Severity::Level & level, const std::string & message) const;
-  void trace (const std::string & message) const;
-  void debug (const std::string & message) const;
-  void info (const std::string & message) const;
-  void warning (const std::string & message) const;
-  void error (const std::string & message) const;
-  void fatal (const std::string & message) const;
+  void log (const Level & level, const String & message) const;
+  void trace (const String & message) const;
+  void debug (const String & message) const;
+  void info (const String & message) const;
+  void warning (const String & message) const;
+  void error (const String & message) const;
+  void fatal (const String & message) const;
 
-  void setThreshold (const Severity::Level & threshold);
+  // accessors
+  Level getThreshold (void) const;
+  void setThreshold (const Level & level);
 
 private:
-  Sink & _sink;
-  Severity::Level _threshold = Severity::Level::TRACE;
+  // helper classes
+  class StringVisitor : public boost::static_visitor<std::string>
+  {
+  public:
+    const std::string operator () (const std::string & message) const;
+    const std::string operator () (const Stringifiable & message) const;
+  };
+
+  // properties
+  Level _threshold;
+  StringSink & _sink;
+  const StringVisitor _stringVisitor;
+
+    // helper functions
+  void logAtLevel (const Level & level, const String & message) const;
+  bool isAboveThreshold (const Level & level) const;
+  const std::string createLogMessage (const Level & level, const String & message) const;
+  const std::string getCurrentTime (void) const;
+  const std::string removeTrailingNewline (const std::string & text) const;
 };
 
 } // namespace Toolbox::Log

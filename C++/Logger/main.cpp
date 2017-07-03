@@ -1,29 +1,24 @@
 #include "Logger.h"
-#include "sinks/sync/ConsoleSink.h"
-
-#include <thread>
-#include <functional>
-#include <memory>
-#include <map>
+#include "sinks/ConsoleSink.h"
+#include "sinks/Message.h"
 
 using namespace Toolbox::Log;
 
 int main (void)
 {
-  Sinks::Sync::ConsoleSink syncConsoleSink;
-  Logger logger (syncConsoleSink);
+  ConsoleSink consoleSink;
+  Logger logger (consoleSink);
 
-  std::thread threads[7];
-  std::string messages[] {"My", "name", "is", "DJ", "Scrum", "Master", "Peck"};
+  logger.log (Level::INFO, "message!"); // logs on default level
+  logger.warning ("warning!"); // succeeds
 
-  // spawn 7 threads:
-  for (int i=0; i < 7; ++i)
-    threads[i] = std::thread (&Logger::log, logger, Severity::Level::INFO, messages[i]);
+  logger.setThreshold (Level::INFO); // changes log level
 
-  for (auto & th : threads) th.join ();
+  logger.debug ("debug?"); // fails
+  logger.info ("info!"); // succeeds
 
-  logger.debug ("debug");
-  logger.fatal ("fatal");
+  Message message ("error!");
+  logger.error (message); // logs stringifiable successfully
 
   return 0;
 }

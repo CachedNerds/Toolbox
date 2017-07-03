@@ -1,9 +1,9 @@
-#include "Severity.h"
+#include "Level.h"
 
-namespace Toolbox::Log::Severity
+namespace Toolbox::Log
 {
 
-const char * toString (Level level)
+const std::string levelToString (const Level & level)
 {
   switch (level)
   {
@@ -17,4 +17,4 @@ const char * toString (Level level)
   }
 }
 
-} // namespace Toolbox::Log::Severity
+} // namespace Toolbox::Log
