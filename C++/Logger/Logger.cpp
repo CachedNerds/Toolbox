@@ -1,124 +1,106 @@
-#include <ctime>
+#include "Logger.h"
 
-template <typename OutputType>
-Logger<OutputType>::Logger (BasicSink<OutputType> & sink)
-: _sink (sink)
+#include <ctime>
+#include <chrono>
+
+namespace Toolbox::Log
+{
+
+Logger::Logger (StringSink & sink)
+: _threshold (Level::TRACE)
+, _sink (sink)
+, _stringVisitor ()
 {
   
 }
 
-template <typename OutputType>
-void Logger<OutputType>::log (const Severity::Level & level, const OutputType & output) const
+void Logger::log (const Level & level, const String & message) const
 {
-  if (level >= this->_threshold)
-  {
-    std::string timestamp = this->getCurrentTime ();
-    this->_sink << "{" << "timestamp: " << timestamp << ", "
-                       << "level: " << Severity::toString (level) << ", "
-                       << "message: " << output << "}\n";
-  }
+  logAtLevel (level, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::log (const Severity::Level & level, const Output<OutputType> & output) const
+void Logger::trace (const String & message) const
 {
-  if (level >= this->_threshold)
-  {
-    std::string timestamp = this->getCurrentTime ();
-    this->_sink << "{" << "timestamp: " << timestamp << ", "
-                       << "level: " << Severity::toString (level) << ", "
-                       << "message: " << output << "}\n";
-  }
+  logAtLevel (Level::TRACE, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::trace (const OutputType & output) const
+void Logger::debug (const String & message) const
 {
-  this->log (Severity::Level::TRACE, output);
+  logAtLevel (Level::DEBUG, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::trace (const Output<OutputType> & output) const
+void Logger::info (const String & message) const
 {
-  this->log (Severity::Level::TRACE, output);
+  logAtLevel (Level::INFO, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::debug (const OutputType & output) const
+void Logger::warning (const String & message) const
 {
-  this->log (Severity::Level::DEBUG, output);
+  logAtLevel (Level::WARNING, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::debug (const Output<OutputType> & output) const
+void Logger::error (const String & message) const
 {
-  this->log (Severity::Level::DEBUG, output);
+  logAtLevel (Level::ERROR, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::info (const OutputType & output) const
+void Logger::fatal (const String & message) const
 {
-  this->log (Severity::Level::INFO, output);
+  logAtLevel (Level::FATAL, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::info (const Output<OutputType> & output) const
+Level Logger::getThreshold (void) const
 {
-  this->log (Severity::Level::INFO, output);
+  return _threshold;
 }
 
-template <typename OutputType>
-void Logger<OutputType>::warning (const OutputType & output) const
+void Logger::setThreshold (const Level & threshold)
 {
-  this->log (Severity::Level::WARNING, output);
+  _threshold = threshold;
 }
 
-template <typename OutputType>
-void Logger<OutputType>::warning (const Output<OutputType> & output) const
+void Logger::logAtLevel (const Level & level, const String & message) const
 {
-  this->log (Severity::Level::WARNING, output);
+  if (isAboveThreshold (level))
+    _sink << createLogMessage (level, message);
 }
 
-template <typename OutputType>
-void Logger<OutputType>::error (const OutputType & output) const
+bool Logger::isAboveThreshold (const Level & level) const
 {
-  this->log (Severity::Level::ERROR, output);
+  return level >= _threshold;
 }
 
-template <typename OutputType>
-void Logger<OutputType>::error (const Output<OutputType> & output) const
+const std::string Logger::createLogMessage (const Level & level, const String & message) const
 {
-  this->log (Severity::Level::ERROR, output);
+  const std::string timestampField = "timestamp: " + getCurrentTime ();
+  const std::string levelField = "level: " + levelToString (level);
+  const std::string messageField = "message: " + boost::apply_visitor (_stringVisitor, message);
+
+  return "{" + timestampField + ", " + levelField + ", " + messageField + "}" + "\n";
 }
 
-template <typename OutputType>
-void Logger<OutputType>::fatal (const OutputType & output) const
-{
-  this->log (Severity::Level::FATAL, output);
-}
-
-template <typename OutputType>
-void Logger<OutputType>::fatal (const Output<OutputType> & output) const
-{
-  this->log (Severity::Level::FATAL, output);
-}
-
-template <typename OutputType>
-void Logger<OutputType>::setThreshold (const Severity::Level & threshold)
-{
-  this->_threshold = threshold;
-}
-
-template <typename OutputType>
-Severity::Level Logger<OutputType>::getThreshold (void) const
-{
-  return this->_threshold;
-}
-
-template <typename OutputType>
-std::string Logger<OutputType>::getCurrentTime (void) const
+const std::string Logger::getCurrentTime (void) const
 {
   std::time_t now = std::chrono::system_clock::to_time_t (std::chrono::system_clock::now ());
-  std::string timestamp (std::ctime (&now));
-  return timestamp.substr (0, timestamp.length () - 1);
+  std::string timestamp = std::ctime (&now);
+  std::string timestampWithoutNewline = removeTrailingNewline (timestamp);
+  return timestampWithoutNewline;
 }
+
+const std::string Logger::removeTrailingNewline (const std::string & text) const
+{
+  return text.substr (0, text.length () - 1);
+}
+
+// static string visitor
+const std::string Logger::StringVisitor::operator () (const std::string & message) const
+{
+  return message;
+}
+
+const std::string Logger::StringVisitor::operator () (const Stringifiable & message) const
+{
+  return message.toString ();
+}
+
+} // namespace Toolbox::Log

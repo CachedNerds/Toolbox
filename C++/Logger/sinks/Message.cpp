@@ -15,9 +15,9 @@ Message::Message (const std::string & message)
 
 }
 
-const std::string Message::getOutput (void) const
+const std::string Message::toString (void) const
 {
-  return this->_message;
+  return _message;
 }
 
 } // namespace Toolbox::Log::Sinks

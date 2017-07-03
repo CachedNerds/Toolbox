@@ -1,20 +1,20 @@
 #ifndef _MESSAGE_H_
 #define _MESSAGE_H_
 
-#include "Output.h"
+#include "Stringifiable.h"
 
 #include <string>
 
 namespace Toolbox::Log::Sinks
 {
 
-class Message : public Output<std::string>
+class Message : public Stringifiable
 {
 public:
   Message (const char * message);
   Message (const std::string & message);
 
-  virtual const std::string getOutput (void) const override;
+  virtual const std::string toString (void) const override;
 
 private:
   const std::string _message;

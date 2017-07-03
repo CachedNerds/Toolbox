@@ -2,13 +2,12 @@
 
 #include <iostream>
 
-namespace Toolbox::Log::Sinks::Sync
+namespace Toolbox::Log::Sinks
 {
 
 void ConsoleSink::output (const std::string & output)
 {
-  std::lock_guard<std::mutex> guard(this->_mut);
   std::cout << output;
 }
 
-} // namespace Toolbox::Log::Sinks::Sync
+} // namespace Toolbox::Log::Sinks

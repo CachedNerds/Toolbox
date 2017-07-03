@@ -1,57 +1,57 @@
 #ifndef _LOGGER_H_
 #define _LOGGER_H_
 
-#include "Severity.h"
+#include "Level.h"
 #include "sinks/BasicSink.h"
-#include "sinks/Output.h"
+#include "sinks/Stringifiable.h"
 
 #include <string>
-#include <iostream>
+#include <boost/variant.hpp>
 
 namespace Toolbox::Log
 {
 
 using namespace Sinks;
 
-template <typename OutputType>
 class Logger
 {
-
+using String = boost::variant<const std::string &, const Stringifiable &>;
 public:
-  Logger<OutputType> (BasicSink<OutputType> & sink);
+  Logger (StringSink & sink);
 
-  void log (const Severity::Level & level, const OutputType & output) const;
-  void log (const Severity::Level & level, const Output<OutputType> & output) const;
+  void log (const Level & level, const String & message) const;
+  void trace (const String & message) const;
+  void debug (const String & message) const;
+  void info (const String & message) const;
+  void warning (const String & message) const;
+  void error (const String & message) const;
+  void fatal (const String & message) const;
 
-  void trace (const OutputType & output) const;
-  void trace (const Output<OutputType> & output) const;
-
-  void debug (const OutputType & output) const;
-  void debug (const Output<OutputType> & output) const;
-
-  void info (const OutputType & output) const;
-  void info (const Output<OutputType> & output) const;
-
-  void warning (const OutputType & output) const;
-  void warning (const Output<OutputType> & output) const;
-
-  void error (const OutputType & output) const;
-  void error (const Output<OutputType> & output) const;
-
-  void fatal (const OutputType & output) const;
-  void fatal (const Output<OutputType> & output) const;
-
-  void setThreshold (const Severity::Level & threshold);
-  Severity::Level getThreshold (void) const;
+  // accessors
+  Level getThreshold (void) const;
+  void setThreshold (const Level & level);
 
 private:
-  std::string getCurrentTime (void) const;
+  // helper classes
+  class StringVisitor : public boost::static_visitor<std::string>
+  {
+  public:
+    const std::string operator () (const std::string & message) const;
+    const std::string operator () (const Stringifiable & message) const;
+  };
 
-  BasicSink<OutputType> & _sink;
-  Severity::Level _threshold = Severity::Level::TRACE;
+  // properties
+  Level _threshold;
+  StringSink & _sink;
+  const StringVisitor _stringVisitor;
+
+    // helper functions
+  void logAtLevel (const Level & level, const String & message) const;
+  bool isAboveThreshold (const Level & level) const;
+  const std::string createLogMessage (const Level & level, const String & message) const;
+  const std::string getCurrentTime (void) const;
+  const std::string removeTrailingNewline (const std::string & text) const;
 };
-
-#include "Logger.cpp"
 
 } // namespace Toolbox::Log
 

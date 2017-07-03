@@ -1,24 +1,24 @@
 #include "Logger.h"
-#include "sinks/sync/ConsoleSink.h"
+#include "sinks/ConsoleSink.h"
 #include "sinks/Message.h"
-
-#include <thread>
-#include <functional>
-#include <memory>
-#include <map>
 
 using namespace Toolbox::Log;
 
 int main (void)
 {
-  using namespace Sinks::Sync;
-
   ConsoleSink consoleSink;
-  Logger<std::string> logger (consoleSink);
-  logger.info ("test");
-  
-  Message message ("message");
-  logger.info (message);
+  Logger logger (consoleSink);
+
+  logger.log (Level::INFO, "message!"); // logs on default level
+  logger.warning ("warning!"); // succeeds
+
+  logger.setThreshold (Level::INFO); // changes log level
+
+  logger.debug ("debug?"); // fails
+  logger.info ("info!"); // succeeds
+
+  Message message ("error!");
+  logger.error (message); // logs stringifiable successfully
 
   return 0;
 }

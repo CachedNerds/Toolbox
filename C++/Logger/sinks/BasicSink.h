@@ -11,10 +11,6 @@ class BasicSink
 {
 
 public:
-  BasicSink<OutputType> (void) = default;
-  BasicSink<OutputType> (const BasicSink & sink) = delete;
-  BasicSink & operator = (const BasicSink & sink) = delete;
-
   virtual BasicSink & operator << (const OutputType & output);
   virtual BasicSink & operator << (const Output<OutputType> & output);
 
@@ -22,6 +18,8 @@ public:
 };
 
 #include "BasicSink.cpp"
+
+using StringSink = BasicSink<std::string>;
 
 } // namespace Toolbox::Log::Sinks
 
