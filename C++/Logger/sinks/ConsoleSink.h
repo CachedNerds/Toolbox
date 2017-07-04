@@ -4,7 +4,6 @@
 #include "BasicSink.h"
 
 #include <string>
-#include <mutex>
 
 namespace Toolbox::Log::Sinks
 {

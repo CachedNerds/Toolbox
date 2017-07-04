@@ -103,15 +103,4 @@ const std::string Logger::removeTrailingNewline (const std::string & text) const
   return text.substr (0, text.length () - 1);
 }
 
-// static string visitor
-const std::string Logger::StringVisitor::operator () (const std::string & message) const
-{
-  return message;
-}
-
-const std::string Logger::StringVisitor::operator () (const Stringifiable & message) const
-{
-  return message.toString ();
-}
-
 } // namespace Toolbox::Log

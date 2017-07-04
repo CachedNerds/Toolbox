@@ -1,13 +1,13 @@
 template <typename OutputType>
-BasicSink<OutputType> & BasicSink<OutputType>::operator << (const OutputType & output)
+BasicSink<OutputType>::BasicSink (void)
+: _outputVisitor ()
 {
-  this->output (output);
-  return *this;
+
 }
 
 template <typename OutputType>
-BasicSink<OutputType> & BasicSink<OutputType>::operator << (const Output<OutputType> & output)
+BasicSink<OutputType> & BasicSink<OutputType>::operator << (const Output & output)
 {
-  this->output (output.getOutput ());
+  this->output (boost::apply_visitor (_outputVisitor, output));
   return *this;
 }

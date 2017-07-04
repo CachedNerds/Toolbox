@@ -3,7 +3,8 @@
 
 #include "Level.h"
 #include "sinks/BasicSink.h"
-#include "sinks/Stringifiable.h"
+#include "outputs/Stringifiable.h"
+#include "outputs/OutputVisitor.h"
 
 #include <string>
 #include <boost/variant.hpp>
@@ -12,14 +13,17 @@ namespace Toolbox::Log
 {
 
 using namespace Sinks;
+using Outputs::Stringifiable;
+using Outputs::OutputVisitor;
 
 class Logger
 {
 using String = boost::variant<const std::string &, const Stringifiable &>;
+using StringVisitor = OutputVisitor<std::string>;
 public:
   Logger (StringSink & sink);
 
-  void log (const Level & level, const String & message) const;
+  void log (const String & message) const;
   void trace (const String & message) const;
   void debug (const String & message) const;
   void info (const String & message) const;
@@ -31,22 +35,18 @@ public:
   Level getThreshold (void) const;
   void setThreshold (const Level & level);
 
-private:
-  // helper classes
-  class StringVisitor : public boost::static_visitor<std::string>
-  {
-  public:
-    const std::string operator () (const std::string & message) const;
-    const std::string operator () (const Stringifiable & message) const;
-  };
+  Level getDefault (void) const;
+  void setDefault (const Level & level);
 
+private:
   // properties
+  Level _default;
   Level _threshold;
   StringSink & _sink;
   const StringVisitor _stringVisitor;
 
     // helper functions
-  void logAtLevel (const Level & level, const String & message) const;
+  void logIfAboveThreshold (const Level & level, const String & message) const;
   bool isAboveThreshold (const Level & level) const;
   const std::string createLogMessage (const Level & level, const String & message) const;
   const std::string getCurrentTime (void) const;
