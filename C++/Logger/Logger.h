@@ -23,7 +23,9 @@ using StringVisitor = OutputVisitor<std::string>;
 public:
   Logger (StringSink & sink);
 
+  // logs message at default level
   void log (const String & message) const;
+  
   void trace (const String & message) const;
   void debug (const String & message) const;
   void info (const String & message) const;
