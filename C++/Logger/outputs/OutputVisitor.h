@@ -3,7 +3,7 @@
 
 #include "Outputable.h"
 
-#include <boost/variant.hpp>
+#include <boost/variant/static_visitor.hpp>
 
 namespace Toolbox::Log::Outputs
 {
