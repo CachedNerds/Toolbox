@@ -7,46 +7,47 @@ namespace Toolbox::Log
 {
 
 Logger::Logger (StringSink & sink)
-: _threshold (Level::TRACE)
+: _default (Level::INFO)
+, _threshold (Level::TRACE)
 , _sink (sink)
 , _stringVisitor ()
 {
   
 }
 
-void Logger::log (const Level & level, const String & message) const
+void Logger::log (const String & message) const
 {
-  logAtLevel (level, message);
+  logIfAboveThreshold (_default, message);
 }
 
 void Logger::trace (const String & message) const
 {
-  logAtLevel (Level::TRACE, message);
+  logIfAboveThreshold (Level::TRACE, message);
 }
 
 void Logger::debug (const String & message) const
 {
-  logAtLevel (Level::DEBUG, message);
+  logIfAboveThreshold (Level::DEBUG, message);
 }
 
 void Logger::info (const String & message) const
 {
-  logAtLevel (Level::INFO, message);
+  logIfAboveThreshold (Level::INFO, message);
 }
 
 void Logger::warning (const String & message) const
 {
-  logAtLevel (Level::WARNING, message);
+  logIfAboveThreshold (Level::WARNING, message);
 }
 
 void Logger::error (const String & message) const
 {
-  logAtLevel (Level::ERROR, message);
+  logIfAboveThreshold (Level::ERROR, message);
 }
 
 void Logger::fatal (const String & message) const
 {
-  logAtLevel (Level::FATAL, message);
+  logIfAboveThreshold (Level::FATAL, message);
 }
 
 Level Logger::getThreshold (void) const
@@ -59,7 +60,17 @@ void Logger::setThreshold (const Level & threshold)
   _threshold = threshold;
 }
 
-void Logger::logAtLevel (const Level & level, const String & message) const
+Level Logger::getDefault (void) const
+{
+  return _default;
+}
+
+void Logger::setDefault (const Level & level)
+{
+  _default = level;
+}
+
+void Logger::logIfAboveThreshold (const Level & level, const String & message) const
 {
   if (isAboveThreshold (level))
     _sink << createLogMessage (level, message);
