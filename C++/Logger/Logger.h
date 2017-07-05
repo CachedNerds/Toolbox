@@ -33,7 +33,6 @@ public:
   void error (const String & message) const;
   void fatal (const String & message) const;
 
-  // accessors
   Level getThreshold (void) const;
   void setThreshold (const Level & level);
 
@@ -41,13 +40,11 @@ public:
   void setDefault (const Level & level);
 
 private:
-  // properties
   Level _default;
   Level _threshold;
   StringSink & _sink;
   const StringVisitor _stringVisitor;
 
-    // helper functions
   void logIfAboveThreshold (const Level & level, const String & message) const;
   bool isAboveThreshold (const Level & level) const;
   const std::string createLogMessage (const Level & level, const String & message) const;
