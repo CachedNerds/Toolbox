@@ -49,4 +49,4 @@ run-tests:
 	./StringifiableTests
 
 clean:
-	rm *.o $(TESTS)/*.o logger test
+	rm *.o $(TESTS)/*.o logger test LevelTests StringifiableTests
