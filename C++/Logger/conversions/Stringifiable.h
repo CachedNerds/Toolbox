@@ -1,0 +1,20 @@
+#ifndef _STRINGIFIABLE_H_
+#define _STRINGIFIABLE_H_
+
+#include "ConvertibleTo.h"
+
+#include <string>
+
+namespace Toolbox::Log::Conversion
+{
+
+class Stringifiable : public ConvertibleTo<const std::string>
+{
+public:
+  virtual const std::string toString (void) const = 0;
+  const std::string convert (void) const override final;
+};
+
+} // namespace Toolbox::Log::Conversion
+
+#endif // _STRINGIFIABLE_H_
