@@ -1,9 +1,8 @@
 #include "Logger.h"
 #include "sinks/ConsoleSink.h"
-#include "outputs/Message.h"
+#include "Message.h"
 
 using namespace Toolbox::Log;
-using Outputs::Message;
 
 int main (void)
 {
@@ -11,6 +10,7 @@ int main (void)
   Logger logger (consoleSink);
 
   logger.log ("message!"); // logs on default level
+  logger.log (Level::FATAL, "fatal!"); // succeeds
   logger.warning ("warning!"); // succeeds
   logger.setDefault (Level::DEBUG); // sets default level the log method will log at
   logger.setThreshold (Level::INFO); // changes log level threshold

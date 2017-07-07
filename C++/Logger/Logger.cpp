@@ -20,6 +20,11 @@ void Logger::log (const String & message) const
   logIfAboveThreshold (_default, message);
 }
 
+void Logger::log (const Level & level, const String & message) const
+{
+  logIfAboveThreshold (level, message);
+}
+
 void Logger::trace (const String & message) const
 {
   logIfAboveThreshold (Level::TRACE, message);
@@ -94,8 +99,7 @@ const std::string Logger::getCurrentTime (void) const
 {
   std::time_t now = std::chrono::system_clock::to_time_t (std::chrono::system_clock::now ());
   std::string timestamp = std::ctime (&now);
-  std::string timestampWithoutNewline = removeTrailingNewline (timestamp);
-  return timestampWithoutNewline;
+  return removeTrailingNewline (timestamp);
 }
 
 const std::string Logger::removeTrailingNewline (const std::string & text) const

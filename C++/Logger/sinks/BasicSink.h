@@ -1,34 +1,32 @@
 #ifndef _BASIC_SINK_H_
 #define _BASIC_SINK_H_
 
-#include "../outputs/Outputable.h"
-#include "../outputs/OutputVisitor.h"
+#include "../conversions/ConvertibleTo.h"
+#include "../conversions/ConversionVisitor.h"
 
 #include <boost/variant.hpp>
 
 namespace Toolbox::Log::Sinks
 {
 
-using Toolbox::Log::Outputs::Outputable;
-using Toolbox::Log::Outputs::OutputVisitor;
+using Toolbox::Log::Conversion::ConvertibleTo;
+using Toolbox::Log::Conversion::ConversionVisitor;
 
 template <typename OutputType>
 class BasicSink
 {
-using Output = boost::variant<const OutputType &, const Outputable<OutputType> &>;
+using Output = boost::variant<const OutputType &, const ConvertibleTo<OutputType> &>;
+using OutputVisitor = ConversionVisitor<OutputType>;
 public:
   BasicSink (void);
   virtual BasicSink<OutputType> & operator << (const Output & output);
   virtual void output (const OutputType & output) = 0;
 
-protected:
-  // properties
-  const OutputVisitor<OutputType> _outputVisitor;
+private:
+  OutputVisitor _outputVisitor;
 };
 
 #include "BasicSink.cpp"
-
-using StringSink = BasicSink<std::string>;
 
 } // namespace Toolbox::Log::Sinks
 

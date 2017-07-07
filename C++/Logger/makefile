@@ -4,7 +4,7 @@ LINKER_FLAGS = -lboost_system
 OBJ_FILES = main.o Logger.o Level.o ConsoleSink.o Stringifiable.o Message.o
 TEST_OBJ_FILES = TestLevel.o Level.o TestStringifiable.o Stringifiable.o
 SINKS = sinks
-OUTPUTS = outputs
+CONVERSIONS = conversions
 TESTS = tests
 
 # Executable Targets
@@ -20,21 +20,21 @@ Logger.o: Stringifiable.o $(SINKS)/BasicSink.h Level.h Logger.h Logger.cpp
 Level.o: Level.h Level.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) Level.cpp
 
-ConsoleSink.o: $(SINKS)/ConsoleSink.h $(SINKS)/ConsoleSink.cpp
+ConsoleSink.o: $(SINKS)/BasicSink.h $(SINKS)/BasicSink.cpp $(SINKS)/ConsoleSink.h $(SINKS)/ConsoleSink.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(SINKS)/ConsoleSink.cpp
 
-Stringifiable.o: $(OUTPUTS)/Outputable.h $(OUTPUTS)/Stringifiable.h $(OUTPUTS)/Stringifiable.cpp
-	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(OUTPUTS)/Stringifiable.cpp
+Stringifiable.o: $(CONVERSIONS)/ConvertibleTo.h $(CONVERSIONS)/Stringifiable.h $(CONVERSIONS)/Stringifiable.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(CONVERSIONS)/Stringifiable.cpp
 
-Message.o: Stringifiable.o $(OUTPUTS)/Message.h $(OUTPUTS)/Message.cpp $(OUTPUTS)/Outputable.h
-	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(OUTPUTS)/Message.cpp
+Message.o: Stringifiable.o Message.h Message.cpp $(CONVERSIONS)/ConvertibleTo.h
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) Message.cpp
 
 # Tests Targets
 TestLevel.o: Level.o $(TESTS)/Level.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/Level.cpp -o TestLevel.o
 
-TestStringifiable.o: Stringifiable.o $(TESTS)/$(OUTPUTS)/Stringifiable.*
-	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(OUTPUTS)/Stringifiable.cpp -o TestStringifiable.o
+TestStringifiable.o: Stringifiable.o $(TESTS)/$(CONVERSIONS)/Stringifiable.h $(TESTS)/$(CONVERSIONS)/Stringifiable.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSIONS)/Stringifiable.cpp -o TestStringifiable.o
 
 # Command Targets
 tests: $(TEST_OBJ_FILES)

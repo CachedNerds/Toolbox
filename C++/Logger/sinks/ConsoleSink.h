@@ -8,6 +8,8 @@
 namespace Toolbox::Log::Sinks
 {
 
+using StringSink = BasicSink<std::string>;
+
 class ConsoleSink : public StringSink
 {
 public:

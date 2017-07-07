@@ -3,28 +3,28 @@
 
 #include "Level.h"
 #include "sinks/BasicSink.h"
-#include "outputs/Stringifiable.h"
-#include "outputs/OutputVisitor.h"
+#include "conversions/Stringifiable.h"
+#include "conversions/ConversionVisitor.h"
 
-#include <string>
 #include <boost/variant.hpp>
 
 namespace Toolbox::Log
 {
 
 using namespace Sinks;
-using Outputs::Stringifiable;
-using Outputs::OutputVisitor;
+using namespace Conversion;
 
 class Logger
 {
 using String = boost::variant<const std::string &, const Stringifiable &>;
-using StringVisitor = OutputVisitor<std::string>;
+using StringVisitor = ConversionVisitor<const std::string>;
+using StringSink = BasicSink<std::string>;
 public:
   Logger (StringSink & sink);
 
-  // logs message at default level
+  // logs message at default log level
   void log (const String & message) const;
+  void log (const Level & level, const String & message) const;
   
   void trace (const String & message) const;
   void debug (const String & message) const;
@@ -43,7 +43,7 @@ private:
   Level _default;
   Level _threshold;
   StringSink & _sink;
-  const StringVisitor _stringVisitor;
+  StringVisitor _stringVisitor;
 
   void logIfAboveThreshold (const Level & level, const String & message) const;
   bool isAboveThreshold (const Level & level) const;
