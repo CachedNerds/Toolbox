@@ -33,7 +33,7 @@ Message.o: Stringifiable.o Message.h Message.cpp $(CONVERSIONS)/ConvertibleTo.h
 TestLevel.o: Level.o $(TESTS)/Level.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/Level.cpp -o TestLevel.o
 
-TestStringifiable.o: Stringifiable.o $(TESTS)/$(CONVERSIONS)/Stringifiable.h $(TESTS)/$(CONVERSIONS)/Stringifiable.cpp
+TestStringifiable.o: Stringifiable.o $(CONVERSIONS)/Stringifiable.h $(CONVERSIONS)/Stringifiable.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSIONS)/Stringifiable.cpp -o TestStringifiable.o
 
 # Command Targets

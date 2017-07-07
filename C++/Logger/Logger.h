@@ -20,7 +20,7 @@ using String = boost::variant<const std::string &, const Stringifiable &>;
 using StringVisitor = ConversionVisitor<const std::string>;
 using StringSink = BasicSink<std::string>;
 public:
-  Logger (StringSink & sink);
+  explicit Logger (StringSink & sink);
 
   // logs message at default log level
   void log (const String & message) const;

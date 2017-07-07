@@ -1,14 +1,14 @@
 #define BOOST_TEST_MODULE Stringifiable
 #include <boost/test/included/unit_test.hpp>
 
-#include "../../outputs/Stringifiable.h"
+#include "../../conversions/Stringifiable.h"
 
-using Toolbox::Log::Outputs::Stringifiable;
+using Toolbox::Log::Conversion::Stringifiable;
 
 class TestMessage : public Stringifiable
 {
 public:
-  TestMessage (const std::string & message) : _message (message) {}
+  explicit TestMessage (const std::string & message) : _message (message) {}
 
   const std::string toString (void) const override
   {
@@ -26,9 +26,9 @@ BOOST_AUTO_TEST_CASE (toString_matches_input)
   BOOST_TEST (testMessage.toString () == message);
 }
 
-BOOST_AUTO_TEST_CASE (toString_matches_toOutput)
+BOOST_AUTO_TEST_CASE (toString_matches_convert)
 {
   const std::string message = "test";
   TestMessage testMessage (message);
-  BOOST_TEST (testMessage.toString () == testMessage.toOutput ());
+  BOOST_TEST (testMessage.toString () == testMessage.convert ());
 }
