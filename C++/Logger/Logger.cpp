@@ -10,7 +10,6 @@ Logger::Logger (StringSink & sink)
 : _default (Level::INFO)
 , _threshold (Level::TRACE)
 , _sink (sink)
-, _stringVisitor ()
 {
   
 }
@@ -88,7 +87,6 @@ bool Logger::isAboveThreshold (const Level & level) const
 
 const std::string Logger::createLogMessage (const Level & level, const String & message) const
 {
-  using Conversion::Variant;
   const std::string timestampField = "timestamp: " + getCurrentTime ();
   const std::string levelField = "level: " + levelToString (level);
   const std::string messageField = "message: " + StringVariant::get (message);

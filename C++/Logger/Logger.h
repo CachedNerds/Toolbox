@@ -2,12 +2,9 @@
 #define _LOGGER_H_
 
 #include "Level.h"
-#include "sinks/BasicSink.h"
-#include "conversions/Stringifiable.h"
-#include "conversions/VariantVisitor.h"
-#include "conversions/Variant.h"
-
-#include <boost/variant.hpp>
+#include "sink/BasicSink.h"
+#include "conversion/Stringifiable.h"
+#include "conversion/Variant.h"
 
 namespace Toolbox::Log
 {
@@ -17,7 +14,7 @@ class Logger
 using StringVariant = Conversion::Variant<std::string>;
 using String = StringVariant::type;
 using StringVisitor = Conversion::VariantVisitor<std::string>;
-using StringSink = Sinks::BasicSink<std::string>;
+using StringSink = Sink::BasicSink<std::string>;
 public:
   explicit Logger (StringSink & sink);
 
@@ -42,7 +39,6 @@ private:
   Level _default;
   Level _threshold;
   StringSink & _sink;
-  StringVisitor _stringVisitor;
 
   void logIfAboveThreshold (const Level & level, const String & message) const;
   bool isAboveThreshold (const Level & level) const;

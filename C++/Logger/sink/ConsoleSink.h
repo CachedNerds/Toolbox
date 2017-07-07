@@ -5,7 +5,7 @@
 
 #include <string>
 
-namespace Toolbox::Log::Sinks
+namespace Toolbox::Log::Sink
 {
 
 using StringSink = BasicSink<std::string>;
@@ -17,6 +17,6 @@ public:
   void output (const std::string & output) override;
 };
 
-} // namespace Toolbox::Log::Sinks
+} // namespace Toolbox::Log::Sink
 
 #endif // _CONSOLE_SINK_H_

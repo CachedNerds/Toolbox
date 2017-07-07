@@ -1,7 +1,7 @@
 #ifndef _MESSAGE_H_
 #define _MESSAGE_H_
 
-#include "conversions/Stringifiable.h"
+#include "conversion/Stringifiable.h"
 
 #include <string>
 

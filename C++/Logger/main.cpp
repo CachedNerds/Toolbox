@@ -1,11 +1,11 @@
 #include "Logger.h"
-#include "sinks/ConsoleSink.h"
+#include "sink/ConsoleSink.h"
 #include "Message.h"
 
 int main (void)
 {
   using namespace Toolbox::Log;
-  using namespace Sinks;
+  using namespace Sink;
   using namespace Conversion;
   ConsoleSink consoleSink;
   Logger logger (consoleSink);

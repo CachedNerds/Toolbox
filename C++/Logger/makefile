@@ -3,8 +3,8 @@ ADDITIONAL_FLAGS = -DBOOST_SYSTEM_NO_DEPRECATED -I ~/boost_1_64_0
 LINKER_FLAGS = -lboost_system
 OBJ_FILES = main.o Logger.o Level.o ConsoleSink.o Stringifiable.o Message.o
 TEST_OBJ_FILES = TestLevel.o Level.o TestStringifiable.o Stringifiable.o TestVariantVisitor.o
-SINKS = sinks
-CONVERSIONS = conversions
+SINKS = sink
+CONVERSIONS = conversion
 TESTS = tests
 
 # Executable Targets
@@ -54,4 +54,4 @@ run-tests:
 	./VariantVisitorTests
 
 clean:
-	rm *.o $(TESTS)/*.o logger test LevelTests StringifiableTests
+	rm *.o $(TESTS)/*.o logger test LevelTests StringifiableTests VariantVisitorTests
