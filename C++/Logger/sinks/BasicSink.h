@@ -3,20 +3,18 @@
 
 #include "../conversions/ConvertibleTo.h"
 #include "../conversions/ConversionVisitor.h"
+#include "../conversions/ConversionVariant.h"
 
 #include <boost/variant.hpp>
 
 namespace Toolbox::Log::Sinks
 {
 
-using Toolbox::Log::Conversion::ConvertibleTo;
-using Toolbox::Log::Conversion::ConversionVisitor;
-
 template <typename OutputType>
 class BasicSink
 {
-using Output = boost::variant<const OutputType &, const ConvertibleTo<OutputType> &>;
-using OutputVisitor = ConversionVisitor<OutputType>;
+using Output = typename Toolbox::Log::Conversion::ConversionVariant<OutputType>::type;
+using OutputVisitor = Toolbox::Log::Conversion::ConversionVisitor<OutputType>;
 public:
   BasicSink (void);
   virtual BasicSink<OutputType> & operator << (const Output & output);

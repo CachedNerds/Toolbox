@@ -8,7 +8,7 @@ template <typename ResultType>
 class ConvertibleTo
 {
 public:
-  virtual ResultType convert (void) const = 0;
+  virtual const ResultType convert (void) const = 0;
 };
 
 } // namespace Toolbox::Log::Conversion

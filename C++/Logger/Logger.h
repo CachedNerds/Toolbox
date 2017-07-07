@@ -5,20 +5,18 @@
 #include "sinks/BasicSink.h"
 #include "conversions/Stringifiable.h"
 #include "conversions/ConversionVisitor.h"
+#include "conversions/ConversionVariant.h"
 
 #include <boost/variant.hpp>
 
 namespace Toolbox::Log
 {
 
-using namespace Sinks;
-using namespace Conversion;
-
 class Logger
 {
-using String = boost::variant<const std::string &, const Stringifiable &>;
-using StringVisitor = ConversionVisitor<const std::string>;
-using StringSink = BasicSink<std::string>;
+using String = Conversion::ConversionVariant<std::string>::type;
+using StringVisitor = Conversion::ConversionVisitor<std::string>;
+using StringSink = Sinks::BasicSink<std::string>;
 public:
   explicit Logger (StringSink & sink);
 

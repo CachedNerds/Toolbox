@@ -8,7 +8,7 @@
 namespace Toolbox::Log::Conversion
 {
 
-class Stringifiable : public ConvertibleTo<const std::string>
+class Stringifiable : public ConvertibleTo<std::string>
 {
 public:
   virtual const std::string toString (void) const = 0;

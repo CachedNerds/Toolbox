@@ -9,7 +9,7 @@ namespace Toolbox::Log::Conversion
 {
 
 template <typename ResultType>
-class ConversionVisitor : public boost::static_visitor<ResultType>
+class ConversionVisitor : public boost::static_visitor<const ResultType>
 {
 public:
   virtual const ResultType operator () (const ResultType & subject) const;
