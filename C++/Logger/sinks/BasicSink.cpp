@@ -8,6 +8,6 @@ BasicSink<OutputType>::BasicSink (void)
 template <typename OutputType>
 BasicSink<OutputType> & BasicSink<OutputType>::operator << (const Output & output)
 {
-  this->output (boost::apply_visitor (_outputVisitor, output));
+  this->output (OutputVariant::get (output));
   return *this;
 }

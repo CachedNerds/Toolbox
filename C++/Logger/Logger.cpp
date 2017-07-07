@@ -88,9 +88,10 @@ bool Logger::isAboveThreshold (const Level & level) const
 
 const std::string Logger::createLogMessage (const Level & level, const String & message) const
 {
+  using Conversion::Variant;
   const std::string timestampField = "timestamp: " + getCurrentTime ();
   const std::string levelField = "level: " + levelToString (level);
-  const std::string messageField = "message: " + boost::apply_visitor (_stringVisitor, message);
+  const std::string messageField = "message: " + StringVariant::get (message);
 
   return "{" + timestampField + ", " + levelField + ", " + messageField + "}" + "\n";
 }

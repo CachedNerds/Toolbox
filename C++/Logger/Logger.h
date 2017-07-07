@@ -4,8 +4,8 @@
 #include "Level.h"
 #include "sinks/BasicSink.h"
 #include "conversions/Stringifiable.h"
-#include "conversions/ConversionVisitor.h"
-#include "conversions/ConversionVariant.h"
+#include "conversions/VariantVisitor.h"
+#include "conversions/Variant.h"
 
 #include <boost/variant.hpp>
 
@@ -14,8 +14,9 @@ namespace Toolbox::Log
 
 class Logger
 {
-using String = Conversion::ConversionVariant<std::string>::type;
-using StringVisitor = Conversion::ConversionVisitor<std::string>;
+using StringVariant = Conversion::Variant<std::string>;
+using String = StringVariant::type;
+using StringVisitor = Conversion::VariantVisitor<std::string>;
 using StringSink = Sinks::BasicSink<std::string>;
 public:
   explicit Logger (StringSink & sink);

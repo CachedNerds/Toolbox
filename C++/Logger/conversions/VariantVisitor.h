@@ -1,5 +1,5 @@
-#ifndef _CONVERSION_VISITOR_H_
-#define _CONVERSION_VISITOR_H_
+#ifndef _VARIANT_VISITOR_H_
+#define _VARIANT_VISITOR_H_
 
 #include "ConvertibleTo.h"
 
@@ -9,15 +9,15 @@ namespace Toolbox::Log::Conversion
 {
 
 template <typename ResultType>
-class ConversionVisitor : public boost::static_visitor<const ResultType>
+class VariantVisitor : public boost::static_visitor<const ResultType>
 {
 public:
   virtual const ResultType operator () (const ResultType & subject) const;
   virtual const ResultType operator () (const ConvertibleTo<ResultType> & subject) const;
 };
 
-#include "ConversionVisitor.cpp"
+#include "VariantVisitor.cpp"
 
 } // namespace Toolbox::Log::Conversion
 
-#endif // _CONVERSION_VISITOR_H_
+#endif // _VARIANT_VISITOR_H_
