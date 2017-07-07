@@ -2,7 +2,7 @@ CPP_FLAGS = --std=c++1z -c
 ADDITIONAL_FLAGS = -DBOOST_SYSTEM_NO_DEPRECATED -I ~/boost_1_64_0
 LINKER_FLAGS = -lboost_system
 OBJ_FILES = main.o Logger.o Level.o ConsoleSink.o Stringifiable.o Message.o
-TEST_OBJ_FILES = TestLevel.o Level.o TestStringifiable.o Stringifiable.o TestConversionVisitor.o
+TEST_OBJ_FILES = TestLevel.o Level.o TestStringifiable.o Stringifiable.o TestVariantVisitor.o
 SINKS = sinks
 CONVERSIONS = conversions
 TESTS = tests
@@ -36,14 +36,14 @@ TestLevel.o: Level.o $(TESTS)/Level.cpp
 TestStringifiable.o: Stringifiable.o $(CONVERSIONS)/Stringifiable.h $(CONVERSIONS)/Stringifiable.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSIONS)/Stringifiable.cpp -o TestStringifiable.o
 
-TestConversionVisitor.o: $(CONVERSIONS)/ConversionVisitor.h $(CONVERSIONS)/ConversionVisitor.cpp
-	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSIONS)/ConversionVisitor.cpp -o TestConversionVisitor.o
+TestVariantVisitor.o: $(CONVERSIONS)/VariantVisitor.h $(CONVERSIONS)/VariantVisitor.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSIONS)/VariantVisitor.cpp -o TestVariantVisitor.o
 
 # Command Targets
 tests: $(TEST_OBJ_FILES)
 	g++ $(LINKER_FLAGS) TestLevel.o Level.o -o LevelTests
 	g++ $(LINKER_FLAGS) TestStringifiable.o Stringifiable.o -o StringifiableTests
-	g++ $(LINKER_FLAGS) TestConversionVisitor.o -o ConversionVisitorTests
+	g++ $(LINKER_FLAGS) TestVariantVisitor.o -o VariantVisitorTests
 
 run:
 	./logger
@@ -51,7 +51,7 @@ run:
 run-tests:
 	./LevelTests
 	./StringifiableTests
-	./ConversionVisitorTests
+	./VariantVisitorTests
 
 clean:
 	rm *.o $(TESTS)/*.o logger test LevelTests StringifiableTests

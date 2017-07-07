@@ -3,14 +3,15 @@
 
 #include "../../conversions/ConvertibleTo.h"
 #include "../../conversions/Stringifiable.h"
-#include "../../conversions/ConversionVisitor.h"
-#include "../../conversions/ConversionVariant.h"
+#include "../../conversions/VariantVisitor.h"
+#include "../../conversions/Variant.h"
 
 #include <boost/variant.hpp>
 
 using namespace Toolbox::Log::Conversion;
-using TestStringVariant = ConversionVariant<std::string>::type;
-using TestStringVisitor = ConversionVisitor<std::string>;
+using TestStringVariant = Variant<std::string>;
+using TestString = TestStringVariant::type;
+using TestStringVisitor = VariantVisitor<std::string>;
 
 class TestMessage : public ConvertibleTo<std::string>
 {
@@ -34,9 +35,9 @@ private:
 BOOST_AUTO_TEST_CASE (ConversionVisitor_visits_primative)
 {
   const std::string message = "test";
-  TestStringVariant testVariant = message;
+  TestString testVariant = message;
   TestStringVisitor testVisitor;
-  const std::string testValue = boost::apply_visitor (testVisitor, testVariant);
+  const std::string testValue = TestStringVariant::get (testVariant);
 
   BOOST_TEST (testValue == message);
 }
@@ -45,9 +46,9 @@ BOOST_AUTO_TEST_CASE (ConversionVisitor_visits_ConvertibleTo)
 {
   const std::string message = "test";
   TestMessage testMessage (message);
-  TestStringVariant testVariant = testMessage;
+  TestString testVariant = testMessage;
   TestStringVisitor testVisitor;
-  const std::string testValue = boost::apply_visitor (testVisitor, testVariant);
+  const std::string testValue = TestStringVariant::get (testVariant);
 
   BOOST_TEST (testValue == message);
 }
