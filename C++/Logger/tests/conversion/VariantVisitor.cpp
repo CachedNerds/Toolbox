@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE ConversionVisitor
+#define BOOST_TEST_MODULE VariantVisitor
 #include <boost/test/included/unit_test.hpp>
 
 #include "../../conversion/ConvertibleTo.h"
@@ -29,7 +29,7 @@ private:
   const std::string _message;
 };
 
-BOOST_AUTO_TEST_CASE (ConversionVisitor_visits_primative)
+BOOST_AUTO_TEST_CASE (VariantVisitor_visits_primative)
 {
   const std::string message = "test";
   TestString testVariant = message;
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE (ConversionVisitor_visits_primative)
   BOOST_TEST (testValue == message);
 }
 
-BOOST_AUTO_TEST_CASE (ConversionVisitor_visits_ConvertibleTo)
+BOOST_AUTO_TEST_CASE (VariantVisitor_visits_ConvertibleTo)
 {
   const std::string message = "test";
   TestMessage testMessage (message);
