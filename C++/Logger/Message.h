@@ -1,17 +1,16 @@
 #ifndef _MESSAGE_H_
 #define _MESSAGE_H_
 
-#include "Stringifiable.h"
+#include "conversion/Stringifiable.h"
 
 #include <string>
 
-namespace Toolbox::Log::Sinks
+namespace Toolbox::Log
 {
-
+using Conversion::Stringifiable;
 class Message : public Stringifiable
 {
 public:
-  Message (const char * message);
   Message (const std::string & message);
 
   virtual const std::string toString (void) const override;
@@ -20,6 +19,6 @@ private:
   const std::string _message;
 };
 
-} // namespace Toolbox::Log::Sinks
+} // namespace Toolbox::Log
 
 #endif // _MESSAGE_H_

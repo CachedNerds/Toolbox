@@ -4,10 +4,11 @@
 #include "BasicSink.h"
 
 #include <string>
-#include <mutex>
 
-namespace Toolbox::Log::Sinks
+namespace Toolbox::Log::Sink
 {
+
+using StringSink = BasicSink<std::string>;
 
 class ConsoleSink : public StringSink
 {
@@ -16,6 +17,6 @@ public:
   void output (const std::string & output) override;
 };
 
-} // namespace Toolbox::Log::Sinks
+} // namespace Toolbox::Log::Sink
 
 #endif // _CONSOLE_SINK_H_

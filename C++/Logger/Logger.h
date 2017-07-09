@@ -2,24 +2,26 @@
 #define _LOGGER_H_
 
 #include "Level.h"
-#include "sinks/BasicSink.h"
-#include "sinks/Stringifiable.h"
-
-#include <string>
-#include <boost/variant.hpp>
+#include "sink/BasicSink.h"
+#include "conversion/Stringifiable.h"
+#include "conversion/Variant.h"
 
 namespace Toolbox::Log
 {
 
-using namespace Sinks;
-
 class Logger
 {
-using String = boost::variant<const std::string &, const Stringifiable &>;
+using StringVariant = Conversion::Variant<std::string>;
+using String = StringVariant::type;
+using StringVisitor = Conversion::VariantVisitor<std::string>;
+using StringSink = Sink::BasicSink<std::string>;
 public:
-  Logger (StringSink & sink);
+  explicit Logger (StringSink & sink);
 
+  // logs message at default log level
+  void log (const String & message) const;
   void log (const Level & level, const String & message) const;
+  
   void trace (const String & message) const;
   void debug (const String & message) const;
   void info (const String & message) const;
@@ -27,26 +29,18 @@ public:
   void error (const String & message) const;
   void fatal (const String & message) const;
 
-  // accessors
   Level getThreshold (void) const;
   void setThreshold (const Level & level);
 
-private:
-  // helper classes
-  class StringVisitor : public boost::static_visitor<std::string>
-  {
-  public:
-    const std::string operator () (const std::string & message) const;
-    const std::string operator () (const Stringifiable & message) const;
-  };
+  Level getDefault (void) const;
+  void setDefault (const Level & level);
 
-  // properties
+private:
+  Level _default;
   Level _threshold;
   StringSink & _sink;
-  const StringVisitor _stringVisitor;
 
-    // helper functions
-  void logAtLevel (const Level & level, const String & message) const;
+  void logIfAboveThreshold (const Level & level, const String & message) const;
   bool isAboveThreshold (const Level & level) const;
   const std::string createLogMessage (const Level & level, const String & message) const;
   const std::string getCurrentTime (void) const;
