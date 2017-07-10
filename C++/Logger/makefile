@@ -1,11 +1,19 @@
+# flags
 CPP_FLAGS = --std=c++1z -c
 ADDITIONAL_FLAGS = -DBOOST_SYSTEM_NO_DEPRECATED -I ~/boost_1_64_0
 LINKER_FLAGS = -lboost_system
+
+# file lists
 OBJ_FILES = main.o Logger.o Level.o ConsoleSink.o Stringifiable.o Message.o
-TEST_OBJ_FILES = TestLevel.o Level.o TestStringifiable.o Stringifiable.o TestVariantVisitor.o TestBasicSink.o
+TEST_OBJ_FILES = TestLevel.o Level.o TestMessage.o TestSink.o TestConvertibleTo.o TestStringifiable.o \
+                 Stringifiable.o TestResult.o TestBasicSink.o TestLogger.o
+TEST_EXE_FILES = LevelTests ConvertibleToTests StringifiableTests ResultTests BasicSinkTests LoggerTests
+
+# directories
 SINK = sink
 CONVERSION = conversion
 TESTS = tests
+TEST_TYPES = test_types
 
 # Executable Targets
 all: $(OBJ_FILES)
@@ -14,7 +22,7 @@ all: $(OBJ_FILES)
 main.o: main.cpp Message.o ConsoleSink.o Logger.o
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) main.cpp
 
-Logger.o: Stringifiable.o $(SINK)/BasicSink.h Level.h Logger.h Logger.cpp
+Logger.o: Stringifiable.o $(SINK)/BasicSink.h Level.h Logger.h Logger.cpp $(CONVERSION)/Result.h
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) Logger.cpp
 
 Level.o: Level.h Level.cpp
@@ -30,33 +38,49 @@ Message.o: Stringifiable.o Message.h Message.cpp $(CONVERSION)/ConvertibleTo.h
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) Message.cpp
 
 # Tests Targets
+TestMessage.o: $(CONVERSION)/ConvertibleTo.h $(TESTS)/$(TEST_TYPES)/TestMessage.h $(TESTS)/$(TEST_TYPES)/TestMessage.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(TEST_TYPES)/TestMessage.cpp
+
+TestSink.o: $(SINK)/BasicSink.h $(SINK)/BasicSink.cpp $(TESTS)/$(TEST_TYPES)/TestSink.h $(TESTS)/$(TEST_TYPES)/TestSink.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(TEST_TYPES)/TestSink.cpp
+
 TestLevel.o: Level.o $(TESTS)/Level.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/Level.cpp -o TestLevel.o
+
+TestConvertibleTo.o: TestMessage.o $(TESTS)/$(CONVERSION)/ConvertibleTo.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSION)/ConvertibleTo.cpp -o TestConvertibleTo.o
 
 TestStringifiable.o: Stringifiable.o $(CONVERSION)/Stringifiable.h $(CONVERSION)/Stringifiable.cpp $(TESTS)/$(CONVERSION)/Stringifiable.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSION)/Stringifiable.cpp -o TestStringifiable.o
 
-TestVariantVisitor.o: $(CONVERSION)/VariantVisitor.h $(CONVERSION)/VariantVisitor.cpp $(TESTS)/$(CONVERSION)/VariantVisitor.cpp
-	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSION)/VariantVisitor.cpp -o TestVariantVisitor.o
+TestResult.o: TestMessage.o $(CONVERSION)/Result.h $(CONVERSION)/Result.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(CONVERSION)/Result.cpp -o TestResult.o
 
-TestBasicSink.o: $(SINK)/BasicSink.h $(SINK)/BasicSink.cpp $(TESTS)/$(SINK)/BasicSink.cpp
+TestBasicSink.o: TestSink.o $(TESTS)/$(SINK)/BasicSink.cpp
 	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/$(SINK)/BasicSink.cpp -o TestBasicSink.o
+
+TestLogger.o: TestSink.o TestMessage.o Logger.o Level.o $(TESTS)/Logger.cpp
+	g++ $(CPP_FLAGS) $(ADDITIONAL_FLAGS) $(TESTS)/Logger.cpp -o TestLogger.o
 
 # Command Targets
 tests: $(TEST_OBJ_FILES)
 	g++ $(LINKER_FLAGS) TestLevel.o Level.o -o LevelTests
+	g++ $(LINKER_FLAGS) TestMessage.o TestConvertibleTo.o -o ConvertibleToTests
 	g++ $(LINKER_FLAGS) TestStringifiable.o Stringifiable.o -o StringifiableTests
-	g++ $(LINKER_FLAGS) TestVariantVisitor.o -o VariantVisitorTests
-	g++ $(LINKER_FLAGS) TestBasicSink.o -o BasicSinkTests
+	g++ $(LINKER_FLAGS) TestMessage.o TestResult.o -o ResultTests
+	g++ $(LINKER_FLAGS) TestSink.o TestBasicSink.o -o BasicSinkTests
+	g++ $(LINKER_FLAGS) TestSink.o TestMessage.o Level.o Logger.o TestLogger.o -o LoggerTests
 
 run:
 	./logger
 
 run-tests:
 	./LevelTests
+	./ConvertibleToTests
 	./StringifiableTests
-	./VariantVisitorTests
+	./ResultTests
 	./BasicSinkTests
+	./LoggerTests
 
 clean:
-	rm *.o $(TESTS)/*.o logger test LevelTests StringifiableTests VariantVisitorTests BasicSinkTests
+	rm *.o $(TESTS)/*.o logger $(TEST_EXE_FILES)

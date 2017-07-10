@@ -1,26 +1,9 @@
 #define BOOST_TEST_MODULE BasicSink
 #include <boost/test/included/unit_test.hpp>
 
-#include "../../sink/BasicSink.h"
+#include "../test_types/TestSink.h"
 
 using namespace Toolbox::Log::Sink;
-
-class TestSink : public BasicSink<std::string>
-{
-public:
-  void output (const std::string & message) override
-  {
-    _message = message;
-  }
-
-  const std::string getMessage (void) const
-  {
-    return _message;
-  }
-
-private:
-  std::string _message;
-};
 
 BOOST_AUTO_TEST_CASE (stream_operator_works)
 {

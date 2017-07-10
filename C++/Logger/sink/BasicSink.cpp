@@ -1,6 +1,6 @@
 template <typename OutputType>
-BasicSink<OutputType> & BasicSink<OutputType>::operator << (const Output & output)
+BasicSink<OutputType> & BasicSink<OutputType>::operator << (const OutputVisitor & output)
 {
-  this->output (OutputVariant::get (output));
+  this->output (Output::get (output));
   return *this;
 }
