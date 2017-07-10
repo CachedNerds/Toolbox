@@ -87,7 +87,7 @@ bool Logger::isAboveThreshold (const Level & level) const
 
 const std::string Logger::createLogMessage (const Level & level, const String::Variant & message) const
 {
-  return levelToString (level) + ": " + String::get (message);
+  return levelToString (level) + ": " + String::get (message) + "\n";
 }
 
 const std::string Logger::getCurrentTime (void) const
