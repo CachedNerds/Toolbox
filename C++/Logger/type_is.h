@@ -19,4 +19,4 @@ struct type_is <TT<T, Ts ...>>
   using type = T;
 };
 
-#endif
+#endif // _TYPE_IS_H_
