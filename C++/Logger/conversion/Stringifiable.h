@@ -12,7 +12,7 @@ class Stringifiable : public ConvertibleTo<std::string>
 {
 public:
   virtual const std::string toString (void) const = 0;
-  const operator std::string (void) const override final;
+  operator std::string (void) const override final;
 };
 
 } // namespace Toolbox::Log::Conversion

@@ -10,7 +10,7 @@ template <typename ResultType>
 class ConvertibleTo : public ValueTypeIs <ResultType>
 {
 public:
-  virtual const operator ResultType (void) const = 0;
+  virtual operator ResultType (void) const = 0;
 };
 
 } // namespace Toolbox::Log::Conversion
