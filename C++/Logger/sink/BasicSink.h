@@ -2,7 +2,6 @@
 #define _BASIC_SINK_H_
 
 #include "../conversion/ConvertibleTo.h"
-#include "../conversion/Result.h"
 
 namespace Toolbox::Log::Sink
 {
@@ -10,10 +9,8 @@ namespace Toolbox::Log::Sink
 template <typename OutputType>
 class BasicSink
 {
-using Output = Toolbox::Log::Conversion::Result<OutputType>;
-using OutputVisitor = typename Output::Variant;
 public:
-  virtual BasicSink<OutputType> & operator << (const OutputVisitor & output);
+  virtual BasicSink<OutputType> & operator << (const OutputType & output);
   virtual void output (const OutputType & output) = 0;
 };
 

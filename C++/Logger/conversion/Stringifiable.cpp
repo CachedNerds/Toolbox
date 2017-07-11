@@ -3,7 +3,7 @@
 namespace Toolbox::Log::Conversion
 {
 
-const std::string Stringifiable::convert (void) const
+const Stringifiable::operator std::string (void) const
 {
   return toString ();
 }

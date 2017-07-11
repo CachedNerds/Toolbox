@@ -9,6 +9,7 @@ BOOST_AUTO_TEST_CASE (convert_matches_input)
 {
   const std::string message = "test";
   TestMessage testMessage (message);
+  const std::string convertedValue = testMessage;
 
-  BOOST_TEST (testMessage.convert () == message);
+  BOOST_TEST (convertedValue == message);
 }

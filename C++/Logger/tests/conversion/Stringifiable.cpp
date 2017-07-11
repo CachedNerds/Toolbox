@@ -30,5 +30,7 @@ BOOST_AUTO_TEST_CASE (toString_matches_convert)
 {
   const std::string message = "test";
   TestMessage testMessage (message);
-  BOOST_TEST (testMessage.toString () == testMessage.convert ());
+  const std::string convertedValue = testMessage;
+
+  BOOST_TEST (testMessage.toString () == convertedValue);
 }

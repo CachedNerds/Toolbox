@@ -6,7 +6,7 @@
 
  }
 
-const std::string TestMessage::convert (void) const
+const TestMessage::operator std::string (void) const
 {
   return _message;
 }

@@ -14,42 +14,42 @@ Logger::Logger (StringSink & sink)
   
 }
 
-void Logger::log (const String::Variant & message) const
+void Logger::log (const std::string & message) const
 {
   logIfAboveThreshold (_default, message);
 }
 
-void Logger::log (const Level & level, const String::Variant & message) const
+void Logger::log (const Level & level, const std::string & message) const
 {
   logIfAboveThreshold (level, message);
 }
 
-void Logger::trace (const String::Variant & message) const
+void Logger::trace (const std::string & message) const
 {
   logIfAboveThreshold (Level::TRACE, message);
 }
 
-void Logger::debug (const String::Variant & message) const
+void Logger::debug (const std::string & message) const
 {
   logIfAboveThreshold (Level::DEBUG, message);
 }
 
-void Logger::info (const String::Variant & message) const
+void Logger::info (const std::string & message) const
 {
   logIfAboveThreshold (Level::INFO, message);
 }
 
-void Logger::warning (const String::Variant & message) const
+void Logger::warning (const std::string & message) const
 {
   logIfAboveThreshold (Level::WARNING, message);
 }
 
-void Logger::error (const String::Variant & message) const
+void Logger::error (const std::string & message) const
 {
   logIfAboveThreshold (Level::ERROR, message);
 }
 
-void Logger::fatal (const String::Variant & message) const
+void Logger::fatal (const std::string & message) const
 {
   logIfAboveThreshold (Level::FATAL, message);
 }
@@ -74,7 +74,7 @@ void Logger::setDefault (const Level & level)
   _default = level;
 }
 
-void Logger::logIfAboveThreshold (const Level & level, const String::Variant & message) const
+void Logger::logIfAboveThreshold (const Level & level, const std::string & message) const
 {
   if (isAboveThreshold (level))
     _sink << createLogMessage (level, message);
@@ -85,9 +85,9 @@ bool Logger::isAboveThreshold (const Level & level) const
   return level >= _threshold;
 }
 
-const std::string Logger::createLogMessage (const Level & level, const String::Variant & message) const
+const std::string Logger::createLogMessage (const Level & level, const std::string & message) const
 {
-  return levelToString (level) + ": " + String::get (message) + "\n";
+  return levelToString (level) + ": " + message + "\n";
 }
 
 const std::string Logger::getCurrentTime (void) const
