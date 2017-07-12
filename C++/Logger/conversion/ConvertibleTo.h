@@ -15,4 +15,4 @@ public:
 
 } // namespace Toolbox::Log::Conversion
 
-#endif // _OUTPUTABLE_H_
+#endif // _CONVERTIBLE_TO_H_
