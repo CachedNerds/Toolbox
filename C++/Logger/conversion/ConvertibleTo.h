@@ -4,10 +4,10 @@
 namespace Toolbox::Log::Conversion
 {
 
-#include "../ValueTypeIs.h"
+#include "../value_type_is.h"
 
 template <typename ResultType>
-class ConvertibleTo : public ValueTypeIs <ResultType>
+class ConvertibleTo : public value_type_is <ResultType>
 {
 public:
   virtual operator ResultType (void) const = 0;
