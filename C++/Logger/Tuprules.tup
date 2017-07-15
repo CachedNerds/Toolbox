@@ -1,0 +1,7 @@
+CC += g++
+CFLAGS += -g
+CFLAGS += -std=c++1z
+CFLAGS += -c
+
+!cc = |> $(CC) $(CFLAGS) %f -o %o |> %B.o
+!ar = |> ar crs %o %f |>

@@ -1,0 +1,9 @@
+include_rules
+
+CFLAGS += -Iconversion
+CFLAGS += -Isink
+
+EXE += logger
+
+: foreach *.cpp |> !cc |>
+: *.o conversion/conversion.a sink/sink.a |> $(CC) %f -o %o |> $(EXE)
