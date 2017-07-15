@@ -2,16 +2,13 @@
 #define _STRINGIFIABLE_H_
 
 #include "ConvertibleTo.h"
-#include "../metaprogramming/value_type_is.h"
 
 #include <string>
 
 namespace Toolbox::Log::Conversion
 {
 
-class Stringifiable
-  : public ConvertibleTo<std::string>
-  , value_type_is <std::string>
+class Stringifiable : public ConvertibleTo<std::string>
 {
 public:
   virtual const std::string toString (void) const = 0;
