@@ -19,4 +19,7 @@ struct type_is <TT <T, Ts ...>>
   using type = T;
 };
 
+template <typename ... Ts>
+using type_is_t = typename type_is <Ts ...>::type;
+
 #endif // _TYPE_IS_H_
