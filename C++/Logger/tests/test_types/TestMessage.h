@@ -7,7 +7,7 @@
 
 using Toolbox::Log::Conversion::ConvertibleTo;
 
-class TestMessage : public ConvertibleTo<std::string, int>
+class TestMessage : public ConvertibleTo<int, std::string>
 {
 public:
   explicit TestMessage (const std::string & message);
