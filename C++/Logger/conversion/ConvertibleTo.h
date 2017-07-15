@@ -13,7 +13,7 @@ template <typename ResultType, typename ... ResultTypes>
 class ConvertibleTo <ResultType, ResultTypes ...> : public ConvertibleTo <ResultTypes ...>
 {
 public:
-  using value_type = type_is_t <ResultType>
+  using value_type = type_is_t <ResultType>;
 
   virtual operator ResultType (void) const = 0;
 };
