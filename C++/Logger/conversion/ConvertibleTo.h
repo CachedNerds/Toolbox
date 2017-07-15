@@ -6,11 +6,14 @@ namespace Toolbox::Log::Conversion
 
 #include "../metaprogramming/value_type_is.h"
 
-template <typename ResultType>
-class ConvertibleTo : public value_type_is <ResultType>
+template <typename ... ResultType>
+class ConvertibleTo { };
+
+template <typename ResultType, typename ... ResultTypes>
+class ConvertibleTo <ResultType, ResultTypes ...> : public ConvertibleTo <ResultTypes ...>
 {
-public:
-  virtual operator ResultType (void) const = 0;
+  public:
+    virtual operator ResultType (void) const = 0;
 };
 
 } // namespace Toolbox::Log::Conversion

@@ -7,12 +7,14 @@
 
 using Toolbox::Log::Conversion::ConvertibleTo;
 
-class TestMessage : public ConvertibleTo<std::string>
+class TestMessage : public ConvertibleTo<std::string, int>
 {
 public:
   explicit TestMessage (const std::string & message);
 
-  const operator std::string (void) const override;
+  operator std::string (void) const;
+
+  operator int (void) const;
 
 private:
   const std::string _message;
