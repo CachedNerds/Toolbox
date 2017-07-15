@@ -4,7 +4,7 @@
 namespace Toolbox::Log::Conversion
 {
 
-#include "../value_type_is.h"
+#include "../metaprogramming/value_type_is.h"
 
 template <typename ResultType>
 class ConvertibleTo : public value_type_is <ResultType>
