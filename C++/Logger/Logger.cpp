@@ -14,42 +14,42 @@ Logger::Logger (StringSink & sink)
   
 }
 
-void Logger::log (const String & message) const
+void Logger::log (const std::string & message) const
 {
   logIfAboveThreshold (_default, message);
 }
 
-void Logger::log (const Level & level, const String & message) const
+void Logger::log (const Level & level, const std::string & message) const
 {
   logIfAboveThreshold (level, message);
 }
 
-void Logger::trace (const String & message) const
+void Logger::trace (const std::string & message) const
 {
   logIfAboveThreshold (Level::TRACE, message);
 }
 
-void Logger::debug (const String & message) const
+void Logger::debug (const std::string & message) const
 {
   logIfAboveThreshold (Level::DEBUG, message);
 }
 
-void Logger::info (const String & message) const
+void Logger::info (const std::string & message) const
 {
   logIfAboveThreshold (Level::INFO, message);
 }
 
-void Logger::warning (const String & message) const
+void Logger::warning (const std::string & message) const
 {
   logIfAboveThreshold (Level::WARNING, message);
 }
 
-void Logger::error (const String & message) const
+void Logger::error (const std::string & message) const
 {
   logIfAboveThreshold (Level::ERROR, message);
 }
 
-void Logger::fatal (const String & message) const
+void Logger::fatal (const std::string & message) const
 {
   logIfAboveThreshold (Level::FATAL, message);
 }
@@ -74,7 +74,7 @@ void Logger::setDefault (const Level & level)
   _default = level;
 }
 
-void Logger::logIfAboveThreshold (const Level & level, const String & message) const
+void Logger::logIfAboveThreshold (const Level & level, const std::string & message) const
 {
   if (isAboveThreshold (level))
     _sink << createLogMessage (level, message);
@@ -85,13 +85,9 @@ bool Logger::isAboveThreshold (const Level & level) const
   return level >= _threshold;
 }
 
-const std::string Logger::createLogMessage (const Level & level, const String & message) const
+const std::string Logger::createLogMessage (const Level & level, const std::string & message) const
 {
-  const std::string timestampField = "timestamp: " + getCurrentTime ();
-  const std::string levelField = "level: " + levelToString (level);
-  const std::string messageField = "message: " + StringVariant::get (message);
-
-  return "{" + timestampField + ", " + levelField + ", " + messageField + "}" + "\n";
+  return levelToString (level) + ": " + message + "\n";
 }
 
 const std::string Logger::getCurrentTime (void) const
