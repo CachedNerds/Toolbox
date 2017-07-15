@@ -1,7 +1,7 @@
 #define BOOST_TEST_MODULE Level
 #include <boost/test/included/unit_test.hpp>
 
-#include "../Level.h"
+#include <Level.h>
 
 using namespace Toolbox::Log;
 

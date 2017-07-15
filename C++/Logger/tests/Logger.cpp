@@ -1,10 +1,10 @@
 #define BOOST_TEST_MODULE ConvertibleTo
 #include <boost/test/included/unit_test.hpp>
 
-#include "test_types/TestSink.h"
-#include "test_types/TestMessage.h"
-#include "../Level.h"
-#include "../Logger.h"
+#include <TestSink.h>
+#include <TestMessage.h>
+#include <Level.h>
+#include <Logger.h>
 
 using Toolbox::Log::Level;
 using Toolbox::Log::Logger;

@@ -1,7 +1,7 @@
 #ifndef _TEST_MESSAGE_H_
 #define _TEST_MESSAGE_H_
 
-#include "../../conversion/ConvertibleTo.h"
+#include <ConvertibleTo.h>
 
 #include <string>
 

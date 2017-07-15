@@ -1,0 +1,9 @@
+include_rules
+
+CFLAGS += -I ../../conversion
+CFLAGS += -I ../../sink
+
+LIBNAME += test_types
+
+: foreach *.cpp |> !cc |>
+: *.o |> !ar |> $(LIBNAME).a

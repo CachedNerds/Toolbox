@@ -1,7 +1,7 @@
 #define BOOST_TEST_MODULE BasicSink
 #include <boost/test/included/unit_test.hpp>
 
-#include "../test_types/TestSink.h"
+#include <TestSink.h>
 
 using namespace Toolbox::Log::Sink;
 

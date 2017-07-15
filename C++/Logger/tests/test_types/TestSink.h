@@ -1,7 +1,7 @@
 #ifndef _TEST_SINK_H_
 #define _TEST_SINK_H_
 
-#include "../../sink/BasicSink.h"
+#include <BasicSink.h>
 
 #include <string>
 

@@ -1,7 +1,7 @@
 #define BOOST_TEST_MODULE Stringifiable
 #include <boost/test/included/unit_test.hpp>
 
-#include "../../conversion/Stringifiable.h"
+#include <Stringifiable.h>
 
 using Toolbox::Log::Conversion::Stringifiable;
 
