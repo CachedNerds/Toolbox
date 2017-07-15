@@ -12,8 +12,8 @@ class ConvertibleTo { };
 template <typename ResultType, typename ... ResultTypes>
 class ConvertibleTo <ResultType, ResultTypes ...> : public ConvertibleTo <ResultTypes ...>
 {
-  public:
-    virtual operator ResultType (void) const = 0;
+public:
+  virtual operator ResultType (void) const = 0;
 };
 
 } // namespace Toolbox::Log::Conversion
