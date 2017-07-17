@@ -79,4 +79,6 @@ run-tests:
 	./LoggerTests
 
 clean:
-	rm *.o $(TESTS)/*.o logger $(TEST_EXE_FILES)
+	rm *.o logger $(TEST_EXE_FILES) \
+	       $(TESTS)/*.o $(CONVERSION)/*.o $(SINK)/*.o $(TESTS)/$(CONVERSION)/*.o $(TESTS)/$(SINK)/*.o $(TESTS)/$(TEST_TYPES)/*.o \
+	       $(TESTS)/tests.a $(TESTS)/$(CONVERSION)/conversion.a $(TESTS)/$(SINK)/sink.a $(TESTS)/$(TEST_TYPES)/test_types.a $(CONVERSION)/conversion.a $(SINK)/sink.a logger.a
