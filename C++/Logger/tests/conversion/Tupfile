@@ -1,9 +1,0 @@
-include_rules
-
-CFLAGS += -I ../test_types
-CFLAGS += -I ../../conversion
-
-LIBNAME += conversion
-
-: foreach *.cpp |> !cc |>
-: *.o ../test_types/test_types.a ../../conversion/conversion.a |> !ar |> $(LIBNAME).a

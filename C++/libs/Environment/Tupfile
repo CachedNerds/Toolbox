@@ -1,0 +1,6 @@
+include_rules
+
+CFLAGS += -I ../../
+
+: foreach $(SOURCE_DIR)/*.cpp |> !cc |>
+: $(OUT_DIR)/*.o |> !ar |>

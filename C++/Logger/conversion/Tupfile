@@ -1,6 +1,0 @@
-include_rules
-
-LIBNAME += conversion
-
-: foreach *.cpp |> !cc |>
-: *.o |> !ar |> $(LIBNAME).a

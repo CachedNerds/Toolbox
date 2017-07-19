@@ -1,0 +1,41 @@
+.gitignore
+
+CC += g++
+
+CFLAGS += -g
+CFLAGS += -std=c++1z
+CFLAGS += -c
+CFLAGS += -I ../../
+
+LIB = Conversion
+
+OUT = build
+SOURCE = src
+
+TEST = test
+TEST_BIN = $(TEST)/bin
+TEST_OUT = $(TEST)/build
+FIXTURES = fixtures
+FIXTURES_OUT = $(TEST_OUT)/$(FIXTURES)
+
+BINARIES = $(FIXTURES_OUT)/*.o
+LIBS = $(OUT)/$(LIB).a
+
+!cc = |> $(CC) $(CFLAGS) %f -o %o |>
+!ar = |> ar crs %o %f |> $(OUT)/$(LIB).a
+
+# Build Source
+: foreach $(SOURCE)/*.cpp |> !cc |> $(OUT)/%B.o
+: $(OUT)/*.o |> !ar |>
+
+# Build Fixtures
+: foreach $(TEST)/$(FIXTURES)/*.cpp |> !cc |> $(FIXTURES_OUT)/%B.o
+
+# Build Tests
+: foreach $(TEST)/*.cpp |> !cc |> $(TEST_OUT)/%B.o
+
+# Link Tests
+: foreach $(TEST_OUT)/*.o | $(BINARIES) $(LIBS) |> $(CC) %f $(BINARIES) $(LIBS) -o %o |> $(TEST_BIN)/%B.test
+
+# Run Tests
+: foreach $(TEST_BIN)/*.test |> ./%f |>

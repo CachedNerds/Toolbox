@@ -1,9 +1,0 @@
-include_rules
-
-CFLAGS += -Iconversion
-CFLAGS += -Isink
-
-LIBNAME += logger
-
-: foreach *.cpp |> !cc |>
-: *.o conversion/conversion.a sink/sink.a |> !ar |> $(LIBNAME).a

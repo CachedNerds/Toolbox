@@ -1,6 +1,0 @@
-include_rules
-
-LIBNAME += sink
-
-: ConsoleSink.cpp |> !cc |>
-: *.o |> !ar |> $(LIBNAME).a
