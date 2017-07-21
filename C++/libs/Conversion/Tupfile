@@ -1,5 +1,6 @@
 .gitignore
 
+# constants
 CC += g++
 
 CFLAGS += -g
@@ -7,22 +8,20 @@ CFLAGS += -std=c++1z
 CFLAGS += -c
 CFLAGS += -I ../../
 
-LIB = Conversion
-
 OUT = build
 SOURCE = src
-
 TEST = test
 TEST_BIN = $(TEST)/bin
 TEST_OUT = $(TEST)/build
 FIXTURES = fixtures
 FIXTURES_OUT = $(TEST_OUT)/$(FIXTURES)
 
-BINARIES = $(FIXTURES_OUT)/*.o
-LIBS = $(OUT)/$(LIB).a
-
+# macros
 !cc = |> $(CC) $(CFLAGS) %f -o %o |>
-!ar = |> ar crs %o %f |> $(OUT)/$(LIB).a
+!ar = |> ar crs %o %f |> $(OUT)/@(PROJECT).a
+
+BINARIES = $(FIXTURES_OUT)/*.o
+LIBS = $(OUT)/*.a
 
 # Build Source
 : foreach $(SOURCE)/*.cpp |> !cc |> $(OUT)/%B.o
