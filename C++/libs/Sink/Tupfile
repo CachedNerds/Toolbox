@@ -1,4 +1,4 @@
 include_rules
 
-: $(SOURCE_DIR)/ConsoleSink.cpp |> !cc |>
+: $(SOURCE_DIR)/*.cpp |> !cc |>
 : $(OUT_DIR)/*.o |> !ar |>

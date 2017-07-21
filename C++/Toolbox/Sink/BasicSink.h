@@ -10,11 +10,15 @@ template <typename OutputType>
 class BasicSink
 {
 public:
-  virtual BasicSink<OutputType> & operator << (const OutputType & output);
+  BasicSink<OutputType> & operator << (const OutputType & output)
+  {
+    this->output (output);
+
+    return *this;
+  }
+
   virtual void output (const OutputType & output) = 0;
 };
-
-#include <libs/Sink/src/BasicSink.cpp>
 
 } // namespace Toolbox::Log::Sink
 
