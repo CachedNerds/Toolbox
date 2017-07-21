@@ -35,4 +35,4 @@ LIBS = $(OUT)/*.a
 : foreach $(TEST)/*.cpp |> !cc |> $(TEST_OUT)/%B.o
 
 # Link Tests
-: $(TEST_OUT)/*.o $(BINARIES) $(LIBS) |> $(CC) %f -o %o |> $(TEST_OUT)/$(PROJECT)
+: $(TEST_OUT)/*.o $(BINARIES) $(LIBS) |> $(CC) %f -o %o |> $(TEST_OUT)/$(PROJECT).test
