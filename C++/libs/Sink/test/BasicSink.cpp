@@ -1,24 +1,23 @@
-#define BOOST_TEST_MODULE BasicSink
-#include <boost/test/included/unit_test.hpp>
+#include <Toolbox/catch.hpp>
 
-#include <TestSink.h>
+#include "fixtures/TestSink.h"
 
 using namespace Toolbox::Log::Sink;
 
-BOOST_AUTO_TEST_CASE (stream_operator_works)
+TEST_CASE ("stream operator accepts the message")
 {
   TestSink sink;
   const std::string message = "test";
   sink << message;
 
-  BOOST_TEST (message == sink.getMessage ());
+  REQUIRE (message == sink.getMessage ());
 }
 
-BOOST_AUTO_TEST_CASE (output_outputs_message)
+TEST_CASE ("output method outputs the message")
 {
   TestSink sink;
   const std::string message = "test";
   sink.output (message);
 
-  BOOST_TEST (message == sink.getMessage ());
+  REQUIRE (message == sink.getMessage ());
 }

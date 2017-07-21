@@ -1,6 +1,4 @@
-#define BOOST_TEST_MODULE Stringifiable
-#include <boost/test/included/unit_test.hpp>
-
+#include <Toolbox/catch.hpp>
 #include <Toolbox/Conversion/Stringifiable.h>
 
 using Toolbox::Log::Conversion::Stringifiable;
@@ -19,18 +17,18 @@ private:
   const std::string _message;
 };
 
-BOOST_AUTO_TEST_CASE (toString_matches_input)
+TEST_CASE ("toString result matches the input")
 {
   const std::string message = "test";
   TestStringifiable testStringifiable (message);
-  BOOST_TEST (testStringifiable.toString () == message);
+  REQUIRE (testStringifiable.toString () == message);
 }
 
-BOOST_AUTO_TEST_CASE (toString_matches_convert)
+TEST_CASE ("toString result matches the converted value")
 {
   const std::string message = "test";
   TestStringifiable testStringifiable (message);
   const std::string convertedValue = testStringifiable;
 
-  BOOST_TEST (testStringifiable.toString () == convertedValue);
+  REQUIRE (testStringifiable.toString () == convertedValue);
 }

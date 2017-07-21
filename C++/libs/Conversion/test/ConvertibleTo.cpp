@@ -1,15 +1,13 @@
-#define BOOST_TEST_MODULE ConvertibleTo
-#include <boost/test/included/unit_test.hpp>
-
+#include <Toolbox/catch.hpp>
 #include "fixtures/TestMessage.h"
 
 #include <string>
 
-BOOST_AUTO_TEST_CASE (convert_matches_input)
+TEST_CASE ("Implementation of ConvertibleTo string converts to string")
 {
   const std::string message = "test";
   TestMessage testMessage (message);
   const std::string convertedValue = testMessage;
 
-  BOOST_TEST (convertedValue == message);
+  REQUIRE (message == convertedValue);
 }

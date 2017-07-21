@@ -1,4 +1,38 @@
-include_rules
+.gitignore
 
-: $(SOURCE_DIR)/*.cpp |> !cc |>
-: $(OUT_DIR)/*.o |> !ar |>
+# constants
+CC += g++
+
+CFLAGS += -g
+CFLAGS += -std=c++1z
+CFLAGS += -c
+CFLAGS += -I ../../
+
+PROJECT = Sink
+
+OUT = build
+SOURCE = src
+TEST = test
+TEST_OUT = $(TEST)/build
+FIXTURES = fixtures
+FIXTURES_OUT = $(TEST_OUT)/$(FIXTURES)
+
+# macros
+!cc = |> $(CC) $(CFLAGS) %f -o %o |>
+!ar = |> ar crs %o %f |> $(OUT)/$(PROJECT).a
+
+BINARIES = $(FIXTURES_OUT)/*.o
+LIBS = $(OUT)/*.a
+
+# Build Source
+: foreach $(SOURCE)/*.cpp |> !cc |> $(OUT)/%B.o
+: $(OUT)/*.o |> !ar |>
+
+# Build Fixtures
+: foreach $(TEST)/$(FIXTURES)/*.cpp |> !cc |> $(FIXTURES_OUT)/%B.o
+
+# Build Tests
+: foreach $(TEST)/*.cpp |> !cc |> $(TEST_OUT)/%B.o
+
+# Link Tests
+: $(TEST_OUT)/*.o $(BINARIES) $(LIBS) |> $(CC) %f -o %o |> $(TEST_OUT)/$(PROJECT)

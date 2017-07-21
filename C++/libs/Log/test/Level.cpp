@@ -1,11 +1,9 @@
-#define BOOST_TEST_MODULE Level
-#include <boost/test/included/unit_test.hpp>
-
-#include <Level.h>
+#include <Toolbox/catch.hpp>
+#include <Toolbox/Log/Level.h>
 
 using namespace Toolbox::Log;
 
-BOOST_AUTO_TEST_CASE (level_to_string)
+TEST_CASE ("levelToString converts a Level to its string representation")
 {
-  BOOST_TEST (levelToString (Level::INFO) == "INFO");
+  REQUIRE (levelToString (Level::INFO) == "INFO");
 }

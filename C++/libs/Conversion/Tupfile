@@ -8,17 +8,18 @@ CFLAGS += -std=c++1z
 CFLAGS += -c
 CFLAGS += -I ../../
 
+PROJECT = Conversion
+
 OUT = build
 SOURCE = src
 TEST = test
-TEST_BIN = $(TEST)/bin
 TEST_OUT = $(TEST)/build
 FIXTURES = fixtures
 FIXTURES_OUT = $(TEST_OUT)/$(FIXTURES)
 
 # macros
 !cc = |> $(CC) $(CFLAGS) %f -o %o |>
-!ar = |> ar crs %o %f |> $(OUT)/@(PROJECT).a
+!ar = |> ar crs %o %f |> $(OUT)/$(PROJECT).a
 
 BINARIES = $(FIXTURES_OUT)/*.o
 LIBS = $(OUT)/*.a
@@ -34,7 +35,4 @@ LIBS = $(OUT)/*.a
 : foreach $(TEST)/*.cpp |> !cc |> $(TEST_OUT)/%B.o
 
 # Link Tests
-: foreach $(TEST_OUT)/*.o | $(BINARIES) $(LIBS) |> $(CC) %f $(BINARIES) $(LIBS) -o %o |> $(TEST_BIN)/%B.test
-
-# Run Tests
-: foreach $(TEST_BIN)/*.test |> ./%f |>
+: $(TEST_OUT)/*.o $(BINARIES) $(LIBS) |> $(CC) %f -o %o |> $(TEST_OUT)/$(PROJECT)

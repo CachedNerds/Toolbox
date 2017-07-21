@@ -1,10 +1,9 @@
-#define BOOST_TEST_MODULE ConvertibleTo
-#include <boost/test/included/unit_test.hpp>
+#include <Toolbox/catch.hpp>
 
-#include <TestSink.h>
-#include <TestMessage.h>
-#include <Level.h>
-#include <Logger.h>
+#include "fixtures/TestSink.h"
+#include "fixtures/TestMessage.h"
+#include <Toolbox/Log/Level.h>
+#include <Toolbox/Log/Logger.h>
 
 using Toolbox::Log::Level;
 using Toolbox::Log::Logger;
@@ -14,7 +13,7 @@ const std::string createMessage (const Level & level, const std::string & messag
   return levelToString (level) + ": " + message + "\n";
 }
 
-BOOST_AUTO_TEST_CASE (default_level_accessors)
+TEST_CASE ("get and set default log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -22,10 +21,10 @@ BOOST_AUTO_TEST_CASE (default_level_accessors)
   Level level = Level::DEBUG;
   logger.setDefault (level);
 
-  BOOST_TEST (logger.getDefault () == level);
+  REQUIRE (logger.getDefault () == level);
 }
 
-BOOST_AUTO_TEST_CASE (threshold_level_accessors)
+TEST_CASE ("get and set threshold log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -33,10 +32,10 @@ BOOST_AUTO_TEST_CASE (threshold_level_accessors)
   Level level = Level::DEBUG;
   logger.setThreshold (level);
 
-  BOOST_TEST (logger.getThreshold () == level);
+  REQUIRE (logger.getThreshold () == level);
 }
 
-BOOST_AUTO_TEST_CASE (logger_log_with_default_level)
+TEST_CASE ("log with default level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -44,10 +43,10 @@ BOOST_AUTO_TEST_CASE (logger_log_with_default_level)
   const std::string message = "message";
   logger.log (message);
 
-  BOOST_TEST (testSink.getMessage () == createMessage (logger.getDefault (), message));
+  REQUIRE (testSink.getMessage () == createMessage (logger.getDefault (), message));
 }
 
-BOOST_AUTO_TEST_CASE (logger_log_with_specific_level)
+TEST_CASE ("log with specific level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -56,10 +55,10 @@ BOOST_AUTO_TEST_CASE (logger_log_with_specific_level)
   Level level = Level::INFO;
   logger.log (level, message);
 
-  BOOST_TEST (testSink.getMessage () == createMessage (level, message));
+  REQUIRE (testSink.getMessage () == createMessage (level, message));
 }
 
-BOOST_AUTO_TEST_CASE (logger_can_log_strings_and_ConvertibleToStrings)
+TEST_CASE ("can log strings")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -67,16 +66,22 @@ BOOST_AUTO_TEST_CASE (logger_can_log_strings_and_ConvertibleToStrings)
   const std::string message = "message";
   logger.log (message);
 
-  BOOST_TEST (testSink.getMessage () == createMessage (logger.getDefault (), message));
-
-  const std::string newMessage = "newMessage";
-  const TestMessage testMessage (newMessage);
-  logger.log (testMessage);
-
-  BOOST_TEST (testSink.getMessage () == createMessage (logger.getDefault (), newMessage));
+  REQUIRE (testSink.getMessage () == createMessage (logger.getDefault (), message));
 }
 
-BOOST_AUTO_TEST_CASE (logger_trace)
+TEST_CASE ("can log ConvertibleTo<string> objects")
+{
+  TestSink testSink;
+  Logger logger (testSink);
+
+  const std::string message = "message";
+  const TestMessage testMessage (message);
+  logger.log (testMessage);
+
+  REQUIRE (testSink.getMessage () == createMessage (logger.getDefault (), message));
+}
+
+TEST_CASE ("logger.trace logs at trace log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -86,10 +91,10 @@ BOOST_AUTO_TEST_CASE (logger_trace)
 
   const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::TRACE);
-  BOOST_TEST (testMessage.find (level) != std::string::npos);
+  REQUIRE (testMessage.find (level) != std::string::npos);
 }
 
-BOOST_AUTO_TEST_CASE (logger_debug)
+TEST_CASE ("logger.debug logs at debug log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -99,10 +104,10 @@ BOOST_AUTO_TEST_CASE (logger_debug)
 
   const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::DEBUG);
-  BOOST_TEST (testMessage.find (level) != std::string::npos);
+  REQUIRE (testMessage.find (level) != std::string::npos);
 }
 
-BOOST_AUTO_TEST_CASE (logger_info)
+TEST_CASE ("logger.info logs at info log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -112,10 +117,10 @@ BOOST_AUTO_TEST_CASE (logger_info)
 
   const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::INFO);
-  BOOST_TEST (testMessage.find (level) != std::string::npos);
+  REQUIRE (testMessage.find (level) != std::string::npos);
 }
 
-BOOST_AUTO_TEST_CASE (logger_warning)
+TEST_CASE ("logger.warning logs at warning log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -125,10 +130,10 @@ BOOST_AUTO_TEST_CASE (logger_warning)
 
   const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::WARNING);
-  BOOST_TEST (testMessage.find (level) != std::string::npos);
+  REQUIRE (testMessage.find (level) != std::string::npos);
 }
 
-BOOST_AUTO_TEST_CASE (logger_error)
+TEST_CASE ("logger.error logs at error log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -138,10 +143,10 @@ BOOST_AUTO_TEST_CASE (logger_error)
 
   const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::ERROR);
-  BOOST_TEST (testMessage.find (level) != std::string::npos);
+  REQUIRE (testMessage.find (level) != std::string::npos);
 }
 
-BOOST_AUTO_TEST_CASE (logger_fatal)
+TEST_CASE ("logger.fatal logs at fatal log level")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -151,10 +156,10 @@ BOOST_AUTO_TEST_CASE (logger_fatal)
 
   const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::FATAL);
-  BOOST_TEST (testMessage.find (level) != std::string::npos);
+  REQUIRE (testMessage.find (level) != std::string::npos);
 }
 
-BOOST_AUTO_TEST_CASE (logger_doesnt_log_below_threshold)
+TEST_CASE ("doesn't log below threshold")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -168,10 +173,10 @@ BOOST_AUTO_TEST_CASE (logger_doesnt_log_below_threshold)
   Level level = Level::TRACE;
   logger.log (level, newMessage);
 
-  BOOST_TEST (testSink.getMessage () != createMessage (level, newMessage));
+  REQUIRE (testSink.getMessage () != createMessage (level, newMessage));
 }
 
-BOOST_AUTO_TEST_CASE (logger_does_log_above_threshold)
+TEST_CASE ("does_log_above_threshold")
 {
   TestSink testSink;
   Logger logger (testSink);
@@ -185,5 +190,5 @@ BOOST_AUTO_TEST_CASE (logger_does_log_above_threshold)
   Level level = Level::INFO;
   logger.log (level, newMessage);
 
-  BOOST_TEST (testSink.getMessage () == createMessage (level, newMessage));
+  REQUIRE (testSink.getMessage () == createMessage (level, newMessage));
 }
