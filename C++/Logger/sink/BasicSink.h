@@ -10,7 +10,7 @@ template <typename OutputType>
 class BasicSink
 {
 public:
-  virtual BasicSink<OutputType> & operator << (const OutputType & output);
+  virtual BasicSink <OutputType> & operator << (const OutputType & output);
   virtual void output (const OutputType & output) = 0;
 };
 

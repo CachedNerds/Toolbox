@@ -13,3 +13,13 @@ BOOST_AUTO_TEST_CASE (convert_matches_input)
 
   BOOST_TEST (convertedValue == message);
 }
+
+BOOST_AUTO_TEST_CASE (convert_matches_input_size)
+{
+  const std::string message = "test";
+  TestMessage testMessage (message);
+
+  int testMessageSize = testMessage;
+
+  BOOST_TEST (testMessageSize == message.length());
+}
