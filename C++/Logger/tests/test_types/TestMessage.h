@@ -12,9 +12,9 @@ class TestMessage : public ConvertibleTo<int, std::string>
 public:
   explicit TestMessage (const std::string & message);
 
-  operator std::string (void) const;
+  operator std::string (void) const override;
 
-  operator int (void) const;
+  operator int (void) const override;
 
 private:
   const std::string _message;
