@@ -14,6 +14,18 @@ for (condition)
 
 }
 ```
+```
+while (condition)
+{
+
+}
+```
+```
+do
+{
+
+} while (condition);
+```
 ### 2. Empty brackets shall contain a single empty line between them
 #### Correct
 ```
