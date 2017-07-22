@@ -1,5 +1,5 @@
 #include <Toolbox/catch.hpp>
-#include "fixtures/TestMessage.h"
+#include "TestMessage.h"
 
 #include <string>
 

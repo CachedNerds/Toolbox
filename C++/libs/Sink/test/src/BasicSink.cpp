@@ -1,6 +1,6 @@
 #include <Toolbox/catch.hpp>
 
-#include "fixtures/TestSink.h"
+#include "TestSink.h"
 
 using namespace Toolbox::Log::Sink;
 

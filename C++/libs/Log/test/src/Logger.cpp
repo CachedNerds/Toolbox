@@ -1,7 +1,7 @@
 #include <Toolbox/catch.hpp>
 
-#include "fixtures/TestSink.h"
-#include "fixtures/TestMessage.h"
+#include "TestSink.h"
+#include "TestMessage.h"
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Log/Logger.h>
 
