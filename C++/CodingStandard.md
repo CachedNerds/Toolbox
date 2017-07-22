@@ -5,21 +5,20 @@
 ```
 if (condition)
 {
+
 }
 ```
 ```
 for (condition)
 {
+
 }
 ```
-#### Incorrect
+### 2. Empty brackets shall contain a single empty line between them
+#### Correct
 ```
-if(condition)
+if (condition)
 {
-}
-```
-```
-for(condition)
-{
+
 }
 ```
