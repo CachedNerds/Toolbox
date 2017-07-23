@@ -1,32 +1,20 @@
-.gitignore
+# order matters
+include config.tup
+include_rules
 
-# constants
-CC += g++
+# override build variables
+# VARIABLE = new_value
 
-CFLAGS += -g
-CFLAGS += -std=c++1z
-CFLAGS += -c
-CFLAGS += -I ../../
-
-PROJECT = Logger
-
-OUT = build
-SOURCE = src
-TEST = test
-TEST_OUT = $(TEST)/build
-
-# macros
-!cc = |> $(CC) $(CFLAGS) %f -o %o |>
-!ar = |> ar crs %o %f |> $(OUT)/$(PROJECT).a
-
-LIBS = $(OUT)/*.a
+# define custom build variables
 
 # Build Source
-: foreach $(SOURCE)/*.cpp |> !cc |> $(OUT)/%B.o
-: $(OUT)/*.o |> !ar |>
+: foreach $(SOURCE_FILES) |> !compile |> $(SOURCE_OUT)/%B.o
+
+# Archive Source
+: $(SOURCE_OUT_FILES) |> !archive |> $(PROJECT_LIB) ../<$(PROJECT)>
 
 # Build Tests
-: foreach $(TEST)/$(SOURCE)/*.cpp |> !cc |> $(TEST_OUT)/%B.o
+: foreach $(TEST_FILES) |> !compile |> $(TEST_OUT)/%B.o
 
 # Link Tests
-: $(TEST_OUT)/*.o $(LIBS) |> $(CC) %f -o %o |> $(TEST_OUT)/$(PROJECT).test
+: $(TEST_OUT_FILES) $(PROJECT_LIB) | ../<Conversion> ../<Sink> |> $(CC) %f %<Conversion> %<Sink> -o %o |> $(TEST_OUT)/$(PROJECT).test
