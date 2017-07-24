@@ -51,3 +51,41 @@ A few rules to follow while developing with C++17.
 
     }
     ```
+
+## Classes
+
+  - 1. Prefer `class`es instead of `struct`s.
+  - 1. No public member variables.
+  - 1. Use PascalCase for `class` names.
+  - 1. Use leading underscore for memeber variables names.
+    ```
+    class Foo
+    {
+      int _fooData;
+    };
+    ```
+  - 1. camelCase class method names.
+    ```
+    class Foo
+    {
+    public:
+      void doFooStuff (void) const;
+    };
+    ```
+  - 1. Prefer `explicit` constructors. 
+  - 1. Separate method name and argument list with space.
+    ```
+    class Foo
+    {
+    public:
+      void doFooStuff (void) const;
+    };
+    ```
+  - 1. Use `void` into parenthesis for methods with an empty parameter list.
+    ```
+    class Foo
+    {
+    public:
+      void doFooStuff (void) const;
+    };
+    ```
