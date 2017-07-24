@@ -4,9 +4,19 @@ CC = g++
 
 # Uncomment to build with debug symbols
 #CFLAGS += -g
+
+ARCH = -m64
+#ARCH = -m32
+
+CFLAGS += $(ARCH)
+
 CFLAGS += -std=c++1z
 CFLAGS += -c
 CFLAGS += -I ../../
+
+LINKFLAGS += $(ARCH)
+LINKFLAGS += -static
+LINKFLAGS += -v
 
 SOURCE = src
 SOURCE_OUT = build
