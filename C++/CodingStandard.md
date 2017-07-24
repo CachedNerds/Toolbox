@@ -89,3 +89,31 @@ A few rules to follow while developing with C++17.
       void doFooStuff (void) const;
     };
     ```
+
+## Templates and Template Metaprogramming
+  - 1. `template` keyword and template arguments go on line above the template definition, declaration, or statement.
+    ```
+    template<typename FooType>
+    class Foo;
+
+    template<int N>
+    class Bar;
+    ```
+  - 2. Prefer `typename` to `class` when writing templates.
+  - 3. Template metafunctions will be `struct`s and use the `underscore_case`.
+    ```
+    template <typename T>
+    struct value_type_is;
+    ```
+  - 4. Template parameter type names will be `PascalCase` and end with the word `Type` **when a descriptive name is required**. Otherwise normal type names will be a single letter starting e.g. `T`, `U`. 
+    ```
+    // explicit name required for template intent
+    template<typename FooType>
+    class Foo;
+
+    template<typename T>
+    class Bar;
+
+    template<typename T, typename U>
+    class Baz;
+    ```
