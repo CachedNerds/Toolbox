@@ -2,7 +2,8 @@
 
 CC = g++
 
-CFLAGS += -g
+# Uncomment to build with debug symbols
+#CFLAGS += -g
 CFLAGS += -std=c++1z
 CFLAGS += -c
 CFLAGS += -I ../../
