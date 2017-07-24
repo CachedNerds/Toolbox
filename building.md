@@ -174,4 +174,7 @@ There are only a handful of variable definitions that the Tuprules.tup file is e
   - example: `LIB_TYPE = static`
 
 #### Tupfile
+The project specific Tupfile is where every project defines its compilation, archiving, and linking steps.  It is also the place where projects can override the variables defined within `Tuprules.tup`.  The Tupfile is also where each project must include its a config.tup file.
+
+##### Tupfile template and ordering
 - pending
