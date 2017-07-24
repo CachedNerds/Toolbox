@@ -16,7 +16,7 @@ A few rules to follow while developing with C++17.
   ```
 
 ## Control Flow
-  1. There will be a space before an if/for condition.
+  1. There will be a space before a conditional statement
   ```
   if (condition)
   {
@@ -55,7 +55,7 @@ A few rules to follow while developing with C++17.
   1. Prefer `class`es instead of `struct`s.
   2. No public member variables.
   3. Use PascalCase for `class` names.
-  4. Use leading underscore for memeber variables names.
+  4. Use leading underscore for member variables names.
   ```
   class Foo
   {
@@ -79,7 +79,7 @@ A few rules to follow while developing with C++17.
     void doFooStuff (void) const;
   };
   ```
-  8. Use `void` into parenthesis for methods with an empty parameter list.
+  8. Add `void` in parenthesis for methods with an empty parameter list.
   ```
   class Foo
   {
@@ -100,7 +100,7 @@ A few rules to follow while developing with C++17.
   2. Prefer `typename` to `class` when writing templates.
   3. Template metafunctions will be `struct`s and use the `underscore_case`.
   ```
-  template <typename T>
+  template<typename T>
   struct value_type_is;
   ```
 
