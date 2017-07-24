@@ -140,6 +140,7 @@ Some of these variables can be overriden with project specific values within a p
   - example: `objectA.o objectB.o |> !archive |> objects.a`
 - `!link`
   - the `!link` macro takes a set of object files or libraries, links them using the `CC` variable, and names the output based on the user defined output name
+  - example: `objectA.o objectB.o libaryA.a |> !link |> exename`
 
 #### $(TUP_PLATFORM).tup
 The `$(TUP_PLATFORM).tup` file (e.g. linux.tup) defines any platform specific variables needed to build on the linux platform.  This file is then included within the Tuprules.tup file and the build system will act accordingly.
