@@ -213,7 +213,7 @@ The first step is to compile the test source files of the project.
 - output: the source output location (`TEST_OUT`)
 
 The `Tuprules.tup` file provides the `!compile` macro as well as default values for the `TEST_FILES` and `TEST_OUT` variables that can be used to define the compile source rule.
-- default Compile Source rule: `: foreach $(TEST_FILES) |> !compile |> $(TEST_OUT)/%B.o`
+- default Compile Tests rule: `: foreach $(TEST_FILES) |> !compile |> $(TEST_OUT)/%B.o`
 
 ##### Create Test Executable
 
