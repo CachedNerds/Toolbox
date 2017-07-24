@@ -1,5 +1,3 @@
-# C++ Coding Standard
-## Rules
 ### 1. There will be a space before an if/for condition
 #### Correct
 ```
@@ -34,3 +32,6 @@ if (condition)
 
 }
 ```
+# Toolbox C++ Coding Standard
+
+A few rules to follow while developing with C++17.
