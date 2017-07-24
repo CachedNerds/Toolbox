@@ -3,22 +3,22 @@
 A few rules to follow while developing with C++17.
 
 ## Namespaces
-  - 1. All projects will have a single entry point in the `::toolbox` namespace.
+  1. All projects will have a single entry point in the `::toolbox` namespace.
     ```
     // namespace for Logger
     namespace Toolbox::Log {
 
     }
     ```
-  - 1. Namespace names will CamelCase.
-  - 1. Prefer C++17 style nested namespaces.
+  1. Namespace names will CamelCase.
+  1. Prefer C++17 style nested namespaces.
     ```
     // namespace Foo { namespace Bar { namesapce Baz { /*...*/ }}}
     namespace Foo::Bar::Baz { /*...*/ }
     ```
 
 ## Control Flow
-  - 1. There will be a space before an if/for condition.
+  1. There will be a space before an if/for condition.
     ```
     if (condition)
     {
@@ -44,7 +44,7 @@ A few rules to follow while developing with C++17.
     } while (condition);
     ```
 
-  - 2. Empty brackets shall contain a single empty line between them
+  2. Empty brackets shall contain a single empty line between them
     ```
     if (condition)
     {
@@ -54,17 +54,17 @@ A few rules to follow while developing with C++17.
 
 ## Classes
 
-  - 1. Prefer `class`es instead of `struct`s.
-  - 1. No public member variables.
-  - 1. Use PascalCase for `class` names.
-  - 1. Use leading underscore for memeber variables names.
+  1. Prefer `class`es instead of `struct`s.
+  1. No public member variables.
+  1. Use PascalCase for `class` names.
+  1. Use leading underscore for memeber variables names.
     ```
     class Foo
     {
       int _fooData;
     };
     ```
-  - 1. camelCase class method names.
+  1. camelCase class method names.
     ```
     class Foo
     {
@@ -72,8 +72,8 @@ A few rules to follow while developing with C++17.
       void doFooStuff (void) const;
     };
     ```
-  - 1. Prefer `explicit` constructors. 
-  - 1. Separate method name and argument list with space.
+  1. Prefer `explicit` constructors. 
+  1. Separate method name and argument list with space.
     ```
     class Foo
     {
@@ -81,7 +81,7 @@ A few rules to follow while developing with C++17.
       void doFooStuff (void) const;
     };
     ```
-  - 1. Use `void` into parenthesis for methods with an empty parameter list.
+  1. Use `void` into parenthesis for methods with an empty parameter list.
     ```
     class Foo
     {
@@ -91,7 +91,7 @@ A few rules to follow while developing with C++17.
     ```
 
 ## Templates and Template Metaprogramming
-  - 1. `template` keyword and template arguments go on line above the template definition, declaration, or statement.
+  1. `template` keyword and template arguments go on line above the template definition, declaration, or statement.
     ```
     template<typename FooType>
     class Foo;
@@ -99,13 +99,13 @@ A few rules to follow while developing with C++17.
     template<int N>
     class Bar;
     ```
-  - 2. Prefer `typename` to `class` when writing templates.
-  - 3. Template metafunctions will be `struct`s and use the `underscore_case`.
+  2. Prefer `typename` to `class` when writing templates.
+  3. Template metafunctions will be `struct`s and use the `underscore_case`.
     ```
     template <typename T>
     struct value_type_is;
     ```
-  - 4. Template parameter type names will be `PascalCase` and end with the word `Type` **when a descriptive name is required**. Otherwise normal type names will be a single letter starting e.g. `T`, `U`. 
+  4. Template parameter type names will be `PascalCase` and end with the word `Type` **when a descriptive name is required**. Otherwise normal type names will be a single letter starting e.g. `T`, `U`. 
     ```
     // explicit name required for template intent
     template<typename FooType>
