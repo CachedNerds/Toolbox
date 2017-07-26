@@ -2,10 +2,21 @@
 
 CC = g++
 
-CFLAGS += -g
+# Uncomment to build with debug symbols
+#CFLAGS += -g
+
+ARCH = -m64
+#ARCH = -m32
+
+CFLAGS += $(ARCH)
+
 CFLAGS += -std=c++1z
 CFLAGS += -c
 CFLAGS += -I ../../
+
+LINKFLAGS += $(ARCH)
+LINKFLAGS += -static
+LINKFLAGS += -v
 
 SOURCE = src
 SOURCE_OUT = build
@@ -16,6 +27,11 @@ TEST = test
 TEST_OUT = $(TEST)/build
 TEST_FILES = $(TEST)/$(SOURCE)/*.cpp
 TEST_OBJ_FILES = $(TEST_OUT)/*.o
+
+# macros
+!compile = |> $(CC) $(CFLAGS) %f -o %o |>
+!archive = |> ar crs %o %f |>
+!link = |> $(CC) %f -o %o |>
 
 # includes the STATIC and SHARED variables for the target platform
 include @(TUP_PLATFORM).tup
@@ -33,8 +49,3 @@ else
 endif
 
 PROJECT_LIB = $(PROJECT).$(EXTENSION)
-
-# macros
-!compile = |> $(CC) $(CFLAGS) %f -o %o |>
-!archive = |> ar crs %o %f |>
-!link = |> $(CC) %f -o %o |>
