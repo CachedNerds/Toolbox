@@ -15,8 +15,6 @@ CFLAGS += -c
 CFLAGS += -I ../../
 
 LINKFLAGS += $(ARCH)
-LINKFLAGS += -static
-LINKFLAGS += -v
 
 SOURCE = src
 SOURCE_OUT = build
