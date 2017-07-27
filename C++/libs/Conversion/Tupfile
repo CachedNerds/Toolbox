@@ -7,14 +7,14 @@ include_rules
 
 # define custom build variables
 
-# Build Source
+# Compile Source
 : foreach $(SOURCE_FILES) |> !compile |> $(SOURCE_OUT)/%B.o
 
 # Archive Source
-: $(SOURCE_OUT_FILES) |> !archive |> $(PROJECT_LIB) ../<$(PROJECT)>
+: $(SOURCE_OBJ_FILES) |> !archive |> $(SOURCE_OUT)/$(PROJECT_LIB) ../<$(PROJECT)>
 
-# Build Tests
+# Compile Tests
 : foreach $(TEST_FILES) |> !compile |> $(TEST_OUT)/%B.o
 
-# Link Tests
-: $(TEST_OUT_FILES) $(PROJECT_LIB) |> !link |> $(TEST_OUT)/$(PROJECT).test
+# Create Link Executable
+: $(TEST_OBJ_FILES) $(SOURCE_OUT)/$(PROJECT_LIB) |> !link |> $(TEST_OUT)/$(PROJECT).test

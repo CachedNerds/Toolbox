@@ -19,17 +19,17 @@ LINKFLAGS += $(ARCH)
 SOURCE = src
 SOURCE_OUT = build
 SOURCE_FILES = $(SOURCE)/*.cpp
-SOURCE_OUT_FILES = $(SOURCE_OUT)/*.o
+SOURCE_OBJ_FILES = $(SOURCE_OUT)/*.o
 
 TEST = test
 TEST_OUT = $(TEST)/build
 TEST_FILES = $(TEST)/$(SOURCE)/*.cpp
-TEST_OUT_FILES = $(TEST_OUT)/*.o
+TEST_OBJ_FILES = $(TEST_OUT)/*.o
 
 # macros
 !compile = |> $(CC) $(CFLAGS) %f -o %o |>
 !archive = |> ar crs %o %f |>
-!link = |> $(CC) $(LINKFLAGS) %f -o %o |>
+!link = |> $(CC) %f -o %o |>
 
 # includes the STATIC and SHARED variables for the target platform
 include @(TUP_PLATFORM).tup
@@ -46,4 +46,4 @@ else
   endif
 endif
 
-PROJECT_LIB = $(SOURCE_OUT)/$(PROJECT).$(EXTENSION)
+PROJECT_LIB = $(PROJECT).$(EXTENSION)
