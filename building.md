@@ -4,13 +4,23 @@ The build system that we use is called _tup_ and is required to build the Toolbo
 Visit [Tup Home](http://gittup.org/tup/) for instructions on how to install tup.
 
 ## Building
-1. clone the Toolbox repository.
-2. enter the libs directory.
-3. run the command `tup`.
-
-This will tell the _tup_ build system to orchestrate the building of the entire Toolbox.
-
-If you want to build specific projects within the Toolbox simple pass a list of project names to the tup command, e.g. `tup project1 project2 project3`.
+**1.** Clone the repository.
+```
+$ git clone https://github.com/CachedNerds/Toolbox.git
+```
+**2.** Navigate to the libs directory.
+```
+$ cd Toolbox/libs
+```
+**3.** Build Toolbox
+  + To build all projects in Toolbox
+    ```
+    $ tup
+    ```
+  + To build a specific project or a set of specific projects
+    ```
+    $ tup projectA projectB
+    ```
 
 ## Project structure
 #### Toolbox directory structure
@@ -31,7 +41,7 @@ If you want to build specific projects within the Toolbox simple pass a list of 
     - Project C
       - etc
   - Toolbox
-    - Project A
+      -  - Project A
       - header files
     - Project B
       - etc
