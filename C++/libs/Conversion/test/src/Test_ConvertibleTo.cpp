@@ -11,3 +11,12 @@ TEST_CASE ("Implementation of ConvertibleTo string converts to string")
 
   REQUIRE (message == convertedValue);
 }
+
+TEST_CASE ("Implementation of ConvertibleTo string converts to size_t")
+{
+  const std::string message = "test";
+  TestMessage testMessage (message);
+  const size_t messageLength = testMessage;
+
+  REQUIRE (message.length() == messageLength);
+}
