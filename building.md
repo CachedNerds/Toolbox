@@ -196,25 +196,62 @@ There are four steps to building a Toolbox project each of which have three comp
 
 ##### Compile Source
 The first step is to compile the source files of the project.
-- input: the source files (`SOURCE_FILES`)
-- command: the `!compile` macro
-- output: the source output location (`SOURCE_OUT`)
+
+- components
+  - input: the source files (`SOURCE_FILES`)
+  - command: the `!compile` macro
+  - output: the source output location (`SOURCE_OUT`)
 
 The `Tuprules.tup` file provides the `!compile` macro as well as default values for the `SOURCE_FILES` and `SOURCE_OUT` variables that can be used to define the compile source rule.
 - default Compile Source rule: `: foreach $(SOURCE_FILES) |> !compile |> $(SOURCE_OUT)/%B.o`
 
 ##### Archive Source
-The next step is to archive the projects object files into a library.  There are three components to archiving a project's source: the source object files, the `!archive` macro, and the output location.  The `Tuprules.tup` file provides the `!archive` macro as well as default values for the `SOURCE_OBJ_FILES` and `SOURCE_OUT`
+The second step is to archive the projects object files into a library.
+
+- components
+  - input: the source object files (`SOURCE_OBJ_FILES`)
+  - command: the `!archive` macro
+  - output: There are two parts to the archive output: the library and the creation of a project group
+    - library: the library output location and filename (`SOURCE_OUT`/`PROJECT_LIB`)
+    - project group: the project group allows other projects within the Toolbox to depend on the project, without this the project cannot be used within other projects within the Toolbox (`../<$(PROJECT)>`)
+
+- default Archive Source rule: `: $(SOURCE_OBJ_FILES) |> !archive |> $(SOURCE_OUT)/$(PROJECT_LIB) ../<$(PROJECT)>`
 
 ##### Compile Tests
-The first step is to compile the test source files of the project.
-- input: the test source files (`TEST_FILES`)
-- command: the `!compile` macro
-- output: the source output location (`TEST_OUT`)
+The third step is to compile the test source files of the project.
+
+- components
+  - input: the test source files (`TEST_FILES`)
+  - command: the `!compile` macro
+  - output: the source output location (`TEST_OUT`)
 
 The `Tuprules.tup` file provides the `!compile` macro as well as default values for the `TEST_FILES` and `TEST_OUT` variables that can be used to define the compile source rule.
 - default Compile Tests rule: `: foreach $(TEST_FILES) |> !compile |> $(TEST_OUT)/%B.o`
 
 ##### Create Test Executable
+The final step is to create the test executable.
 
-###### Explain use of project groups
+###### Without project dependencies
+- components
+  - input: the test object files (`TEST_OBJ_FILES`) and the project library (`SOURCE_OUT`/`PROJECT_LIB`)
+  - command: the `!link` macro
+  - output: the test executable (`TEST_OUT`/`PROJECT`.text)
+ 
+ The `Tuprules.tup` file provides the `!link` macro as well as default values for the `TEST_OBJ_FILES`, `SOURCE_OUT`, `PROJECT_LIB`, and `TEST_OUT` variables and the `config.tup` file defines the `PROJECT` variable that can be used to define the create test executable rule.
+ 
+ If the project has no dependencies then simply use the `!link` macro; however, if the project depends on another Toolbox project, the projects group will need to be included in the rule. 
+
+- default Create Text Executable rule: `: $(TEST_OBJ_FILES) $(SOURCE_OUT)/$(PROJECT_LIB) |> !link |> $(TEST_OUT)/$(PROJECT).test` 
+
+###### With project dependencies
+- components
+  - input: the test object files (`TEST_OBJ_FILES`) and the project library (`SOURCE_OUT`/`PROJECT_LIB`)
+    - order-only input: the project groups for dependent projects (`../<project1> ../<project2>`)
+  - command: the project group expansions must be included within the command: (`$(CC) %f %<project1> %<project2> -o %o`)
+  - output: the test executable (`TEST_OUT`/`PROJECT`.text)
+ 
+ The `Tuprules.tup` file provides the default values for the `CC`, `TEST_OBJ_FILES`, `SOURCE_OUT`, `PROJECT_LIB`, and `TEST_OUT` variables and the `config.tup` file defines the `PROJECT` variable that can be used to define the create test executable rule.
+
+The inclusion of the project groups will cause them to be built before building the test executable.
+
+- default Create Text Executable rule: `: $(TEST_OBJ_FILES) $(SOURCE_OUT)/$(PROJECT_LIB) | ../<Conversion> ../<Sink> |> $(CC) %f %<Conversion> %<Sink> -o %o |> $(TEST_OUT)/$(PROJECT).test` 
