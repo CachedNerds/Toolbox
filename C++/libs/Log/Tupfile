@@ -17,4 +17,4 @@ include_rules
 : foreach $(TEST_FILES) |> !compile |> $(TEST_OUT)/%B.o
 
 # Link Tests
-: $(TEST_OBJ_FILES) $(SOURCE_OUT)/$(PROJECT_LIB) | ../<Conversion> ../<Sink> |> $(CC) %f %<Conversion> %<Sink> -o %o |> $(TEST_OUT)/$(PROJECT).test
+: $(TEST_OBJ_FILES) $(SOURCE_OUT)/$(PROJECT_LIB) | ../<Conversion> ../<Sink> ../<Time> |> $(CC) %f %<Conversion> %<Sink> %<Time> -o %o |> $(TEST_OUT)/$(PROJECT).test
