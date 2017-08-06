@@ -1,7 +1,5 @@
 #include <Toolbox/Log/Logger.h>
-
-#include <ctime>
-#include <chrono>
+#include <Toolbox/Time/Time.h>
 
 namespace Toolbox::Log
 {
@@ -92,14 +90,7 @@ const std::string Logger::createLogMessage (const Level & level, const std::stri
 
 const std::string Logger::getCurrentTime (void) const
 {
-  std::time_t now = std::chrono::system_clock::to_time_t (std::chrono::system_clock::now ());
-  std::string timestamp = std::ctime (&now);
-  return removeTrailingNewline (timestamp);
-}
-
-const std::string Logger::removeTrailingNewline (const std::string & text) const
-{
-  return text.substr (0, text.length () - 1);
+  return Time::getCurrentTime();
 }
 
 } // namespace Toolbox::Log
