@@ -21,7 +21,7 @@ const std::string getCurrentTime (void)
   // localtime_s is not in namespace std on vc++ libraries for some reason
   localtime_s(&localNow, &now);
 #else
-  localtime_r(&localNow, &now);
+  localtime_r(&now, &localNow);
 #endif
 
   constexpr int dateSize = 26;
