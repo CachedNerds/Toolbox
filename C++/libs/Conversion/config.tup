@@ -1,0 +1,5 @@
+# define the project specific values
+PROJECT = Conversion
+
+# static, shared, or both
+LIB_TYPE = static

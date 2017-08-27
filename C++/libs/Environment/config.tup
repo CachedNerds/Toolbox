@@ -1,0 +1,5 @@
+# define the project specific values
+PROJECT = Environment
+
+# static, shared, or both
+LIB_TYPE = static

@@ -1,0 +1,2 @@
+STATIC = a
+SHARED = so
