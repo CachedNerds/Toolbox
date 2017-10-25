@@ -41,7 +41,6 @@ private:
   bool isAboveThreshold (const Level & level) const;
   const std::string createLogMessage (const Level & level, const std::string & message) const;
   const std::string getCurrentTime (void) const;
-  const std::string removeTrailingNewline (const std::string & text) const;
 };
 
 } // namespace Toolbox::Log
