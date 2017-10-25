@@ -26,8 +26,8 @@ const std::string getCurrentTime (void)
 
   constexpr int dateSize = 26;
   char format[] = "%c";
-  std::string timestamp{dateSize};
-  std::strftime(timestamp.data(), dateSize, format, &localNow);
+  char timestamp[dateSize];
+  std::strftime(timestamp, dateSize, format, &localNow);
   return removeTrailingNewline (timestamp);
 }
 
