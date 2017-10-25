@@ -3,6 +3,7 @@
 
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Sink/BasicSink.h>
+#include <Toolbox/Sink/ThreadSafeSink.h>
 #include <Toolbox/Conversion/Stringifiable.h>
 
 namespace Toolbox::Log
@@ -15,15 +16,15 @@ public:
   explicit Logger (StringSink & sink);
 
   // logs message at default log level
-  void log (const std::string & message) const;
-  void log (const Level & level, const std::string & message) const;
+  void log (const std::string & message);
+  void log (const Level & level, const std::string & message);
   
-  void trace (const std::string & message) const;
-  void debug (const std::string & message) const;
-  void info (const std::string & message) const;
-  void warning (const std::string & message) const;
-  void error (const std::string & message) const;
-  void fatal (const std::string & message) const;
+  void trace (const std::string & message);
+  void debug (const std::string & message);
+  void info (const std::string & message);
+  void warning (const std::string & message);
+  void error (const std::string & message);
+  void fatal (const std::string & message);
 
   Level getThreshold (void) const;
   void setThreshold (const Level & level);
@@ -36,7 +37,7 @@ private:
   Level _threshold;
   StringSink & _sink;
 
-  void logIfAboveThreshold (const Level & level, const std::string & message) const;
+  void logIfAboveThreshold (const Level & level, const std::string & message);
   bool isAboveThreshold (const Level & level) const;
   const std::string createLogMessage (const Level & level, const std::string & message) const;
   const std::string getCurrentTime (void) const;

@@ -15,7 +15,9 @@ CFLAGS += -c
 CFLAGS += -I ../../
 
 LINKFLAGS += $(ARCH)
-LINKFLAGS += -static
+ifneq (@(TUP_PLATFORM),macosx)
+  LINKFLAGS += -static
+endif
 LINKFLAGS += -v
 
 SOURCE = src

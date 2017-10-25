@@ -14,42 +14,42 @@ Logger::Logger (StringSink & sink)
   
 }
 
-void Logger::log (const std::string & message) const
+void Logger::log (const std::string & message)
 {
   logIfAboveThreshold (_default, message);
 }
 
-void Logger::log (const Level & level, const std::string & message) const
+void Logger::log (const Level & level, const std::string & message)
 {
   logIfAboveThreshold (level, message);
 }
 
-void Logger::trace (const std::string & message) const
+void Logger::trace (const std::string & message)
 {
   logIfAboveThreshold (Level::TRACE, message);
 }
 
-void Logger::debug (const std::string & message) const
+void Logger::debug (const std::string & message)
 {
   logIfAboveThreshold (Level::DEBUG, message);
 }
 
-void Logger::info (const std::string & message) const
+void Logger::info (const std::string & message)
 {
   logIfAboveThreshold (Level::INFO, message);
 }
 
-void Logger::warning (const std::string & message) const
+void Logger::warning (const std::string & message)
 {
   logIfAboveThreshold (Level::WARNING, message);
 }
 
-void Logger::error (const std::string & message) const
+void Logger::error (const std::string & message)
 {
   logIfAboveThreshold (Level::ERROR, message);
 }
 
-void Logger::fatal (const std::string & message) const
+void Logger::fatal (const std::string & message)
 {
   logIfAboveThreshold (Level::FATAL, message);
 }
@@ -74,10 +74,10 @@ void Logger::setDefault (const Level & level)
   _default = level;
 }
 
-void Logger::logIfAboveThreshold (const Level & level, const std::string & message) const
+void Logger::logIfAboveThreshold (const Level & level, const std::string & message)
 {
   if (isAboveThreshold (level))
-    _sink << createLogMessage (level, message);
+  _sink << createLogMessage (level, message);
 }
 
 bool Logger::isAboveThreshold (const Level & level) const

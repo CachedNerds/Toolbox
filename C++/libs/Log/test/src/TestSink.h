@@ -5,7 +5,7 @@
 
 #include <string>
 
-using Toolbox::Log::Sink::BasicSink;
+using Toolbox::Sink::BasicSink;
 
 class TestSink : public BasicSink<std::string>
 {
