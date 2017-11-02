@@ -1,13 +1,15 @@
 #include <Toolbox/Log/Logger.h>
 #include <Toolbox/Time/Time.h>
 
+#include <memory>
+
 namespace Toolbox::Log
 {
 
-Logger::Logger (StringSink & sink)
+Logger::Logger (StringSink sink)
 : _default (Level::INFO)
 , _threshold (Level::TRACE)
-, _sink (sink)
+, _sink (std::move (sink))
 {
   
 }
@@ -75,7 +77,7 @@ void Logger::setDefault (const Level & level)
 void Logger::logIfAboveThreshold (const Level & level, const std::string & message)
 {
   if (isAboveThreshold (level))
-  _sink << createLogMessage (level, message);
+    _sink << createLogMessage (level, message);
 }
 
 bool Logger::isAboveThreshold (const Level & level) const
@@ -83,12 +85,12 @@ bool Logger::isAboveThreshold (const Level & level) const
   return level >= _threshold;
 }
 
-const std::string Logger::createLogMessage (const Level & level, const std::string & message) const
+std::string Logger::createLogMessage (const Level & level, const std::string & message) const
 {
   return levelToString (level) + ": " + message + "\n";
 }
 
-const std::string Logger::getCurrentTime (void) const
+std::string Logger::getCurrentTime (void) const
 {
   return Time::getCurrentTime();
 }

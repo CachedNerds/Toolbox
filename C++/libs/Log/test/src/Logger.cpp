@@ -4,9 +4,11 @@
 #include "TestMessage.h"
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Log/Logger.h>
+#include <iostream>
 
 using Toolbox::Log::Level;
 using Toolbox::Log::Logger;
+using namespace Toolbox::Logger;
 
 const std::string createMessage (const Level & level, const std::string & message)
 {
@@ -15,8 +17,9 @@ const std::string createMessage (const Level & level, const std::string & messag
 
 TEST_CASE ("get and set default log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
  
   Level level = Level::DEBUG;
   logger.setDefault (level);
@@ -26,8 +29,9 @@ TEST_CASE ("get and set default log level")
 
 TEST_CASE ("get and set threshold log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   Level level = Level::DEBUG;
   logger.setThreshold (level);
@@ -37,132 +41,143 @@ TEST_CASE ("get and set threshold log level")
 
 TEST_CASE ("log with default level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string message = "message";
   logger.log (message);
 
-  REQUIRE (testSink.getMessage () == createMessage (logger.getDefault (), message));
+  REQUIRE (rc == createMessage (logger.getDefault (), message));
 }
 
 TEST_CASE ("log with specific level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string message = "message";
   Level level = Level::INFO;
   logger.log (level, message);
 
-  REQUIRE (testSink.getMessage () == createMessage (level, message));
+  REQUIRE (rc == createMessage (level, message));
 }
 
 TEST_CASE ("can log strings")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
 
   const std::string message = "message";
   logger.log (message);
 
-  REQUIRE (testSink.getMessage () == createMessage (logger.getDefault (), message));
+  REQUIRE (rc == createMessage (logger.getDefault (), message));
 }
 
 TEST_CASE ("can log ConvertibleTo<string> objects")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
 
   const std::string message = "message";
   const TestMessage testMessage (message);
   logger.log (testMessage);
 
-  REQUIRE (testSink.getMessage () == createMessage (logger.getDefault (), message));
+  REQUIRE (rc == createMessage (logger.getDefault (), message));
 }
 
 TEST_CASE ("logger.trace logs at trace log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
  
   const std::string message = "message";
   logger.trace (message);
 
-  const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::TRACE);
-  REQUIRE (testMessage.find (level) != std::string::npos);
+  std::string result = rc;
+  REQUIRE (result.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.debug logs at debug log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string message = "message";
   logger.debug (message);
 
-  const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::DEBUG);
-  REQUIRE (testMessage.find (level) != std::string::npos);
+  std::string result = rc;
+  REQUIRE (result.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.info logs at info log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string message = "message";
   logger.info (message);
 
-  const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::INFO);
-  REQUIRE (testMessage.find (level) != std::string::npos);
+  std::string result = rc;
+  REQUIRE (result.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.warning logs at warning log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string message = "message";
   logger.warning (message);
 
-  const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::WARNING);
-  REQUIRE (testMessage.find (level) != std::string::npos);
+  std::string result = rc;
+  REQUIRE (result.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.error logs at error log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string message = "message";
   logger.error (message);
 
-  const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::ERROR);
-  REQUIRE (testMessage.find (level) != std::string::npos);
+  std::string result = rc;
+  REQUIRE (result.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.fatal logs at fatal log level")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string message = "message";
   logger.fatal (message);
 
-  const std::string testMessage = testSink.getMessage ();
   const std::string level = levelToString (Level::FATAL);
-  REQUIRE (testMessage.find (level) != std::string::npos);
+  std::string result = rc;
+  REQUIRE (result.find (level) != std::string::npos);
 }
 
 TEST_CASE ("doesn't log below threshold")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string previousMessage = "previous message";
   logger.log (Level::ERROR, previousMessage);
@@ -173,13 +188,14 @@ TEST_CASE ("doesn't log below threshold")
   Level level = Level::TRACE;
   logger.log (level, newMessage);
 
-  REQUIRE (testSink.getMessage () != createMessage (level, newMessage));
+  REQUIRE (rc != createMessage (level, newMessage));
 }
 
 TEST_CASE ("does_log_above_threshold")
 {
-  TestSink testSink;
-  Logger logger (testSink);
+  std::string rc;
+  Test::Sink testSink (rc);
+  Logger logger (std::move (testSink));
   
   const std::string previousMessage = "previous message";
   logger.log (Level::ERROR, previousMessage);
@@ -190,5 +206,5 @@ TEST_CASE ("does_log_above_threshold")
   Level level = Level::INFO;
   logger.log (level, newMessage);
 
-  REQUIRE (testSink.getMessage () == createMessage (level, newMessage));
+  REQUIRE (rc == createMessage (level, newMessage));
 }

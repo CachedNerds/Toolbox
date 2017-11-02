@@ -3,36 +3,26 @@
 namespace Toolbox::Sink::Test
 {
 
-Sink::Sink (void)
-: _message ()
+Sink::Sink (std::string & resource)
+: _resource (resource)
 {
 
 }
 
-Sink::Sink (const std::string & message)
-: _message (message)
+void Sink::output (const std::string & output)
+{
+  _resource = output;
+}
+
+SafeSink::SafeSink (std::string & resource)
+: _resource (resource)
 {
 
 }
 
-void Sink::output (const std::string & message)
+void SafeSink::output (const std::string & output)
 {
-  _message = message;
-}
-
-const std::string Sink::getMessage (void) const
-{
-  return _message;
-}
-
-void SyncSink::output (const std::string & message)
-{
-  _message = message;
-}
-
-const std::string SyncSink::getMessage (void) const
-{
-  return _message;
+  _resource = output;
 }
 
 } // namespace Toolbox::Sink::Test

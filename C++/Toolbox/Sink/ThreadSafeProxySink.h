@@ -39,7 +39,7 @@ ThreadSafeProxySink & operator= (ThreadSafeProxySink && sink)
 */
 virtual void output (const OutputType & output) override
 {
-  _sink.output (output);
+  _sink << output;
 }
 
 protected:
@@ -50,7 +50,7 @@ template <typename SinkType,
           typename OutputType = typename SinkType::value_type,
           typename... Args,
           typename = typename std::enable_if<std::is_base_of<BasicSink<OutputType>, SinkType>::value>::type>
-ThreadSafeProxySink<SinkType> make_thread_safe (Args... args)
+ThreadSafeProxySink<SinkType> make_thread_safe (Args&&... args)
 {
   return ThreadSafeProxySink<SinkType> (SinkType (std::forward<Args> (args)...));
 }

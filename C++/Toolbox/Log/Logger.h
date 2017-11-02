@@ -13,7 +13,7 @@ class Logger
 {
 using StringSink = Sink::BasicSink<std::string>;
 public:
-  explicit Logger (StringSink & sink);
+  explicit Logger (StringSink sink);
 
   // logs message at default log level
   void log (const std::string & message);
@@ -35,12 +35,12 @@ public:
 private:
   Level _default;
   Level _threshold;
-  StringSink & _sink;
+  StringSink && _sink;
 
   void logIfAboveThreshold (const Level & level, const std::string & message);
   bool isAboveThreshold (const Level & level) const;
-  const std::string createLogMessage (const Level & level, const std::string & message) const;
-  const std::string getCurrentTime (void) const;
+  std::string createLogMessage (const Level & level, const std::string & message) const;
+  std::string getCurrentTime (void) const;
 };
 
 } // namespace Toolbox::Log

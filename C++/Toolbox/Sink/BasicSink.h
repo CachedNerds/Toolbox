@@ -18,7 +18,7 @@ public:
   BasicSink (BasicSink && rhs) = default;
   BasicSink & operator= (BasicSink && rhs) = default;
 
-  ~BasicSink (void)
+  virtual ~BasicSink (void)
   {
 
   }
