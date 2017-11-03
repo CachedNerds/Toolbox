@@ -6,6 +6,8 @@
 #include <Toolbox/Sink/ThreadSafeSink.h>
 #include <Toolbox/Conversion/Stringifiable.h>
 
+#include <memory>
+
 namespace Toolbox::Log
 {
 
@@ -13,7 +15,7 @@ class Logger
 {
 using StringSink = Sink::BasicSink<std::string>;
 public:
-  explicit Logger (StringSink sink);
+  explicit Logger (std::unique_ptr<StringSink> sink);
 
   // logs message at default log level
   void log (const std::string & message);
@@ -35,7 +37,7 @@ public:
 private:
   Level _default;
   Level _threshold;
-  StringSink && _sink;
+  std::unique_ptr<StringSink> _sink;
 
   void logIfAboveThreshold (const Level & level, const std::string & message);
   bool isAboveThreshold (const Level & level) const;

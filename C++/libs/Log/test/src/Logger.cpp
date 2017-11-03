@@ -2,13 +2,11 @@
 
 #include "TestSink.h"
 #include "TestMessage.h"
+#include <Toolbox/Sink/ThreadSafeProxySink.h>
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Log/Logger.h>
-#include <iostream>
 
-using Toolbox::Log::Level;
-using Toolbox::Log::Logger;
-using namespace Toolbox::Logger;
+using namespace Toolbox::Log;
 
 const std::string createMessage (const Level & level, const std::string & message)
 {
@@ -18,8 +16,7 @@ const std::string createMessage (const Level & level, const std::string & messag
 TEST_CASE ("get and set default log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
  
   Level level = Level::DEBUG;
   logger.setDefault (level);
@@ -30,8 +27,7 @@ TEST_CASE ("get and set default log level")
 TEST_CASE ("get and set threshold log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   Level level = Level::DEBUG;
   logger.setThreshold (level);
@@ -42,8 +38,7 @@ TEST_CASE ("get and set threshold log level")
 TEST_CASE ("log with default level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string message = "message";
   logger.log (message);
@@ -54,8 +49,7 @@ TEST_CASE ("log with default level")
 TEST_CASE ("log with specific level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string message = "message";
   Level level = Level::INFO;
@@ -67,8 +61,7 @@ TEST_CASE ("log with specific level")
 TEST_CASE ("can log strings")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
 
   const std::string message = "message";
   logger.log (message);
@@ -79,8 +72,7 @@ TEST_CASE ("can log strings")
 TEST_CASE ("can log ConvertibleTo<string> objects")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
 
   const std::string message = "message";
   const TestMessage testMessage (message);
@@ -92,8 +84,7 @@ TEST_CASE ("can log ConvertibleTo<string> objects")
 TEST_CASE ("logger.trace logs at trace log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
  
   const std::string message = "message";
   logger.trace (message);
@@ -106,8 +97,7 @@ TEST_CASE ("logger.trace logs at trace log level")
 TEST_CASE ("logger.debug logs at debug log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string message = "message";
   logger.debug (message);
@@ -120,8 +110,7 @@ TEST_CASE ("logger.debug logs at debug log level")
 TEST_CASE ("logger.info logs at info log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string message = "message";
   logger.info (message);
@@ -134,8 +123,7 @@ TEST_CASE ("logger.info logs at info log level")
 TEST_CASE ("logger.warning logs at warning log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string message = "message";
   logger.warning (message);
@@ -148,8 +136,7 @@ TEST_CASE ("logger.warning logs at warning log level")
 TEST_CASE ("logger.error logs at error log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string message = "message";
   logger.error (message);
@@ -162,8 +149,7 @@ TEST_CASE ("logger.error logs at error log level")
 TEST_CASE ("logger.fatal logs at fatal log level")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string message = "message";
   logger.fatal (message);
@@ -176,8 +162,7 @@ TEST_CASE ("logger.fatal logs at fatal log level")
 TEST_CASE ("doesn't log below threshold")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string previousMessage = "previous message";
   logger.log (Level::ERROR, previousMessage);
@@ -194,8 +179,7 @@ TEST_CASE ("doesn't log below threshold")
 TEST_CASE ("does_log_above_threshold")
 {
   std::string rc;
-  Test::Sink testSink (rc);
-  Logger logger (std::move (testSink));
+  Logger logger (std::make_unique<Test::Sink> (rc));
   
   const std::string previousMessage = "previous message";
   logger.log (Level::ERROR, previousMessage);
@@ -207,4 +191,16 @@ TEST_CASE ("does_log_above_threshold")
   logger.log (level, newMessage);
 
   REQUIRE (rc == createMessage (level, newMessage));
+}
+
+TEST_CASE ("Logging to a thread safe sink")
+{
+  using namespace Toolbox::Sink;
+
+  std::string rc;
+  Logger logger (make_unique_thread_safe<Test::Sink> (rc));
+  std::string message = "test";
+  logger.info (message);
+
+  REQUIRE (rc == createMessage (Level::INFO, message));
 }

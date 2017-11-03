@@ -50,9 +50,18 @@ template <typename SinkType,
           typename OutputType = typename SinkType::value_type,
           typename... Args,
           typename = typename std::enable_if<std::is_base_of<BasicSink<OutputType>, SinkType>::value>::type>
-ThreadSafeProxySink<SinkType> make_thread_safe (Args&&... args)
+auto make_thread_safe (Args&&... args)
 {
   return ThreadSafeProxySink<SinkType> (SinkType (std::forward<Args> (args)...));
+}
+
+template <typename SinkType,
+          typename OutputType = typename SinkType::value_type,
+          typename... Args,
+          typename = typename std::enable_if<std::is_base_of<BasicSink<OutputType>, SinkType>::value>::type>
+auto make_unique_thread_safe (Args&&... args)
+{
+  return std::make_unique<ThreadSafeProxySink<SinkType>> (SinkType (std::forward<Args> (args)...));
 }
 
 } // namespace Toolbox::Sink

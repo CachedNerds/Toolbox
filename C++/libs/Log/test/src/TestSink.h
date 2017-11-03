@@ -7,7 +7,7 @@
 
 using Toolbox::Sink::BasicSink;
 
-namespace Toolbox::Logger::Test
+namespace Toolbox::Log::Test
 {
 
 class Sink : public BasicSink<std::string>
@@ -21,6 +21,6 @@ private:
   std::string & _resource;
 };
 
-} // namespace Toolbox::Logger::Test
+} // namespace Toolbox::Log::Test
 
 #endif // _TEST_SINK_H_
