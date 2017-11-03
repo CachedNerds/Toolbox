@@ -2,7 +2,6 @@
 
 #include "TestSink.h"
 #include <Toolbox/Sink/ThreadSafeProxySink.h>
-#include <thread>
 #include <sstream>
 
 using namespace Toolbox::Sink;
