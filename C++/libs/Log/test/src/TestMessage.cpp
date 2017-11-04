@@ -1,12 +1,17 @@
 #include "TestMessage.h"
 
- TestMessage::TestMessage (const std::string & message)
- : _message (message)
- {
+namespace Toolbox::Log::Test
+{
 
- }
+Message::Message (const std::string & message)
+: _message (message)
+{
 
-TestMessage::operator std::string (void) const
+}
+
+Message::operator std::string (void) const
 {
   return _message;
 }
+
+} // namespace Toolbox::Log::Test
