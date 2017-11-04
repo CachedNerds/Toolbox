@@ -5,12 +5,15 @@
 
 #include <string>
 
-using Toolbox::Log::Conversion::ConvertibleTo;
+using Toolbox::Conversion::ConvertibleTo;
 
-class TestMessage : public ConvertibleTo<std::string, size_t>
+namespace Toolbox::Conversion::Test
+{
+
+class Message : public ConvertibleTo<std::string, size_t>
 {
 public:
-  explicit TestMessage (const std::string & message);
+  explicit Message (const std::string & message);
 
   operator std::string (void) const override;
 
@@ -19,5 +22,7 @@ public:
 private:
   const std::string _message;
 };
+
+} // namespace Toolbox::Conversion::Test
 
 #endif // _TEST_MESSAGE_H_

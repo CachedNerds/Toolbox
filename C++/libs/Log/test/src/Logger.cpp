@@ -76,7 +76,7 @@ TEST_CASE ("can log ConvertibleTo<string> objects")
   Logger logger (std::make_unique<Test::Sink> (rc));
 
   const std::string message = "message";
-  const TestMessage testMessage (message);
+  const Test::Message testMessage (message);
   logger.log (testMessage);
 
   REQUIRE (rc == createMessage (logger.getDefault (), message));

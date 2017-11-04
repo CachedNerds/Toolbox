@@ -3,6 +3,9 @@
 
 #include "type_is.h"
 
+namespace Toolbox::Meta
+{
+
 template <typename T>
 struct value_type_is
 {
@@ -20,5 +23,7 @@ struct value_type_is <TT <T, Ts ...>>
 {
   using value_type = typename type_is <T>::type;
 };
+
+} // namespace Toolbox::Meta
 
 #endif // _VALUE_TYPE_IS_H_
