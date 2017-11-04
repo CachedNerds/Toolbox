@@ -74,8 +74,9 @@ void Logger::setDefault (const Level & level)
 
 void Logger::logIfAboveThreshold (const Level & level, const std::string & message)
 {
-  if (isAboveThreshold (level))
+  if (_sink && isAboveThreshold (level)) {
     (*_sink) << createLogMessage (level, message);
+  }
 }
 
 bool Logger::isAboveThreshold (const Level & level) const
@@ -86,11 +87,6 @@ bool Logger::isAboveThreshold (const Level & level) const
 std::string Logger::createLogMessage (const Level & level, const std::string & message) const
 {
   return levelToString (level) + ": " + message + "\n";
-}
-
-std::string Logger::getCurrentTime (void) const
-{
-  return Time::getCurrentTime();
 }
 
 } // namespace Toolbox::Log
