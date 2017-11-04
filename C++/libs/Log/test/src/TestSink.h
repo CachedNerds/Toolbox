@@ -1,5 +1,4 @@
-#ifndef _TEST_SINK_H_
-#define _TEST_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
 
@@ -22,5 +21,3 @@ private:
 };
 
 } // namespace Toolbox::Log::Test
-
-#endif // _TEST_SINK_H_

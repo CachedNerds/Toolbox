@@ -1,5 +1,4 @@
-#ifndef _MESSAGE_H_
-#define _MESSAGE_H_
+#pragma once
 
 #include <Toolbox/Conversion/Stringifiable.h>
 
@@ -22,5 +21,3 @@ private:
 };
 
 } // namespace Toolbox::Log
-
-#endif // _MESSAGE_H_

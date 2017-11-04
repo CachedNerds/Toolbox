@@ -1,5 +1,4 @@
-#ifndef _ENVIRONMENT_H_
-#define _ENVIRONMENT_H_
+#pragma once
 
 #include <string>
 
@@ -13,5 +12,3 @@ public:
 };
 
 } // namespace Toolbox::Environment
-
-#endif // _ENVIRONMENT_H_

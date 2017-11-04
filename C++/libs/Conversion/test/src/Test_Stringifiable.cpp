@@ -1,24 +1,5 @@
 #include <Toolbox/catch.hpp>
-#include <Toolbox/Conversion/Stringifiable.h>
-
-namespace Toolbox::Conversion::Test
-{
-
-class Stringifiable : public Toolbox::Conversion::Stringifiable
-{
-public:
-  explicit Stringifiable (const std::string & message) : _message (message) {}
-
-  const std::string toString (void) const override
-  {
-    return _message;
-  }
-
-private:
-  const std::string _message;
-};
-
-} // namespace Toolbox::Conversion::Test
+#include "TestStringifiable.h"
 
 using namespace Toolbox::Conversion;
 

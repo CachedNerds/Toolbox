@@ -1,5 +1,4 @@
-#ifndef _TYPE_IS_H_
-#define _TYPE_IS_H_
+#pragma once
 
 namespace Toolbox::Meta
 {
@@ -26,5 +25,3 @@ template <typename ... Ts>
 using type_is_t = typename type_is <Ts ...>::type;
 
 } // namespace Toolbox::Meta
-
-#endif // _TYPE_IS_H_

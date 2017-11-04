@@ -1,5 +1,4 @@
-#ifndef _TEST_MESSAGE_H_
-#define _TEST_MESSAGE_H_
+#pragma once
 
 #include <Toolbox/Conversion/ConvertibleTo.h>
 
@@ -24,5 +23,3 @@ private:
 };
 
 } // namespace Toolbox::Conversion::Test
-
-#endif // _TEST_MESSAGE_H_

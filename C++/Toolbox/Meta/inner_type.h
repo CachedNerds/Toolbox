@@ -1,5 +1,4 @@
-#ifndef _INNER_TYPE_H_
-#define _INNER_TYPE_H_
+#pragma once
 
 namespace Toolbox::Meta
 {
@@ -26,5 +25,3 @@ template <typename ... Ts>
 using inner_type_t = typename inner_type <Ts ...>::type;
 
 } // namespace Toolbox::Meta
-
-#endif // _INNER_TYPE_H_

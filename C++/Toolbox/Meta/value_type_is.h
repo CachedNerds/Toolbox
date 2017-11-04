@@ -1,5 +1,4 @@
-#ifndef _VALUE_TYPE_IS_H_
-#define _VALUE_TYPE_IS_H_
+#pragma once
 
 #include "type_is.h"
 
@@ -25,5 +24,3 @@ struct value_type_is <TT <T, Ts ...>>
 };
 
 } // namespace Toolbox::Meta
-
-#endif // _VALUE_TYPE_IS_H_

@@ -1,5 +1,4 @@
-#ifndef _PRODUCTION_H_
-#define _PRODUCTION_H_
+#pragma once
 
 #include "Environment.h"
 
@@ -16,5 +15,3 @@ private:
 };
 
 } // namespace Toolbox::Environment
-
-#endif // _PRODUCTION_H_

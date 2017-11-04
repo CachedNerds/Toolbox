@@ -1,5 +1,4 @@
-#ifndef _TEST_SINK_H_
-#define _TEST_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
 #include <Toolbox/Sink/ThreadSafeSink.h>
@@ -37,5 +36,3 @@ private:
 };
 
 } // namespace Toolbox::Sink::Test
-
-#endif // _TEST_SINK_H_

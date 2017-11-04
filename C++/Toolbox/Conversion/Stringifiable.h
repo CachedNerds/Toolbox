@@ -1,5 +1,4 @@
-#ifndef _STRINGIFIABLE_H_
-#define _STRINGIFIABLE_H_
+#pragma once
 
 #include "ConvertibleTo.h"
 
@@ -16,5 +15,3 @@ public:
 };
 
 } // namespace Toolbox::Conversion
-
-#endif // _STRINGIFIABLE_H_

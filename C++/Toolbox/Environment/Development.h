@@ -1,5 +1,4 @@
-#ifndef _DEVELOPMENT_H_
-#define _DEVELOPMENT_H_
+#pragma once
 
 #include "Environment.h"
 
@@ -16,5 +15,3 @@ private:
 };
 
 } // namespace Toolbox::Environment
-
-#endif // _DEVELOPMENT_H_

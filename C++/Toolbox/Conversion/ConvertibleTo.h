@@ -1,5 +1,4 @@
-#ifndef _CONVERTIBLE_TO_H_
-#define _CONVERTIBLE_TO_H_
+#pragma once
 
 #include <Toolbox/Meta/value_type_is.h>
 
@@ -21,5 +20,3 @@ public:
 };
 
 } // namespace Toolbox::Conversion
-
-#endif // _CONVERTIBLE_TO_H_
