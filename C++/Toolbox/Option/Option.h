@@ -49,7 +49,7 @@ namespace Toolbox::Option {
   private:
     // Hidden constructors - one can't instantiate an Opt directly, only the class can
     Opt(void) = default;
-    Opt(std::unique_ptr<T> p) : m_pData(std::move(p)) {};
+    Opt(std::unique_ptr<T> p) : _pData(std::move(p)) {};
 
   public:
     // No copy constructor available, explicitly delete so that it so intent is clear
@@ -63,14 +63,14 @@ namespace Toolbox::Option {
   public:
     // operator bool for quick check
     operator bool() const {
-      return (m_pData != nullptr);
+      return (_pData != nullptr);
     };
 
   public:
     // ifPresent - read the value if it exists
     void ifPresent(std::function<void(const T&)> ifPresentFunction) {
-      if (m_pData)
-        ifPresentFunction(*m_pData.get());
+      if (_pData)
+        ifPresentFunction(*_pData.get());
     };
 
     // map - concrete for mapping to the same type, saves one from typing the template parameter
@@ -85,8 +85,8 @@ namespace Toolbox::Option {
     template<typename U, typename = typename std::enable_if<std::is_copy_constructible_v<T> == true>::type>
     Opt<U> map(std::function<U(T)> mapFunction) {
       static_assert(std::is_copy_constructible_v<U> == true, "Target type must be copy constructible.");
-      if (m_pData) {
-        auto u = mapFunction(*m_pData);
+      if (_pData) {
+        auto u = mapFunction(*_pData);
         U* pU = new U(u);
         return Opt<U>::Option(pU);
       }
@@ -97,9 +97,9 @@ namespace Toolbox::Option {
 
     // filter<T> - retains the option based on a predicate. Returns a new option. 
     Opt<T> filter(std::function<bool(const T&)> filterFunction) {
-      if (m_pData) {
-        bool retain = filterFunction(*m_pData);
-        return (retain) ? Opt<T>::Option(new T(*m_pData)) : Opt<T>::None();
+      if (_pData) {
+        bool retain = filterFunction(*_pData);
+        return (retain) ? Opt<T>::Option(new T(*_pData)) : Opt<T>::None();
       }
       else {
         return Opt<T>::None();
@@ -108,7 +108,7 @@ namespace Toolbox::Option {
 
   private:
     // the underlying data as a unique_ptr
-    std::unique_ptr<T> m_pData;
+    std::unique_ptr<T> _pData;
 
   }; // end of class Opt<T>
 
