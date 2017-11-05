@@ -1,5 +1,4 @@
-#ifndef _OPTION_H_
-#define _OPTION_H_
+#pragma once
 
 #include <functional>
 #include <memory>
@@ -126,5 +125,3 @@ namespace Toolbox::Option {
   }
 
 } // Toolbox::Option
-
-#endif // _OPTION_H_
