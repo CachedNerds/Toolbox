@@ -62,10 +62,10 @@ namespace Toolbox::Option {
     };
 
   public:
-    // forEach - read the value if it exists
-    void forEach(std::function<void(const T&)> forEachFunction) {
+    // ifPresent - read the value if it exists
+    void ifPresent(std::function<void(const T&)> ifPresentFunction) {
       if (m_pData)
-        forEachFunction(*m_pData.get());
+        ifPresentFunction(*m_pData.get());
     };
 
     // map - concrete for mapping to the same type, saves one from typing the template parameter

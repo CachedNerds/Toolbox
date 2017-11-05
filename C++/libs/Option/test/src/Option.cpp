@@ -11,7 +11,7 @@ TEST_CASE("create a Some")
   auto widgetOption = Option::Some<Widget>(10);
 
   int x = 0;
-  widgetOption.forEach([&x](const Widget& widget) {
+  widgetOption.ifPresent([&x](const Widget& widget) {
     x = widget.getIndex();
   });
 
@@ -31,7 +31,7 @@ TEST_CASE("Create a Some from a new instance")
   auto widgetOption = Option::Option(pWidget);
 
   int x = 0;
-  widgetOption.forEach([&x](const Widget& widget) {
+  widgetOption.ifPresent([&x](const Widget& widget) {
     x = widget.getIndex();
   });
 
@@ -49,7 +49,7 @@ TEST_CASE("Create a None from a nullptr")
   auto widgetOption = Option::Option(pWidget);
 
   int x = 0;
-  widgetOption.forEach([&x](const Widget& widget) {
+  widgetOption.ifPresent([&x](const Widget& widget) {
     x = widget.getIndex();
   });
 
@@ -78,13 +78,13 @@ TEST_CASE("Map a widget with index 5 to index 10")
 
   // assign the new widget index so we can compare it later
   int newWidgetIndex = 0;
-  newWidgetOption.forEach([&newWidgetIndex](const Widget& widget) {
+  newWidgetOption.ifPresent([&newWidgetIndex](const Widget& widget) {
     newWidgetIndex = widget.getIndex();
   });
 
 
   // check the old widget to make sure it hasn't changed
-  widgetOption.forEach([&widgetIndex](const Widget& widget) {
+  widgetOption.ifPresent([&widgetIndex](const Widget& widget) {
     widgetIndex = widget.getIndex();
   });
 
