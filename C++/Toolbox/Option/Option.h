@@ -49,6 +49,11 @@ namespace Toolbox::Option {
   public:
     // No copy constructor available, explicitly delete so that it so intent is clear
     Opt(const Opt&) = delete;
+    Opt(Opt&&) = default;
+
+    // prevent implicit deletion by being explicit
+    Opt& operator=(const Opt& other) = delete;
+    Opt& operator=(Opt&& other) = default;
 
   public:
     // operator bool for quick check
