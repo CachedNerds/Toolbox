@@ -78,7 +78,7 @@ namespace Toolbox::Option {
     // else returns Some<U>
     template<typename U>
     Opt<U> map(std::function<U(T)> mapFunction) {
-      static_assert(std::is_copy_constructible_v<U> == true, "Target type must be copy constructible.");
+      static_assert(std::is_copy_constructible<U>::value == true, "Target type must be copy constructible.");
       if (m_pData) {
         auto u = mapFunction(*m_pData);
         U* pU = new U(u);
