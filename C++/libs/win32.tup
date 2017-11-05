@@ -1,8 +1,8 @@
 STATIC = lib
 SHARED = dll
 
-# Use clang for front-end
-CC = clang++.exe
+# Use GCC
+CC = g++
 
 # Use llvm-lib for static libraries
 !archive = |> llvm-lib /MACHINE:X64 /OUT:%o %f |>
