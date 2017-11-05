@@ -74,9 +74,10 @@ namespace Toolbox::Option {
     };
 
     // map<T,U>  - map from an Opt<T> to an Opt<U>
+    // Not available if the type T is not copy constructible
     // if is None<T>, then returns None<U>
     // else returns Some<U>
-    template<typename U>
+    template<typename U, typename = typename std::enable_if<std::is_copy_constructible<T>::value == true>::type>
     Opt<U> map(std::function<U(T)> mapFunction) {
       static_assert(std::is_copy_constructible<U>::value == true, "Target type must be copy constructible.");
       if (m_pData) {
