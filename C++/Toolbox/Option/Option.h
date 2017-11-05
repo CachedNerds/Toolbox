@@ -4,6 +4,12 @@
 #include <memory>
 #include <type_traits>
 
+// is_copy_constructible_v alias for older compilers like GCC 6.4
+namespace std {
+  template<typename T>
+  constexpr bool is_copy_constructible_v = std::is_copy_constructible<T>::value;
+}
+
 namespace Toolbox::Option {
 
   /* The fundamental class describing an Option. Users only collect the Opt<T> as a result and do
@@ -76,9 +82,9 @@ namespace Toolbox::Option {
     // Not available if the type T is not copy constructible
     // if is None<T>, then returns None<U>
     // else returns Some<U>
-    template<typename U, typename = typename std::enable_if<std::is_copy_constructible<T>::value == true>::type>
+    template<typename U, typename = typename std::enable_if<std::is_copy_constructible_v<T> == true>::type>
     Opt<U> map(std::function<U(T)> mapFunction) {
-      static_assert(std::is_copy_constructible<U>::value == true, "Target type must be copy constructible.");
+      static_assert(std::is_copy_constructible_v<U> == true, "Target type must be copy constructible.");
       if (m_pData) {
         auto u = mapFunction(*m_pData);
         U* pU = new U(u);
