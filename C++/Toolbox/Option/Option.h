@@ -24,7 +24,7 @@ namespace Toolbox::Option {
     template<typename... Args>
     static Opt Some(Args... args)
     {
-      return Option::Opt<T>(std::move(std::make_unique<T>(std::forward<Args>(args)...)));
+      return Option::Opt<T>(std::make_unique<T>(std::forward<Args>(args)...));
     }
 
     // Create a None<T>
