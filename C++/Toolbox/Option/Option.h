@@ -48,7 +48,6 @@ namespace Toolbox::Option {
 
   public:
     // No copy constructor available, explicitly delete so that it so intent is clear
-    template<typename T>
     Opt(const Opt&) = delete;
 
   public:
