@@ -31,7 +31,7 @@ TEST_CASE ("ThreadSafeProxySink with rvalue Sink")
 TEST_CASE ("Instantiate ThreadSafeProxySink using make_thread_safe")
 {
   std::string rc;
-  ThreadSafeProxySink<Test::Sink> proxySink = make_thread_safe<Test::Sink>(rc);
+  auto proxySink = make_thread_safe<Test::Sink>(rc);
   std::string message = "test";
   proxySink << message;
 

@@ -3,7 +3,7 @@
 CC = g++
 
 # Uncomment to build with debug symbols
-CFLAGS += -g
+# CFLAGS += -g
 
 ARCH = -m64
 #ARCH = -m32
