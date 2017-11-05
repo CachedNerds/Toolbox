@@ -108,7 +108,7 @@ namespace Toolbox::Option {
 
   // The Some<T> function alias for Opt<T>::Some
   template<typename T, typename... Args>
-  Opt<T> Some(Args... args) {
+  Opt<T> Some(Args&&... args) {
     return Option::Opt<T>::Some(std::forward<Args>(args)...);
   }
 
