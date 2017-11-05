@@ -5,8 +5,7 @@
 #include <memory>
 #include <type_traits>
 
-namespace Toolbox {
-namespace Option {
+namespace Toolbox::Option {
 
   /* The fundamental class describing an Option. Users only collect the Opt<T> as a result and do
      do not instantiate this class directly. The static methods Some, None, and Option have 
@@ -121,7 +120,6 @@ namespace Option {
     return Option::Opt<T>::Option(t);
   }
 
-} // Option
-} // Toolbox
+} // Toolbox::Option
 
 #endif // _OPTION_H_
