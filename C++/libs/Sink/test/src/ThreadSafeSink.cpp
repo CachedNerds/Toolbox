@@ -38,6 +38,16 @@ TEST_CASE ("Instantiate ThreadSafeProxySink using make_thread_safe")
   REQUIRE (rc == message);
 }
 
+TEST_CASE ("Instantiate a unique_ptr<ThreadSafeProxySink> using make_unique_thread_safe")
+{
+  std::string rc;
+  auto proxySink = make_unique_thread_safe<Test::Sink>(rc);
+  std::string message = "test";
+  (*proxySink) << message;
+
+  REQUIRE (rc == message);
+}
+
 TEST_CASE ("ThreadSafeSink")
 {
   std::string rc;
