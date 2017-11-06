@@ -1,5 +1,4 @@
-#ifndef _LEVEL_H_
-#define _LEVEL_H_
+#pragma once
 
 #include <string>
 
@@ -19,5 +18,3 @@ enum Level
 const std::string levelToString (const Level & level);
 
 } // namespace Toolbox::Log
-
-#endif // _LEVEL_H_

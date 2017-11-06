@@ -1,10 +1,8 @@
-#ifndef _LOGGER_H_
-#define _LOGGER_H_
+#pragma once
 
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Sink/BasicSink.h>
 #include <Toolbox/Sink/ThreadSafeSink.h>
-#include <Toolbox/Conversion/Stringifiable.h>
 
 #include <memory>
 
@@ -46,5 +44,3 @@ private:
 };
 
 } // namespace Toolbox::Log
-
-#endif // _LOGGER_H_

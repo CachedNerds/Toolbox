@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 
 namespace Toolbox::Time
@@ -6,4 +8,3 @@ namespace Toolbox::Time
 const std::string getCurrentTime (void);
 
 } // namespace Toolbox::Time
-

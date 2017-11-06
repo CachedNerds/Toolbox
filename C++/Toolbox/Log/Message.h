@@ -1,13 +1,14 @@
-#ifndef _MESSAGE_H_
-#define _MESSAGE_H_
+#pragma once
 
 #include <Toolbox/Conversion/Stringifiable.h>
 
 #include <string>
 
+using Toolbox::Conversion::Stringifiable;
+
 namespace Toolbox::Log
 {
-using Conversion::Stringifiable;
+
 class Message : public Stringifiable
 {
 public:
@@ -20,5 +21,3 @@ private:
 };
 
 } // namespace Toolbox::Log
-
-#endif // _MESSAGE_H_

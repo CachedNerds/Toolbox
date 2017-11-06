@@ -1,16 +1,18 @@
-#ifndef _TEST_MESSAGE_H_
-#define _TEST_MESSAGE_H_
+#pragma once
 
 #include <Toolbox/Conversion/ConvertibleTo.h>
 
 #include <string>
 
-using Toolbox::Log::Conversion::ConvertibleTo;
+using Toolbox::Conversion::ConvertibleTo;
 
-class TestMessage : public ConvertibleTo<std::string, size_t>
+namespace Toolbox::Conversion::Test
+{
+
+class Message : public ConvertibleTo<std::string, size_t>
 {
 public:
-  explicit TestMessage (const std::string & message);
+  explicit Message (const std::string & message);
 
   operator std::string (void) const override;
 
@@ -20,4 +22,4 @@ private:
   const std::string _message;
 };
 
-#endif // _TEST_MESSAGE_H_
+} // namespace Toolbox::Conversion::Test

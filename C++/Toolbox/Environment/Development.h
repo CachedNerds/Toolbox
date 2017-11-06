@@ -1,7 +1,9 @@
-#ifndef _DEVELOPMENT_H_
-#define _DEVELOPMENT_H_
+#pragma once
 
 #include "Environment.h"
+
+namespace Toolbox::Environment
+{
 
 class Development : public Environment
 {
@@ -12,4 +14,4 @@ private:
   constexpr static const char * env = "DEVELOPMENT";
 };
 
-#endif // _DEVELOPMENT_H_
+} // namespace Toolbox::Environment

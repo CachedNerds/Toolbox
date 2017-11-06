@@ -1,5 +1,4 @@
-#ifndef _TOOLBOX_SINK_THREAD_SAFE_PROXY_SINK_H_
-#define _TOOLBOX_SINK_THREAD_SAFE_PROXY_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
 #include <Toolbox/Sink/ThreadSafeSink.h>
@@ -65,5 +64,3 @@ auto make_unique_thread_safe (Args&&... args)
 }
 
 } // namespace Toolbox::Sink
-
-#endif // _TOOLBOX_SINK_THREAD_SAFE_PROXY_SINK_H_

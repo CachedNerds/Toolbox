@@ -1,5 +1,4 @@
-#ifndef _SYNC_SINK_H_
-#define _SYNC_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
 
@@ -23,5 +22,3 @@ protected:
 };
 
 } // namespace Toolbox::Sink
-
-#endif // _SYNC_SINK_H_

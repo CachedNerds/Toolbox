@@ -1,5 +1,4 @@
-#ifndef _BASIC_SINK_H_
-#define _BASIC_SINK_H_
+#pragma once
 
 #include <Toolbox/Conversion/ConvertibleTo.h>
 
@@ -34,5 +33,3 @@ protected:
 };
 
 } // namespace Toolbox::Sink
-
-#endif // _BASIC_SINK_H_

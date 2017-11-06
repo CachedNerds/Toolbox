@@ -1,5 +1,4 @@
-#ifndef _CONSOLE_SINK_H_
-#define _CONSOLE_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/ThreadSafeSink.h>
 
@@ -15,5 +14,3 @@ public:
 };
 
 } // namespace Toolbox::Sink
-
-#endif // _CONSOLE_SINK_H_
