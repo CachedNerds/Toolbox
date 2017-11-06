@@ -1,11 +1,17 @@
 #include "TestSink.h"
 
-void TestSink::output (const std::string & message)
+namespace Toolbox::Log::Test
 {
-  _message = message;
+
+Sink::Sink (std::string & resource)
+: _resource (resource)
+{
+
 }
 
-const std::string TestSink::getMessage (void) const
+void Sink::output (const std::string & output)
 {
-  return _message;
+  _resource = output;
 }
+
+} // namespace Toolbox::Log::Test

@@ -5,17 +5,22 @@
 
 #include <string>
 
-using Toolbox::Log::Sink::BasicSink;
+using Toolbox::Sink::BasicSink;
 
-class TestSink : public BasicSink<std::string>
+namespace Toolbox::Log::Test
+{
+
+class Sink : public BasicSink<std::string>
 {
 public:
-  void output (const std::string & message) override;
+  Sink (std::string & resource);
 
-  const std::string getMessage (void) const;
+  void output (const std::string & output) override;
 
 private:
-  std::string _message;
+  std::string & _resource;
 };
+
+} // namespace Toolbox::Log::Test
 
 #endif // _TEST_SINK_H_

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace Toolbox::Log::Sink
+namespace Toolbox::Sink
 {
 
 void ConsoleSink::output (const std::string & output)
@@ -10,4 +10,4 @@ void ConsoleSink::output (const std::string & output)
   std::cout << output;
 }
 
-} // namespace Toolbox::Log::Sink
+} // namespace Toolbox::Sink

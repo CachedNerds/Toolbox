@@ -3,7 +3,7 @@
 CC = g++
 
 # Uncomment to build with debug symbols
-#CFLAGS += -g
+# CFLAGS += -g
 
 ARCH = -m64
 #ARCH = -m32
@@ -15,7 +15,9 @@ CFLAGS += -c
 CFLAGS += -I ../../
 
 LINKFLAGS += $(ARCH)
-LINKFLAGS += -static
+ifneq (@(TUP_PLATFORM),macosx)
+  LINKFLAGS += -static
+endif
 LINKFLAGS += -v
 
 SOURCE = src
