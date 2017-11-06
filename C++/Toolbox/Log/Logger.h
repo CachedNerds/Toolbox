@@ -4,7 +4,6 @@
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Sink/BasicSink.h>
 #include <Toolbox/Sink/ThreadSafeSink.h>
-#include <Toolbox/Conversion/Stringifiable.h>
 
 #include <memory>
 

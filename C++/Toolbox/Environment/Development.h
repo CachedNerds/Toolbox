@@ -3,6 +3,9 @@
 
 #include "Environment.h"
 
+namespace Toolbox::Environment
+{
+
 class Development : public Environment
 {
 public:
@@ -11,5 +14,7 @@ public:
 private:
   constexpr static const char * env = "DEVELOPMENT";
 };
+
+} // namespace Toolbox::Environment
 
 #endif // _DEVELOPMENT_H_

@@ -5,9 +5,11 @@
 
 #include <string>
 
+using Toolbox::Conversion::Stringifiable;
+
 namespace Toolbox::Log
 {
-using Conversion::Stringifiable;
+
 class Message : public Stringifiable
 {
 public:
