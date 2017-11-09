@@ -1,6 +1,6 @@
 #include <Toolbox/Log/Message.h>
 
-namespace Toolbox::Log
+namespace toolbox::log
 {
   
 Message::Message (const std::string & message)
@@ -14,4 +14,4 @@ const std::string Message::toString (void) const
   return _message;
 }
 
-} // namespace Toolbox::Log
+} // namespace toolbox::log

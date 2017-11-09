@@ -1,9 +1,7 @@
-#ifndef _OPTION_TEST_WIDGET_H_
-#define _OPTION_TEST_WIDGET_H_
+#pragma once
 
-namespace Toolbox {
-namespace Option {
-namespace Test {
+namespace toolbox::option::test
+{
 
 class Widget {
 
@@ -15,15 +13,7 @@ public:
   void setIndex(const int& index);
 
 private:
-  int m_index;
-
+  int _index;
 };
 
-} // Test
-} // Option
-} // Toolbox
-
-
-#endif // _OPTION_TEST_WIDGET_H_
- 
-
+} // namespace toolbox::option::test

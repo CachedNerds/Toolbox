@@ -1,7 +1,7 @@
 #include <Toolbox/Log/Logger.h>
 #include <Toolbox/Time/Time.h>
 
-namespace Toolbox::Log
+namespace toolbox::log
 {
 
 Logger::Logger (std::unique_ptr<StringSink> sink)
@@ -74,13 +74,13 @@ void Logger::setDefault (const Level & level)
 
 void Logger::logIfAboveThreshold (const Level & level, const std::string & message)
 {
-  if (isAboveThreshold (level))
+  if (_sink && isAboveThreshold (level))
     (*_sink) << createLogMessage (level, message);
 }
 
 bool Logger::isAboveThreshold (const Level & level) const
 {
-  return level >= _threshold;
+  return (level >= _threshold);
 }
 
 std::string Logger::createLogMessage (const Level & level, const std::string & message) const
@@ -90,7 +90,7 @@ std::string Logger::createLogMessage (const Level & level, const std::string & m
 
 std::string Logger::getCurrentTime (void) const
 {
-  return Time::getCurrentTime();
+  return time::getCurrentTime();
 }
 
-} // namespace Toolbox::Log
+} // namespace toolbox::log

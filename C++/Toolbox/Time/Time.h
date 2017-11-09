@@ -1,9 +1,9 @@
 #include <string>
 
-namespace Toolbox::Time
+namespace toolbox::time
 {
 
 const std::string getCurrentTime (void);
 
-} // namespace Toolbox::Time
+} // namespace toolbox::time
 

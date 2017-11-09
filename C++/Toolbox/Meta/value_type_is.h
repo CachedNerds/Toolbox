@@ -1,7 +1,9 @@
-#ifndef _VALUE_TYPE_IS_H_
-#define _VALUE_TYPE_IS_H_
+#pragma once
 
 #include "type_is.h"
+
+namespace toolbox::meta
+{
 
 template <typename T>
 struct value_type_is
@@ -21,4 +23,4 @@ struct value_type_is <TT <T, Ts ...>>
   using value_type = typename type_is <T>::type;
 };
 
-#endif // _VALUE_TYPE_IS_H_
+} // namespace toolbox::meta

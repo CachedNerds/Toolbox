@@ -1,6 +1,6 @@
 #include "TestSink.h"
 
-namespace Toolbox::Log::Test
+namespace toolbox::log::test
 {
 
 Sink::Sink (std::string & resource)
@@ -14,4 +14,4 @@ void Sink::output (const std::string & output)
   _resource = output;
 }
 
-} // namespace Toolbox::Log::Test
+} // namespace toolbox::log::test

@@ -1,13 +1,13 @@
-#ifndef _MESSAGE_H_
-#define _MESSAGE_H_
+#pragma once
 
 #include <Toolbox/Conversion/Stringifiable.h>
-
 #include <string>
 
-namespace Toolbox::Log
+using toolbox::conversion::Stringifiable;
+
+namespace toolbox::log
 {
-using Conversion::Stringifiable;
+
 class Message : public Stringifiable
 {
 public:
@@ -19,6 +19,4 @@ private:
   const std::string _message;
 };
 
-} // namespace Toolbox::Log
-
-#endif // _MESSAGE_H_
+} // namespace toolbox::log

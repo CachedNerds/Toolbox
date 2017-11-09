@@ -1,19 +1,17 @@
-#ifndef _LOGGER_H_
-#define _LOGGER_H_
+#pragma once
 
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Sink/BasicSink.h>
 #include <Toolbox/Sink/ThreadSafeSink.h>
 #include <Toolbox/Conversion/Stringifiable.h>
-
 #include <memory>
 
-namespace Toolbox::Log
+namespace toolbox::log
 {
 
 class Logger
 {
-using StringSink = Sink::BasicSink<std::string>;
+using StringSink = toolbox::sink::BasicSink<std::string>;
 public:
   explicit Logger (std::unique_ptr<StringSink> sink);
 
@@ -45,6 +43,4 @@ private:
   std::string getCurrentTime (void) const;
 };
 
-} // namespace Toolbox::Log
-
-#endif // _LOGGER_H_
+} // namespace toolbox::log

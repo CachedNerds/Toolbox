@@ -1,6 +1,6 @@
 #include <Toolbox/Conversion/Stringifiable.h>
 
-namespace Toolbox::Log::Conversion
+namespace toolbox::conversion
 {
 
 Stringifiable::operator std::string (void) const
@@ -8,4 +8,4 @@ Stringifiable::operator std::string (void) const
   return toString ();
 }
 
-} // namespace Toolbox::Log::Conversion
+} // namespace toolbox::conversion

@@ -1,13 +1,11 @@
-#ifndef _TEST_SINK_H_
-#define _TEST_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
-
 #include <string>
 
-using Toolbox::Sink::BasicSink;
+using toolbox::sink::BasicSink;
 
-namespace Toolbox::Log::Test
+namespace toolbox::log::test
 {
 
 class Sink : public BasicSink<std::string>
@@ -21,6 +19,4 @@ private:
   std::string & _resource;
 };
 
-} // namespace Toolbox::Log::Test
-
-#endif // _TEST_SINK_H_
+} // namespace toolbox::log::test

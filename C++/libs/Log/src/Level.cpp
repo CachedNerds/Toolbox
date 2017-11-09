@@ -1,6 +1,6 @@
 #include <Toolbox/Log/Level.h>
 
-namespace Toolbox::Log
+namespace toolbox::log
 {
 
 const std::string levelToString (const Level & level)
@@ -17,4 +17,4 @@ const std::string levelToString (const Level & level)
   }
 }
 
-} // namespace Toolbox::Log
+} // namespace toolbox::log

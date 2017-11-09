@@ -2,9 +2,11 @@
 #include <ctime>
 #include <chrono>
 
-namespace Toolbox::Time
+namespace toolbox::time
 {
-namespace {
+
+namespace
+{
 
 const std::string removeTrailingNewline (const std::string & text)
 {
@@ -31,4 +33,4 @@ const std::string getCurrentTime (void)
   return removeTrailingNewline (std::string(timestamp));
 }
 
-} // namespace Toolbox::Time
+} // namespace toolbox::time

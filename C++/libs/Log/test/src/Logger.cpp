@@ -6,7 +6,7 @@
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Log/Logger.h>
 
-using namespace Toolbox::Log;
+using namespace toolbox::log;
 
 const std::string createMessage (const Level & level, const std::string & message)
 {
@@ -16,7 +16,7 @@ const std::string createMessage (const Level & level, const std::string & messag
 TEST_CASE ("get and set default log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
  
   Level level = Level::DEBUG;
   logger.setDefault (level);
@@ -27,7 +27,7 @@ TEST_CASE ("get and set default log level")
 TEST_CASE ("get and set threshold log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   Level level = Level::DEBUG;
   logger.setThreshold (level);
@@ -38,7 +38,7 @@ TEST_CASE ("get and set threshold log level")
 TEST_CASE ("log with default level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string message = "message";
   logger.log (message);
@@ -49,7 +49,7 @@ TEST_CASE ("log with default level")
 TEST_CASE ("log with specific level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string message = "message";
   Level level = Level::INFO;
@@ -61,7 +61,7 @@ TEST_CASE ("log with specific level")
 TEST_CASE ("can log strings")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
 
   const std::string message = "message";
   logger.log (message);
@@ -72,10 +72,10 @@ TEST_CASE ("can log strings")
 TEST_CASE ("can log ConvertibleTo<string> objects")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
 
   const std::string message = "message";
-  const TestMessage testMessage (message);
+  const test::Message testMessage (message);
   logger.log (testMessage);
 
   REQUIRE (rc == createMessage (logger.getDefault (), message));
@@ -84,85 +84,79 @@ TEST_CASE ("can log ConvertibleTo<string> objects")
 TEST_CASE ("logger.trace logs at trace log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
  
   const std::string message = "message";
   logger.trace (message);
 
   const std::string level = levelToString (Level::TRACE);
-  std::string result = rc;
-  REQUIRE (result.find (level) != std::string::npos);
+  REQUIRE (rc.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.debug logs at debug log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string message = "message";
   logger.debug (message);
 
   const std::string level = levelToString (Level::DEBUG);
-  std::string result = rc;
-  REQUIRE (result.find (level) != std::string::npos);
+  REQUIRE (rc.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.info logs at info log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string message = "message";
   logger.info (message);
 
   const std::string level = levelToString (Level::INFO);
-  std::string result = rc;
-  REQUIRE (result.find (level) != std::string::npos);
+  REQUIRE (rc.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.warning logs at warning log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string message = "message";
   logger.warning (message);
 
   const std::string level = levelToString (Level::WARNING);
-  std::string result = rc;
-  REQUIRE (result.find (level) != std::string::npos);
+  REQUIRE (rc.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.error logs at error log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string message = "message";
   logger.error (message);
 
   const std::string level = levelToString (Level::ERROR);
-  std::string result = rc;
-  REQUIRE (result.find (level) != std::string::npos);
+  REQUIRE (rc.find (level) != std::string::npos);
 }
 
 TEST_CASE ("logger.fatal logs at fatal log level")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string message = "message";
   logger.fatal (message);
 
   const std::string level = levelToString (Level::FATAL);
-  std::string result = rc;
-  REQUIRE (result.find (level) != std::string::npos);
+  REQUIRE (rc.find (level) != std::string::npos);
 }
 
 TEST_CASE ("doesn't log below threshold")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string previousMessage = "previous message";
   logger.log (Level::ERROR, previousMessage);
@@ -179,7 +173,7 @@ TEST_CASE ("doesn't log below threshold")
 TEST_CASE ("does_log_above_threshold")
 {
   std::string rc;
-  Logger logger (std::make_unique<Test::Sink> (rc));
+  Logger logger (std::make_unique<test::Sink> (rc));
   
   const std::string previousMessage = "previous message";
   logger.log (Level::ERROR, previousMessage);
@@ -195,10 +189,8 @@ TEST_CASE ("does_log_above_threshold")
 
 TEST_CASE ("Logging to a thread safe sink")
 {
-  using namespace Toolbox::Sink;
-
   std::string rc;
-  Logger logger (make_unique_thread_safe<Test::Sink> (rc));
+  Logger logger (toolbox::sink::make_unique_thread_safe<test::Sink> (rc));
   std::string message = "test";
   logger.info (message);
 

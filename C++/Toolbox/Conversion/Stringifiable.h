@@ -1,11 +1,9 @@
-#ifndef _STRINGIFIABLE_H_
-#define _STRINGIFIABLE_H_
+#pragma once
 
 #include "ConvertibleTo.h"
-
 #include <string>
 
-namespace Toolbox::Log::Conversion
+namespace toolbox::conversion
 {
 
 class Stringifiable : public ConvertibleTo<std::string>
@@ -15,6 +13,4 @@ public:
   operator std::string (void) const override;
 };
 
-} // namespace Toolbox::Log::Conversion
-
-#endif // _STRINGIFIABLE_H_
+} // namespace toolbox::conversion

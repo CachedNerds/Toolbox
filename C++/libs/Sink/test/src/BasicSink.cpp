@@ -1,13 +1,12 @@
 #include <Toolbox/catch.hpp>
-
 #include "TestSink.h"
 
-using namespace Toolbox::Sink;
+using namespace toolbox::sink;
 
 TEST_CASE ("stream operator accepts the message")
 {
   std::string rc;
-  Test::Sink sink (rc);
+  test::Sink sink (rc);
   const std::string message = "test";
   sink << message;
 

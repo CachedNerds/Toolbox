@@ -1,6 +1,6 @@
 #include "TestSink.h"
 
-namespace Toolbox::Sink::Test
+namespace toolbox::sink::test
 {
 
 Sink::Sink (std::string & resource)
@@ -25,4 +25,4 @@ void SafeSink::output (const std::string & output)
   _resource = output;
 }
 
-} // namespace Toolbox::Sink::Test
+} // namespace toolbox::sink::test
