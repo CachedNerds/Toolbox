@@ -4,7 +4,7 @@ namespace toolbox::log::test
 {
 
 Sink::Sink (std::string & resource)
-: _resource (resource)
+: _resource(resource)
 {
 
 }

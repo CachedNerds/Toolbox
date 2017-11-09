@@ -2,7 +2,7 @@
 #include <Toolbox/Option/Option.h>
 #include "TestWidget.h"
 
-TEST_CASE("create a Some")
+TEST_CASE ("create a Some")
 {
   using namespace toolbox;
   using toolbox::option::test::Widget;
@@ -21,7 +21,7 @@ TEST_CASE("create a Some")
   REQUIRE(isSome);
 }
 
-TEST_CASE("Create a Some from a new instance")
+TEST_CASE ("Create a Some from a new instance")
 {
   using namespace toolbox;
   using toolbox::option::test::Widget;
@@ -40,7 +40,7 @@ TEST_CASE("Create a Some from a new instance")
   REQUIRE(isSome);
 }
 
-TEST_CASE("Create a None from a nullptr")
+TEST_CASE ("Create a None from a nullptr")
 {
   using namespace toolbox;
   using toolbox::option::test::Widget;
@@ -59,7 +59,7 @@ TEST_CASE("Create a None from a nullptr")
   REQUIRE(isNone);
 }
 
-TEST_CASE("Map a widget with index 5 to index 10")
+TEST_CASE ("Map a widget with index 5 to index 10")
 {
   using namespace toolbox;
   using toolbox::option::test::Widget;
@@ -95,7 +95,7 @@ TEST_CASE("Map a widget with index 5 to index 10")
   REQUIRE(newWidgetIndex == 10);
 }
 
-TEST_CASE("Filter an option by index") 
+TEST_CASE ("Filter an option by index") 
 {
   using namespace toolbox;
   using toolbox::option::test::Widget;

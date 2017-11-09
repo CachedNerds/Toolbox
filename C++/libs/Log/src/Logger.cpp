@@ -5,51 +5,51 @@ namespace toolbox::log
 {
 
 Logger::Logger (std::unique_ptr<StringSink> sink)
-: _default (Level::INFO)
-, _threshold (Level::TRACE)
-, _sink (std::move (sink))
+: _default(Level::INFO)
+, _threshold(Level::TRACE)
+, _sink(std::move(sink))
 {
   
 }
 
 void Logger::log (const std::string & message)
 {
-  logIfAboveThreshold (_default, message);
+  logIfAboveThreshold(_default, message);
 }
 
 void Logger::log (const Level & level, const std::string & message)
 {
-  logIfAboveThreshold (level, message);
+  logIfAboveThreshold(level, message);
 }
 
 void Logger::trace (const std::string & message)
 {
-  logIfAboveThreshold (Level::TRACE, message);
+  logIfAboveThreshold(Level::TRACE, message);
 }
 
 void Logger::debug (const std::string & message)
 {
-  logIfAboveThreshold (Level::DEBUG, message);
+  logIfAboveThreshold(Level::DEBUG, message);
 }
 
 void Logger::info (const std::string & message)
 {
-  logIfAboveThreshold (Level::INFO, message);
+  logIfAboveThreshold(Level::INFO, message);
 }
 
 void Logger::warning (const std::string & message)
 {
-  logIfAboveThreshold (Level::WARNING, message);
+  logIfAboveThreshold(Level::WARNING, message);
 }
 
 void Logger::error (const std::string & message)
 {
-  logIfAboveThreshold (Level::ERROR, message);
+  logIfAboveThreshold(Level::ERROR, message);
 }
 
 void Logger::fatal (const std::string & message)
 {
-  logIfAboveThreshold (Level::FATAL, message);
+  logIfAboveThreshold(Level::FATAL, message);
 }
 
 Level Logger::getThreshold (void) const
@@ -74,8 +74,8 @@ void Logger::setDefault (const Level & level)
 
 void Logger::logIfAboveThreshold (const Level & level, const std::string & message)
 {
-  if (_sink && isAboveThreshold (level))
-    (*_sink) << createLogMessage (level, message);
+  if (_sink && isAboveThreshold(level))
+    (*_sink) << createLogMessage(level, message);
 }
 
 bool Logger::isAboveThreshold (const Level & level) const
@@ -85,7 +85,7 @@ bool Logger::isAboveThreshold (const Level & level) const
 
 std::string Logger::createLogMessage (const Level & level, const std::string & message) const
 {
-  return levelToString (level) + ": " + message + "\n";
+  return levelToString(level) + ": " + message + "\n";
 }
 
 std::string Logger::getCurrentTime (void) const

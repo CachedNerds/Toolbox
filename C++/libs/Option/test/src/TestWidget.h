@@ -3,14 +3,14 @@
 namespace toolbox::option::test
 {
 
-class Widget {
-
+class Widget
+{
 public:
-  Widget(void) = default;
-  Widget(int index);
+  Widget (void) = default;
+  Widget (int index);
 
-  const int& getIndex(void) const;
-  void setIndex(const int& index);
+  const int & getIndex (void) const;
+  void setIndex (const int & index);
 
 private:
   int _index;

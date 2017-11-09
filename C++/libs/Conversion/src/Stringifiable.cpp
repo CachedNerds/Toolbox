@@ -5,7 +5,7 @@ namespace toolbox::conversion
 
 Stringifiable::operator std::string (void) const
 {
-  return toString ();
+  return toString();
 }
 
 } // namespace toolbox::conversion

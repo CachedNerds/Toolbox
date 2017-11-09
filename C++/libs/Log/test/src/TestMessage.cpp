@@ -4,7 +4,7 @@ namespace toolbox::log::test
 {
 
  Message::Message (const std::string & message)
- : _message (message)
+ : _message(message)
  {
 
  }
