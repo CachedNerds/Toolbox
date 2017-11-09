@@ -189,7 +189,7 @@ TEST_CASE ("does_log_above_threshold")
 
 TEST_CASE ("Logging to a thread safe sink")
 {
-  using toolbox::sink;
+  using toolbox::sink::make_unique_thread_safe;
 
   std::string rc;
   Logger logger(make_unique_thread_safe<test::Sink>(rc));
