@@ -1,7 +1,9 @@
-#ifndef _PRODUCTION_H_
-#define _PRODUCTION_H_
+#pragma once
 
 #include "Environment.h"
+
+namespace toolbox::environment
+{
 
 class Production : public Environment
 {
@@ -12,4 +14,4 @@ private:
   constexpr static const char * env = "PRODUCTION";
 };
 
-#endif // _PRODUCTION_H_
+} // namespace toolbox::environment

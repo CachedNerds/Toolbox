@@ -2,13 +2,13 @@
 #include <Toolbox/Option/Option.h>
 #include "TestWidget.h"
 
-TEST_CASE("create a Some")
+TEST_CASE ("create a Some")
 {
-  using namespace Toolbox;
-  using Toolbox::Option::Test::Widget;
+  using namespace toolbox;
+  using toolbox::option::test::Widget;
 
   // create a widget with index 10
-  auto widgetOption = Option::Some<Widget>(10);
+  auto widgetOption = option::Some<Widget>(10);
 
   int x = 0;
   widgetOption.ifPresent([&x](const Widget& widget) {
@@ -21,14 +21,14 @@ TEST_CASE("create a Some")
   REQUIRE(isSome);
 }
 
-TEST_CASE("Create a Some from a new instance")
+TEST_CASE ("Create a Some from a new instance")
 {
-  using namespace Toolbox;
-  using Toolbox::Option::Test::Widget;
+  using namespace toolbox;
+  using toolbox::option::test::Widget;
 
   auto pWidget = new Widget{5};
   // widgetOption now owns pWidget
-  auto widgetOption = Option::Option(pWidget);
+  auto widgetOption = option::Option(pWidget);
 
   int x = 0;
   widgetOption.ifPresent([&x](const Widget& widget) {
@@ -40,13 +40,13 @@ TEST_CASE("Create a Some from a new instance")
   REQUIRE(isSome);
 }
 
-TEST_CASE("Create a None from a nullptr")
+TEST_CASE ("Create a None from a nullptr")
 {
-  using namespace Toolbox;
-  using Toolbox::Option::Test::Widget;
+  using namespace toolbox;
+  using toolbox::option::test::Widget;
 
   Widget* pWidget = nullptr;
-  auto widgetOption = Option::Option(pWidget);
+  auto widgetOption = option::Option(pWidget);
 
   int x = 0;
   widgetOption.ifPresent([&x](const Widget& widget) {
@@ -59,14 +59,14 @@ TEST_CASE("Create a None from a nullptr")
   REQUIRE(isNone);
 }
 
-TEST_CASE("Map a widget with index 5 to index 10")
+TEST_CASE ("Map a widget with index 5 to index 10")
 {
-  using namespace Toolbox;
-  using Toolbox::Option::Test::Widget;
+  using namespace toolbox;
+  using toolbox::option::test::Widget;
 
   // create a widget with index 5
   int widgetIndex = 5;
-  auto widgetOption = Option::Some<Widget>(widgetIndex);
+  auto widgetOption = option::Some<Widget>(widgetIndex);
   // reset this variable for later
   widgetIndex = 0;
 
@@ -95,14 +95,14 @@ TEST_CASE("Map a widget with index 5 to index 10")
   REQUIRE(newWidgetIndex == 10);
 }
 
-TEST_CASE("Filter an option by index") 
+TEST_CASE ("Filter an option by index") 
 {
-  using namespace Toolbox;
-  using Toolbox::Option::Test::Widget;
+  using namespace toolbox;
+  using toolbox::option::test::Widget;
 
   // create a widget with index 5
   int widgetIndex = 5;
-  auto widgetOption = Option::Some<Widget>(widgetIndex);
+  auto widgetOption = option::Some<Widget>(widgetIndex);
 
   // filter by a condition that retains the value, e.g. index 5 is greater than 0
   widgetOption = widgetOption.filter([](const Widget& widget) {

@@ -1,13 +1,11 @@
-#ifndef _TOOLBOX_SINK_THREAD_SAFE_PROXY_SINK_H_
-#define _TOOLBOX_SINK_THREAD_SAFE_PROXY_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
 #include <Toolbox/Sink/ThreadSafeSink.h>
-
 #include <memory>
 #include <type_traits>
 
-namespace Toolbox::Sink
+namespace toolbox::sink
 {
 
 template <typename SinkType,
@@ -34,9 +32,9 @@ ThreadSafeProxySink & operator= (ThreadSafeProxySink && sink)
 }
 
 /**
-* Synchronization is performed within the ThreadSafeSink base class's operator << method.
-* Forward the output to the inner Sink.
-*/
+ * Synchronization is performed within the ThreadSafeSink base class's operator << method.
+ * Forward the output to the inner Sink.
+ */
 virtual void output (const OutputType & output) override
 {
   _sink << output;
@@ -64,6 +62,4 @@ auto make_unique_thread_safe (Args&&... args)
   return std::make_unique<ThreadSafeProxySink<SinkType>> (SinkType (std::forward<Args> (args)...));
 }
 
-} // namespace Toolbox::Sink
-
-#endif // _TOOLBOX_SINK_THREAD_SAFE_PROXY_SINK_H_
+} // namespace toolbox::sink

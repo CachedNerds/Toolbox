@@ -1,11 +1,9 @@
-#ifndef _SYNC_SINK_H_
-#define _SYNC_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
-
 #include <mutex>
 
-namespace Toolbox::Sink
+namespace toolbox::sink
 {
 
 template <typename OutputType>
@@ -22,6 +20,4 @@ protected:
   mutable std::mutex _mutex;
 };
 
-} // namespace Toolbox::Sink
-
-#endif // _SYNC_SINK_H_
+} // namespace toolbox::sink
