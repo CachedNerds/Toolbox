@@ -202,7 +202,7 @@ TEST_CASE ("Logging to a thread safe sink")
 
 TEST_CASE ("Logging to a file")
 {
-  using namespace Toolbox::Sink;
+  using namespace toolbox::sink;
 
   std::string filename = "test.txt";
   Logger logger(std::make_unique<FileSink>(filename));
@@ -210,5 +210,4 @@ TEST_CASE ("Logging to a file")
   logger.info(message);
 
   std::remove(filename.c_str());
-  REQUIRE(rc == createMessage(Level::INFO, message));
 }
