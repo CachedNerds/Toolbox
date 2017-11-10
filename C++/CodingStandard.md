@@ -4,16 +4,29 @@ A few rules to follow while developing with C++17.
 
 ## Namespaces
   1. All namespaces will be snake_case. (e.g. `example_namespace`)
-  1. All projects will have a single entry point in the `::toolbox` namespace.
+  2. All projects will have a single entry point in the `::toolbox` namespace.
   ```
   // namespace for Logger
   namespace toolbox::log { }
   ```
-  2. Namespace names will CamelCase.
   3. Prefer C++17 style nested namespaces.
   ```
   // namespace foo { namespace bar { namespace baz { /*...*/ }}}
   namespace foo::bar::baz { /*...*/ }
+  ```
+  4. All namespaces will have the curly brace on the following line.
+  ```
+  namespace toolbox
+  {
+  
+  } // namespace toolbox
+  ```
+  5. All namespaces will be followed by a ```// namespace name``` after the closing brace.
+  ```
+  namespace toolbox::sink
+  {
+  
+  } // namespace toolbox::sink
   ```
 
 ## Control Flow
@@ -49,6 +62,12 @@ A few rules to follow while developing with C++17.
   {
 
   }
+  ```
+
+## Function calls
+  1. There will be no space between function names and their parameter lists.
+  ```
+  int total = sum(4, 5);
   ```
 
 ## Classes
