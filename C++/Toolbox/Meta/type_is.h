@@ -1,5 +1,7 @@
-#ifndef _TYPE_IS_H_
-#define _TYPE_IS_H_
+#pragma once
+
+namespace toolbox::meta
+{
 
 template <typename T>
 struct type_is
@@ -22,4 +24,4 @@ struct type_is <TT <T, Ts ...>>
 template <typename ... Ts>
 using type_is_t = typename type_is <Ts ...>::type;
 
-#endif // _TYPE_IS_H_
+} // namespace toolbox::meta

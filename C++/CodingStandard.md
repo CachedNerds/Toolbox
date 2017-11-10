@@ -3,16 +3,17 @@
 A few rules to follow while developing with C++17.
 
 ## Namespaces
+  1. All namespaces will be snake_case. (e.g. `example_namespace`)
   1. All projects will have a single entry point in the `::toolbox` namespace.
   ```
   // namespace for Logger
-  namespace Toolbox::Log { }
+  namespace toolbox::log { }
   ```
   2. Namespace names will CamelCase.
   3. Prefer C++17 style nested namespaces.
   ```
-  // namespace Foo { namespace Bar { namesapce Baz { /*...*/ }}}
-  namespace Foo::Bar::Baz { /*...*/ }
+  // namespace foo { namespace bar { namespace baz { /*...*/ }}}
+  namespace foo::bar::baz { /*...*/ }
   ```
 
 ## Control Flow
@@ -98,7 +99,7 @@ A few rules to follow while developing with C++17.
   class Bar;
   ```
   2. Prefer `typename` to `class` when writing templates.
-  3. Template metafunctions will be `struct`s and use the `underscore_case`.
+  3. Template metafunctions will be `struct`s and use the `snake_case`.
   ```
   template<typename T>
   struct value_type_is;

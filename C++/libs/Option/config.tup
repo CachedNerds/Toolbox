@@ -1,0 +1,6 @@
+# define the project specific values
+PROJECT = Option
+
+# static, shared, or both
+LIB_TYPE = static
+

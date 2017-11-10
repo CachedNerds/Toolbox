@@ -1,5 +1,7 @@
-#ifndef _INNER_TYPE_H_
-#define _INNER_TYPE_H_
+#pragma once
+
+namespace toolbox::meta
+{
 
 template <typename T>
 struct inner_type
@@ -22,4 +24,4 @@ struct inner_type <TT <T, Ts ...>>
 template <typename ... Ts>
 using inner_type_t = typename inner_type <Ts ...>::type;
 
-#endif // _INNER_TYPE_H_
+} // namespace toolbox::meta

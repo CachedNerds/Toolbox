@@ -2,22 +2,24 @@
 #include <ctime>
 #include <chrono>
 
-namespace Toolbox::Time
+namespace toolbox::time
 {
-namespace {
+
+namespace
+{
 
 const std::string removeTrailingNewline (const std::string & text)
 {
-  return text.substr (0, text.length () - 1);
+  return text.substr(0, text.length() - 1);
 }
 
 } // end anonymous namespace 
 
 const std::string getCurrentTime (void) 
 {
-  std::time_t now = std::chrono::system_clock::to_time_t (std::chrono::system_clock::now ());
+  std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now ());
   std::tm localNow;
-#ifdef _WIN32
+#if (_MSC_VER > 1300)
   // localtime_s is not in namespace std on vc++ libraries for some reason
   localtime_s(&localNow, &now);
 #else
@@ -28,7 +30,7 @@ const std::string getCurrentTime (void)
   char format[] = "%c";
   char timestamp[dateSize];
   std::strftime(timestamp, dateSize, format, &localNow);
-  return removeTrailingNewline (timestamp);
+  return removeTrailingNewline(std::string(timestamp));
 }
 
-} // namespace Toolbox::Time
+} // namespace toolbox::time

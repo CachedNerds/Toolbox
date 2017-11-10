@@ -1,15 +1,12 @@
-#ifndef _TEST_SINK_H_
-#define _TEST_SINK_H_
+#pragma once
 
 #include <Toolbox/Sink/BasicSink.h>
 #include <Toolbox/Sink/ThreadSafeSink.h>
-
 #include <string>
-#include <sstream>
 
-using Toolbox::Sink::BasicSink;
+using toolbox::sink::BasicSink;
 
-namespace Toolbox::Sink::Test
+namespace toolbox::sink::test
 {
 
 class Sink : public BasicSink<std::string>
@@ -36,6 +33,4 @@ private:
   std::string & _resource;
 };
 
-} // namespace Toolbox::Sink::Test
-
-#endif // _TEST_SINK_H_
+} // namespace toolbox::sink::test
