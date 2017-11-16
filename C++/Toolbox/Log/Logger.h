@@ -40,7 +40,6 @@ private:
   void logIfAboveThreshold (const Level & level, const std::string & message);
   bool isAboveThreshold (const Level & level) const;
   std::string createLogMessage (const Level & level, const std::string & message) const;
-  std::string getCurrentTime (void) const;
 };
 
 } // namespace toolbox::log

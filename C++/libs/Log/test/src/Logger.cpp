@@ -3,6 +3,7 @@
 #include "TestSink.h"
 #include "TestMessage.h"
 #include <Toolbox/Sink/ThreadSafeProxySink.h>
+#include <Toolbox/Sink/FileSink.h>
 #include <Toolbox/Log/Level.h>
 #include <Toolbox/Log/Logger.h>
 
@@ -196,5 +197,17 @@ TEST_CASE ("Logging to a thread safe sink")
   std::string message = "test";
   logger.info(message);
 
-  REQUIRE(rc == createMessage(Level::INFO, message));
+  REQUIRE(rc == createMessage (Level::INFO, message));
+}
+
+TEST_CASE ("Logging to a file")
+{
+  using namespace toolbox::sink;
+
+  std::string filename = "test.txt";
+  Logger logger(std::make_unique<FileSink>(filename));
+  std::string message = "test";
+  logger.info(message);
+
+  std::remove(filename.c_str());
 }

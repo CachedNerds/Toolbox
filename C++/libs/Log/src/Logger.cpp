@@ -88,9 +88,4 @@ std::string Logger::createLogMessage (const Level & level, const std::string & m
   return levelToString(level) + ": " + message + "\n";
 }
 
-std::string Logger::getCurrentTime (void) const
-{
-  return time::getCurrentTime();
-}
-
 } // namespace toolbox::log
