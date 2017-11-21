@@ -17,5 +17,8 @@ Each language type will have a _building.md_ file which explains how to build th
 
 C++: [building](https://github.com/CachedNerds/Toolbox/blob/issue22-build-system/C%2B%2B/building.md)
 
+### Source Code Documentation
+To see source code documentation of the Toolbox, navigate to the `Toolbox/C++` directory and run the command `doxygen Doxyfile`.  This will generate a `html/` directory, open the index.html file in the browser to view the documentation.
+
 ### Contributing
 The [contributing](https://github.com/CachedNerds/Toolbox/blob/master/.github/CONTRIBUTING.md) file details the different standards defined within the Toolbox project and how to contribute.

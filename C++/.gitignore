@@ -5,3 +5,5 @@
 *.dll
 *.test
 .tup
+html/
+latex/
